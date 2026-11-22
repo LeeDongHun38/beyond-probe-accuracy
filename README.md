@@ -100,17 +100,6 @@ Hugging Face Hub at the revisions in `environment/MODELS.md`. 7–8B models run 
 | `tests/` | Unit tests (`pytest`, CPU, no downloads) |
 | `environment/` | Recorded package versions and model checkpoints |
 
-## Citation
-
-```bibtex
-@inproceedings{lee2026beyond,
-  title     = {Beyond Probe Accuracy: Estimation Stability, Intervention Specificity, and Representation Geometry of Probe Directions},
-  author    = {Lee, Donghun and Kim, Mishk},
-  booktitle = {Proceedings of the 19th Conference of the European Chapter of the Association for Computational Linguistics (EACL)},
-  year      = {2026}
-}
-```
-
 ## License
 
 Code is released under the MIT License (`LICENSE`). Data and derived artifacts follow the licenses
