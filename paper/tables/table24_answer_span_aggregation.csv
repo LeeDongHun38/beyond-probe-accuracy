@@ -1,0 +1,4 @@
+model,layer,scored,last_auroc,last_ci_low,last_ci_high,mean_auroc,mean_ci_low,mean_ci_high
+Qwen2.5-7B,18,"39,984",.8566,.8432,.8688,.8430,.8283,.8558
+Llama-3.1-8B,14,"40,000",.8121,.7965,.8266,.8169,.8015,.8309
+Mistral-7B,13,"40,000",.7860,.7697,.8019,.7564,.7391,.7736

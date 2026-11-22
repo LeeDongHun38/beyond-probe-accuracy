@@ -1,0 +1,8 @@
+{
+  "total_pairs": 4999,
+  "train": 2499,
+  "test": 2500,
+  "avg_question_len": 13.892178435687137,
+  "avg_true_answer_len": 1.7041408281656332,
+  "avg_false_answer_len": 1.6859371874374875
+}

@@ -1,0 +1,4 @@
+dataset,total,train,heldout
+TriviaQA,"4,999","2,499","2,500"
+ARC-Easy,"5,197","2,598","2,599"
+CommonsenseQA,"10,962","5,481","5,481"

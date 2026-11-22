@@ -1,0 +1,697 @@
+{
+  "status": "COMPLETE",
+  "created_at_utc": "2026-07-29T14:49:49.261900+00:00",
+  "definition": "baseline forward; L2 norm of canonical transformer-layer output at the last prefill token of the Yes/No judgment prompt",
+  "aggregation": "side medians over seed rows; pooled median over false and true seed rows; duplicate sample IDs selected by different seeds retained",
+  "cells": [
+    {
+      "model": "llama_3.1_8b",
+      "dataset": "triviaqa",
+      "canonical_layer": 14,
+      "n_false": 1000,
+      "n_true": 1000,
+      "n_pooled": 2000,
+      "median_false": 8.509920597076416,
+      "median_true": 8.55377721786499,
+      "median_pooled": 8.533081531524658,
+      "min_pooled": 8.088486671447754,
+      "max_pooled": 9.036991119384766,
+      "source_kind": "stored E8 baseline shards",
+      "seeds": [
+        42,
+        123,
+        456,
+        789,
+        999
+      ],
+      "seed_row_weighting": "duplicate IDs across seeds retained",
+      "sources": [
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/llama/seed_42/baseline_false.json",
+          "sha256": "ca9ff6471128802cae3ba3b9319ab7561d5c065b804671f7f0133f6890050414",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/llama/seed_42/baseline_true.json",
+          "sha256": "c5b308db73a2d87a08db3908896f3c9ab644cd26556c516eb7809bf1795076f5",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/llama/seed_123/baseline_false.json",
+          "sha256": "1d985321f06824e54c48223c72bdde5011e7c63c16ec6957287fb37b5d4c4bd7",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/llama/seed_123/baseline_true.json",
+          "sha256": "47767e9420c05a48a419389df23f3f1d9ca8edaa22d240296617d51eeabc640d",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/llama/seed_456/baseline_false.json",
+          "sha256": "4023999fdd0350136fb19243c602794d26f4a1bc5e228db99f9c89e0319d639b",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/llama/seed_456/baseline_true.json",
+          "sha256": "5c73e6184ffae1e47fdb73b693514ab8fec3866f8d2cceb870e40d2c94d724a5",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/llama/seed_789/baseline_false.json",
+          "sha256": "9eb02978af809812cf9d25f262b4d5dfd33cac15889a1c2ab130c41b3137a8f6",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/llama/seed_789/baseline_true.json",
+          "sha256": "d9932c3b21db795dd4ae49694c077ba5df56548131eabee5a6260111f5d5131e",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/llama/seed_999/baseline_false.json",
+          "sha256": "ad0d01e9b538102f7e0c287d2daadb2ef4df4cf67089915173fe034740388c89",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/llama/seed_999/baseline_true.json",
+          "sha256": "4050574c5b9b020911ccadfce181716e618cb4a8f277bae28e814e7a28bc2790",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/protocol/freeze_spec.json",
+          "sha256": "ea6904a8b353a6ec74f5bba8df3ab82e8b22b2f47687e1cc98e6aa7f4019a556",
+          "role": "sample-ID and protocol freeze"
+        }
+      ]
+    },
+    {
+      "model": "llama_3.1_8b",
+      "dataset": "arc_easy",
+      "canonical_layer": 14,
+      "n_false": 1000,
+      "n_true": 1000,
+      "n_pooled": 2000,
+      "median_false": 8.820382118225098,
+      "median_true": 8.80265760421753,
+      "median_pooled": 8.810213088989258,
+      "min_pooled": 8.180909156799316,
+      "max_pooled": 9.289775848388672,
+      "source_kind": "baseline-only canonical prompt backfill",
+      "seeds": [
+        42,
+        123,
+        456,
+        789,
+        999
+      ],
+      "seed_row_weighting": "duplicate IDs across seeds retained",
+      "unique_sample_ids": 844,
+      "sources": [
+        {
+          "path": "results/canonical_residual_norms_15cell/backfill_7b/llama_arc_easy.json",
+          "sha256": "1e50d620abd7054c594868d22d70dea0cff06e4ab848cfd759b04ccf229961e7",
+          "records_unique": 844
+        },
+        {
+          "path": "results/canonical_residual_norms_15cell/protocol/freeze_spec.json",
+          "sha256": "045e7faf6f2061f30b24b728e30d29c72d7337d1ed1f3d7579068731beb369db",
+          "role": "sample-ID and protocol freeze"
+        }
+      ]
+    },
+    {
+      "model": "llama_3.1_8b",
+      "dataset": "commonsenseqa",
+      "canonical_layer": 14,
+      "n_false": 1000,
+      "n_true": 1000,
+      "n_pooled": 2000,
+      "median_false": 8.542145252227783,
+      "median_true": 8.539770126342773,
+      "median_pooled": 8.541396141052246,
+      "min_pooled": 8.019651412963867,
+      "max_pooled": 9.099493026733398,
+      "source_kind": "baseline-only canonical prompt backfill",
+      "seeds": [
+        42,
+        123,
+        456,
+        789,
+        999
+      ],
+      "seed_row_weighting": "duplicate IDs across seeds retained",
+      "unique_sample_ids": 919,
+      "sources": [
+        {
+          "path": "results/canonical_residual_norms_15cell/backfill_7b/llama_commonsenseqa.json",
+          "sha256": "633072ff2e72a08a96f3ecdf781880699fae256ef4be692109b05bbeaafb61b1",
+          "records_unique": 919
+        },
+        {
+          "path": "results/canonical_residual_norms_15cell/protocol/freeze_spec.json",
+          "sha256": "045e7faf6f2061f30b24b728e30d29c72d7337d1ed1f3d7579068731beb369db",
+          "role": "sample-ID and protocol freeze"
+        }
+      ]
+    },
+    {
+      "model": "qwen2.5_7b",
+      "dataset": "triviaqa",
+      "canonical_layer": 18,
+      "n_false": 1000,
+      "n_true": 1000,
+      "n_pooled": 2000,
+      "median_false": 78.48823928833008,
+      "median_true": 77.92635726928711,
+      "median_pooled": 78.14604949951172,
+      "min_pooled": 74.17353057861328,
+      "max_pooled": 96.88089752197266,
+      "source_kind": "stored E8 baseline shards",
+      "seeds": [
+        42,
+        123,
+        456,
+        789,
+        999
+      ],
+      "seed_row_weighting": "duplicate IDs across seeds retained",
+      "sources": [
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/qwen/seed_42/baseline_false.json",
+          "sha256": "091ee0fa08cab869306a5f5d78b5d32c7a56691b3a588b2bdea878119fb09ea8",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/qwen/seed_42/baseline_true.json",
+          "sha256": "b29a32336855fd391b9fd7be9c37f91ae68512657dd124de7ec62575826f64e1",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/qwen/seed_123/baseline_false.json",
+          "sha256": "e67a8e0dd3610db3e62aa765cc63fff0b123bcb9c25a1658c9bc7ccf65480802",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/qwen/seed_123/baseline_true.json",
+          "sha256": "696883b2b92ed6032c9789c6f0ab698cef002be12290c507c068db71096d9d66",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/qwen/seed_456/baseline_false.json",
+          "sha256": "6af0e265f5f6df5e11b87bcf57b0e269071048317a22b67609536fc6e33ddde8",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/qwen/seed_456/baseline_true.json",
+          "sha256": "ea8367ecb7eb4ed39285d81c159ceeca73595c36b5c8832311e73b78801135d2",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/qwen/seed_789/baseline_false.json",
+          "sha256": "c9e479dd8df445fe503df97ea1d3235823eaf70281cfe7b7a1a76cda80b135de",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/qwen/seed_789/baseline_true.json",
+          "sha256": "ca00994119df496134651121e1fc39b9541a65b1845cf62847ad188f5a69d509",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/qwen/seed_999/baseline_false.json",
+          "sha256": "41d504bca40a6e20a0652c26595374a2d53149adb930c834943dabb68dcc4f05",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/qwen/seed_999/baseline_true.json",
+          "sha256": "da46fa03fab454604e96cb720f6f4360925ad8cd0c7386fdde6b411b1c907387",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/protocol/freeze_spec.json",
+          "sha256": "ea6904a8b353a6ec74f5bba8df3ab82e8b22b2f47687e1cc98e6aa7f4019a556",
+          "role": "sample-ID and protocol freeze"
+        }
+      ]
+    },
+    {
+      "model": "qwen2.5_7b",
+      "dataset": "arc_easy",
+      "canonical_layer": 18,
+      "n_false": 1000,
+      "n_true": 1000,
+      "n_pooled": 2000,
+      "median_false": 81.20835494995117,
+      "median_true": 78.98485565185547,
+      "median_pooled": 79.84869384765625,
+      "min_pooled": 75.57389068603516,
+      "max_pooled": 90.77684783935547,
+      "source_kind": "baseline-only canonical prompt backfill",
+      "seeds": [
+        42,
+        123,
+        456,
+        789,
+        999
+      ],
+      "seed_row_weighting": "duplicate IDs across seeds retained",
+      "unique_sample_ids": 844,
+      "sources": [
+        {
+          "path": "results/canonical_residual_norms_15cell/backfill_7b/qwen_arc_easy.json",
+          "sha256": "84346025ffa1830091985c16eba1c03e1a29da1523c208abdcbd06c3b7116e6b",
+          "records_unique": 844
+        },
+        {
+          "path": "results/canonical_residual_norms_15cell/protocol/freeze_spec.json",
+          "sha256": "045e7faf6f2061f30b24b728e30d29c72d7337d1ed1f3d7579068731beb369db",
+          "role": "sample-ID and protocol freeze"
+        }
+      ]
+    },
+    {
+      "model": "qwen2.5_7b",
+      "dataset": "commonsenseqa",
+      "canonical_layer": 17,
+      "n_false": 1000,
+      "n_true": 1000,
+      "n_pooled": 2000,
+      "median_false": 75.13672256469727,
+      "median_true": 74.83596420288086,
+      "median_pooled": 74.98712921142578,
+      "min_pooled": 72.91333770751953,
+      "max_pooled": 76.68587493896484,
+      "source_kind": "baseline-only canonical prompt backfill",
+      "seeds": [
+        42,
+        123,
+        456,
+        789,
+        999
+      ],
+      "seed_row_weighting": "duplicate IDs across seeds retained",
+      "unique_sample_ids": 919,
+      "sources": [
+        {
+          "path": "results/canonical_residual_norms_15cell/backfill_7b/qwen_commonsenseqa.json",
+          "sha256": "e21e89d623ba6f942aaf9df81833cc9309c9d2990b061b81b5a861d6dda85637",
+          "records_unique": 919
+        },
+        {
+          "path": "results/canonical_residual_norms_15cell/protocol/freeze_spec.json",
+          "sha256": "045e7faf6f2061f30b24b728e30d29c72d7337d1ed1f3d7579068731beb369db",
+          "role": "sample-ID and protocol freeze"
+        }
+      ]
+    },
+    {
+      "model": "mistral_7b_v0.3",
+      "dataset": "triviaqa",
+      "canonical_layer": 13,
+      "n_false": 1000,
+      "n_true": 1000,
+      "n_pooled": 2000,
+      "median_false": 4.6799397468566895,
+      "median_true": 4.677291393280029,
+      "median_pooled": 4.678701162338257,
+      "min_pooled": 4.484930992126465,
+      "max_pooled": 4.867506504058838,
+      "source_kind": "stored E8 baseline shards",
+      "seeds": [
+        42,
+        123,
+        456,
+        789,
+        999
+      ],
+      "seed_row_weighting": "duplicate IDs across seeds retained",
+      "sources": [
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/mistral/seed_42/baseline_false.json",
+          "sha256": "0def6a08ab316319635ed8d133bb508f56fa993f75afb54fa8ed8332aa0ac510",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/mistral/seed_42/baseline_true.json",
+          "sha256": "a5306a8fc814f7e7689eb807258da558e2dfada8ae4bbface8c7bdd6e4223bbf",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/mistral/seed_123/baseline_false.json",
+          "sha256": "339e89fe0cbc25d8d77248f72bacbd1d4dbc9e6b8d85e9892c6d3d05a50a4586",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/mistral/seed_123/baseline_true.json",
+          "sha256": "387fe44eeffbb847fc5411751267701fc44ab3fd0a90f3a5cac8000407e4fd01",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/mistral/seed_456/baseline_false.json",
+          "sha256": "9317c43058d83270946dbeb3ccd8e9b5c0ff8f39f1e78969f2947204cc907acc",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/mistral/seed_456/baseline_true.json",
+          "sha256": "83596cd6c9205dbd1fea9ced92cac5bdc1ffcc607c3f55f4b00785f3f500c206",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/mistral/seed_789/baseline_false.json",
+          "sha256": "31822c5101a850831340c04ec75877abafd414141a17f1a1c7292e67f3370268",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/mistral/seed_789/baseline_true.json",
+          "sha256": "75eafd05547fce547c451e74c3e5a89eace2553bab16605209396a9478154d8a",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/mistral/seed_999/baseline_false.json",
+          "sha256": "ecc0a8c7f3636bf8a98b4a58effc38b7ef5dbe620d82377816fb5a76cf581243",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/e8_shards/mistral/seed_999/baseline_true.json",
+          "sha256": "07f72c53b03d620f929f7238f9dfd1d62a67ddb6f9daf27103bfecf35330070c",
+          "records": 200
+        },
+        {
+          "path": "results/e8_probe_identifiability/protocol/freeze_spec.json",
+          "sha256": "ea6904a8b353a6ec74f5bba8df3ab82e8b22b2f47687e1cc98e6aa7f4019a556",
+          "role": "sample-ID and protocol freeze"
+        }
+      ]
+    },
+    {
+      "model": "mistral_7b_v0.3",
+      "dataset": "arc_easy",
+      "canonical_layer": 15,
+      "n_false": 1000,
+      "n_true": 1000,
+      "n_pooled": 2000,
+      "median_false": 5.79544734954834,
+      "median_true": 5.734729290008545,
+      "median_pooled": 5.7600998878479,
+      "min_pooled": 5.414350509643555,
+      "max_pooled": 6.279401779174805,
+      "source_kind": "baseline-only canonical prompt backfill",
+      "seeds": [
+        42,
+        123,
+        456,
+        789,
+        999
+      ],
+      "seed_row_weighting": "duplicate IDs across seeds retained",
+      "unique_sample_ids": 844,
+      "sources": [
+        {
+          "path": "results/canonical_residual_norms_15cell/backfill_7b/mistral_arc_easy.json",
+          "sha256": "18be385ac3d7f69af6c650b0a4bca3980eb74365098a9d742b65e56bd5f2be60",
+          "records_unique": 844
+        },
+        {
+          "path": "results/canonical_residual_norms_15cell/protocol/freeze_spec.json",
+          "sha256": "045e7faf6f2061f30b24b728e30d29c72d7337d1ed1f3d7579068731beb369db",
+          "role": "sample-ID and protocol freeze"
+        }
+      ]
+    },
+    {
+      "model": "mistral_7b_v0.3",
+      "dataset": "commonsenseqa",
+      "canonical_layer": 17,
+      "n_false": 1000,
+      "n_true": 1000,
+      "n_pooled": 2000,
+      "median_false": 7.832749843597412,
+      "median_true": 7.808706760406494,
+      "median_pooled": 7.820623874664307,
+      "min_pooled": 7.4456281661987305,
+      "max_pooled": 8.404966354370117,
+      "source_kind": "baseline-only canonical prompt backfill",
+      "seeds": [
+        42,
+        123,
+        456,
+        789,
+        999
+      ],
+      "seed_row_weighting": "duplicate IDs across seeds retained",
+      "unique_sample_ids": 919,
+      "sources": [
+        {
+          "path": "results/canonical_residual_norms_15cell/backfill_7b/mistral_commonsenseqa.json",
+          "sha256": "f6430b7809839e4d5615bf43924d819cec8d5f9514a0407cb4a4fa0fc7cae3b2",
+          "records_unique": 919
+        },
+        {
+          "path": "results/canonical_residual_norms_15cell/protocol/freeze_spec.json",
+          "sha256": "045e7faf6f2061f30b24b728e30d29c72d7337d1ed1f3d7579068731beb369db",
+          "role": "sample-ID and protocol freeze"
+        }
+      ]
+    },
+    {
+      "model": "ministral_3_14b",
+      "dataset": "triviaqa",
+      "canonical_layer": 36,
+      "n_false": 600,
+      "n_true": 600,
+      "n_pooled": 1200,
+      "median_false": 108.27180099487305,
+      "median_true": 109.69441223144531,
+      "median_pooled": 109.14246368408203,
+      "min_pooled": 102.27304077148438,
+      "max_pooled": 114.0494613647461,
+      "source_kind": "stored Ministral-3-14B Level-3 baseline shards",
+      "seeds": [
+        42,
+        123,
+        456
+      ],
+      "seed_row_weighting": "duplicate IDs across seeds retained",
+      "sources": [
+        {
+          "path": "results/ministral3_14b/validation/probe_level3/triviaqa/seed_42/baseline_false.json",
+          "sha256": "3e49132bbc558cd54fdd522fc42bd59f00f701abc415bd2e76c964a6ce619537",
+          "records": 200
+        },
+        {
+          "path": "results/ministral3_14b/validation/probe_level3/triviaqa/seed_42/baseline_true.json",
+          "sha256": "cf8a95f770ad2f69b77ca8be27d5761496dd0baabdb3c94ae60068e6ead48a08",
+          "records": 200
+        },
+        {
+          "path": "results/ministral3_14b/validation/probe_level3/triviaqa/seed_123/baseline_false.json",
+          "sha256": "841dcb9ede0dce00f2d6c74874b779f96e5ea10b3a2bc4ea5b355c0c76d45980",
+          "records": 200
+        },
+        {
+          "path": "results/ministral3_14b/validation/probe_level3/triviaqa/seed_123/baseline_true.json",
+          "sha256": "fae0ca665eb4cdafb2a0f3eb98efefedae73a4e545c2ac8ae797b60e393f9ab1",
+          "records": 200
+        },
+        {
+          "path": "results/ministral3_14b/validation/probe_level3/triviaqa/seed_456/baseline_false.json",
+          "sha256": "330f34837e3aa4ddbb5002a8b0e97e62c6573308dc1359f384043b214a9255eb",
+          "records": 200
+        },
+        {
+          "path": "results/ministral3_14b/validation/probe_level3/triviaqa/seed_456/baseline_true.json",
+          "sha256": "93c5a837d75fec5ae89a23028be8ccaa463520ecdbde1303f12fe9c2496c5768",
+          "records": 200
+        }
+      ]
+    },
+    {
+      "model": "ministral_3_14b",
+      "dataset": "arc_easy",
+      "canonical_layer": 19,
+      "n_false": 600,
+      "n_true": 600,
+      "n_pooled": 1200,
+      "median_false": 28.626280784606934,
+      "median_true": 28.57071876525879,
+      "median_pooled": 28.593059539794922,
+      "min_pooled": 27.305904388427734,
+      "max_pooled": 29.704790115356445,
+      "source_kind": "stored Ministral-3-14B Level-3 baseline shards",
+      "seeds": [
+        42,
+        123,
+        456
+      ],
+      "seed_row_weighting": "duplicate IDs across seeds retained",
+      "sources": [
+        {
+          "path": "results/ministral3_14b/validation/probe_level3/arc_easy/seed_42/baseline_false.json",
+          "sha256": "234be26938ae78ff25c40fdea5fb71c5db823497f9f13f1138ab8a5e9107c623",
+          "records": 200
+        },
+        {
+          "path": "results/ministral3_14b/validation/probe_level3/arc_easy/seed_42/baseline_true.json",
+          "sha256": "e0da9f5c6a4926532a000441d16de143d64aebedffe0a57bd73a6f7bfec84131",
+          "records": 200
+        },
+        {
+          "path": "results/ministral3_14b/validation/probe_level3/arc_easy/seed_123/baseline_false.json",
+          "sha256": "147f442d45bef0f724f77cbe1b11b67f8ce63a28191d26656c5d49ff73f705e3",
+          "records": 200
+        },
+        {
+          "path": "results/ministral3_14b/validation/probe_level3/arc_easy/seed_123/baseline_true.json",
+          "sha256": "98f8b4929bcc3217304ccdb6b0390b8aac2878c3eb028f38e3effe9349b63b74",
+          "records": 200
+        },
+        {
+          "path": "results/ministral3_14b/validation/probe_level3/arc_easy/seed_456/baseline_false.json",
+          "sha256": "08d99e7522d5e9c016ce8cf568e5b06b78c5a862137eeb369a0ae65ced47b35d",
+          "records": 200
+        },
+        {
+          "path": "results/ministral3_14b/validation/probe_level3/arc_easy/seed_456/baseline_true.json",
+          "sha256": "d598b5678a9c5532c469b272e8ac96de13a1f2fe9ea73b06934c465b10c09839",
+          "records": 200
+        }
+      ]
+    },
+    {
+      "model": "ministral_3_14b",
+      "dataset": "commonsenseqa",
+      "canonical_layer": 15,
+      "n_false": 600,
+      "n_true": 600,
+      "n_pooled": 1200,
+      "median_false": 20.934104919433594,
+      "median_true": 20.977986335754395,
+      "median_pooled": 20.956289291381836,
+      "min_pooled": 20.421964645385742,
+      "max_pooled": 21.57769775390625,
+      "source_kind": "stored Ministral-3-14B Level-3 baseline shards",
+      "seeds": [
+        42,
+        123,
+        456
+      ],
+      "seed_row_weighting": "duplicate IDs across seeds retained",
+      "sources": [
+        {
+          "path": "results/ministral3_14b/validation/probe_level3/commonsenseqa/seed_42/baseline_false.json",
+          "sha256": "c5c9fe471eef49e1bf1b7645cf51925b25bcec1c51a28ad373a7efd0e16f3260",
+          "records": 200
+        },
+        {
+          "path": "results/ministral3_14b/validation/probe_level3/commonsenseqa/seed_42/baseline_true.json",
+          "sha256": "c2c735cbe08cabcd22841d40d089f60c79591daa0d7cddf3342a0106a07141b6",
+          "records": 200
+        },
+        {
+          "path": "results/ministral3_14b/validation/probe_level3/commonsenseqa/seed_123/baseline_false.json",
+          "sha256": "10cbbc56ea1da3a39fdd7654a9e8969e0a167d01390ea448876f970973a11182",
+          "records": 200
+        },
+        {
+          "path": "results/ministral3_14b/validation/probe_level3/commonsenseqa/seed_123/baseline_true.json",
+          "sha256": "c9c023dbd830fe4fdc3197d920eb6d9b5c1aec7a36a5d9aeba9012ca2a4dfafa",
+          "records": 200
+        },
+        {
+          "path": "results/ministral3_14b/validation/probe_level3/commonsenseqa/seed_456/baseline_false.json",
+          "sha256": "88291504ddae91047408a72a0eb25e8cc69fa0e9cf0f1b42d4c4872abcdfeaea",
+          "records": 200
+        },
+        {
+          "path": "results/ministral3_14b/validation/probe_level3/commonsenseqa/seed_456/baseline_true.json",
+          "sha256": "c45ed375ab2362753bcccecb0b41efe3fc5a6c5dbf41ceed13b3192764fc8faa",
+          "records": 200
+        }
+      ]
+    },
+    {
+      "model": "qwen2.5_14b",
+      "dataset": "triviaqa",
+      "canonical_layer": 29,
+      "n_false": 600,
+      "n_true": 600,
+      "n_pooled": 1200,
+      "median_false": 115.55157089233398,
+      "median_true": 111.84884643554688,
+      "median_pooled": 112.93753433227539,
+      "min_pooled": 107.28436279296875,
+      "max_pooled": 131.37831115722656,
+      "source_kind": "stored Qwen2.5-14B diagnostic pair-level baseline",
+      "seeds": [
+        42,
+        123,
+        456
+      ],
+      "seed_row_weighting": "duplicate IDs across seeds retained",
+      "sources": [
+        {
+          "path": "results/qwen14b/diagnostic_backfill_v1/triviaqa_3seed_pairlevel.json",
+          "sha256": "74769f5e46557f55eb1eea2c57e4a259401678f88dcb890cef3e0dc666a5b47c",
+          "records_false": 600,
+          "records_true": 600
+        }
+      ]
+    },
+    {
+      "model": "qwen2.5_14b",
+      "dataset": "arc_easy",
+      "canonical_layer": 30,
+      "n_false": 600,
+      "n_true": 600,
+      "n_pooled": 1200,
+      "median_false": 129.43042755126953,
+      "median_true": 122.48120498657227,
+      "median_pooled": 125.76435470581055,
+      "min_pooled": 116.24159240722656,
+      "max_pooled": 145.25120544433594,
+      "source_kind": "stored Qwen2.5-14B diagnostic pair-level baseline",
+      "seeds": [
+        42,
+        123,
+        456
+      ],
+      "seed_row_weighting": "duplicate IDs across seeds retained",
+      "sources": [
+        {
+          "path": "results/qwen14b/diagnostic_backfill_v1/arc_easy_3seed_pairlevel.json",
+          "sha256": "4a7be19269da98636e797459fa97d647fa4811ddf86b639daa1e2c970229d96f",
+          "records_false": 600,
+          "records_true": 600
+        }
+      ]
+    },
+    {
+      "model": "qwen2.5_14b",
+      "dataset": "commonsenseqa",
+      "canonical_layer": 27,
+      "n_false": 600,
+      "n_true": 600,
+      "n_pooled": 1200,
+      "median_false": 103.8890380859375,
+      "median_true": 103.79410171508789,
+      "median_pooled": 103.84664535522461,
+      "min_pooled": 101.4808120727539,
+      "max_pooled": 108.32820129394531,
+      "source_kind": "stored Qwen2.5-14B diagnostic pair-level baseline",
+      "seeds": [
+        42,
+        123,
+        456
+      ],
+      "seed_row_weighting": "duplicate IDs across seeds retained",
+      "sources": [
+        {
+          "path": "results/qwen14b/diagnostic_backfill_v1/commonsenseqa_3seed_pairlevel.json",
+          "sha256": "98fbe585eef024b7ac3cc908003e84a1c3cbf4f3e27566a35c53dd9853ec3406",
+          "records_false": 600,
+          "records_true": 600
+        }
+      ]
+    }
+  ],
+  "script_path": "scripts/analyze_canonical_residual_norms_15cell.py",
+  "script_sha256": "92a6c5462f8567d45468200b600064a7a4bad185968a2c775cab287233057db9"
+}

@@ -1,0 +1,8 @@
+{
+  "dataset_name": "commonsenseqa",
+  "total_pairs": 10962,
+  "train": 5481,
+  "test": 5481,
+  "avg_true_len": 1.505838350665937,
+  "avg_false_len": 1.5326582740375845
+}

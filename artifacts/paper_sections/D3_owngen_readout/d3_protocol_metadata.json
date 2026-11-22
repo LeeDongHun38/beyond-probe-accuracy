@@ -1,0 +1,69 @@
+{
+  "scope": "Only the four requested final-answer-token results. The first/last/mean position extension is intentionally excluded.",
+  "common_evaluation": {
+    "direction_refit": false,
+    "direction_score": "Projection of the teacher-forced final answer-span hidden state on the pre-existing canonical TriviaQA/ARC-Easy MD direction.",
+    "teacher_forced_reconstruction": true,
+    "hidden_state_during_generation": false,
+    "answer_extraction": "Generated text is parsed to its first line after stripping common chatty prefixes; empty output is excluded.",
+    "correctness_normalization": "SQuAD-style: lowercase, replace punctuation with spaces, remove articles a/an/the, collapse whitespace.",
+    "alias_matching": "Normalized exact match against any gold alias; independent-span matching is disabled in these final runs.",
+    "target_token_definition": "Last token overlapping the rendered answer character span, found with tokenizer offsets; special tokens normally have no answer-span offsets. Legacy fallback uses the last matched answer token or EOS-previous token.",
+    "bootstrap": "1,000 question-clustered resamples, percentile 95% interval, seed 42.",
+    "question_overlap_with_probe_training": "None for reported held-out questions: directions are trained on the source dataset train split and D.3 evaluates only its test split."
+  },
+  "triviaqa": {
+    "questions_total": 4999,
+    "test_questions": 2500,
+    "generations_per_question": 16,
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_new_tokens": 24,
+    "decoding_seed": 42,
+    "template_assignment": "Preserved from each source TriviaQA pair (template_id 0--2); it is not reassigned by the own-generation run.",
+    "generation_prompt": "Five fixed closed-book QA demonstrations plus Q: <question> A:. Qwen/Llama use a system message; Mistral uses a single user message containing the demonstrations and question.",
+    "readout_context": "assistant message containing the generated answer (post-answer self-readout)",
+    "models": {
+      "qwen": {
+        "layer": 18,
+        "direction_source": "results/ccs_probes_offset/qwen_probes.pt",
+        "direction_refit": false,
+        "artifact_path": "results/owngen_analysis_full/qwen_owngen_method_a.json",
+        "random_direction_control": "results/owngen_random_direction_control/random_direction_control.json#/models/qwen/metrics/assistant_auroc"
+      },
+      "llama": {
+        "layer": 14,
+        "direction_source": "results/ccs_probes/llama_probes.pt",
+        "direction_refit": false,
+        "artifact_path": "results/owngen_analysis_full/llama_owngen_method_a.json",
+        "random_direction_control": "results/owngen_random_direction_control/random_direction_control.json#/models/llama/metrics/assistant_auroc"
+      },
+      "mistral": {
+        "layer": 13,
+        "direction_source": "results/ccs_probes/mistral_probes.pt",
+        "direction_refit": false,
+        "artifact_path": "results/owngen_analysis_full/mistral_owngen_method_a.json",
+        "random_direction_control": "results/owngen_random_direction_control/random_direction_control.json#/models/mistral/metrics/assistant_auroc"
+      }
+    }
+  },
+  "arc_easy": {
+    "questions_total": 1000,
+    "test_questions": 500,
+    "generations_per_question": 32,
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_new_tokens": 24,
+    "decoding_seeds": [
+      20260725,
+      20260726
+    ],
+    "template_assignment": "Preserved source-pair template_id 0--2 in the deterministic 500-train/500-test manifest.",
+    "generation_prompt": "Five fixed closed-book QA demonstrations plus Q: <question> A: in the Qwen system+user chat prompt.",
+    "readout_context": "external_user: system + user message Q: <question> A: <generated answer>; this is post-answer teacher-forced reconstruction, not an assistant-message readout.",
+    "direction_source": "results/ccs_probes_arc_easy/qwen_probes.pt",
+    "direction_refit": false,
+    "random_direction_control": "Not run for the canonical ARC-Easy own-generation last-token result.",
+    "artifact_path": "results/owngen_analysis_arc_easy_full/qwen_owngen_method_a.json"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "dataset_name": "arc_easy",
+  "total_pairs": 5197,
+  "train": 2598,
+  "test": 2599,
+  "avg_true_len": 3.7662112757360013,
+  "avg_false_len": 3.7375408889744084
+}

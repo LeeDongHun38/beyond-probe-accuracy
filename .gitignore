@@ -1,0 +1,17 @@
+# Runtime outputs written by probedir (hidden-state caches, steering results, etc.)
+/results/
+/models/
+/logs/
+
+# Python / tooling
+__pycache__/
+*.py[cod]
+.venv*/
+.ipynb_checkpoints/
+.pytest_cache/
+*.egg-info/
+.DS_Store
+
+# Large tensors outside artifacts/ (Tier-1 data are distributed separately)
+/*.pt
+/*.bin

@@ -1,0 +1,43 @@
+{
+  "status": "BLOCKED_REQUIRES_GPU_RERUN",
+  "scope": "Qwen2.5-7B corrected-direction C3/C4 canonicalization audit",
+  "canonical_corrected_triviaqa": {
+    "dataset": "TriviaQA",
+    "layer": 18,
+    "extraction": "corrected answer-final offset hidden-state extraction",
+    "direction_artifact": "results/qwen7b_corrected_l18_reexecution/protocol/D0_D5_corrected_train_only_f32.safetensors",
+    "direction_key": "D0",
+    "unit_vector_sha256": "74f826d049c5530c3c9c8a1f42fd0d21a8014a7f9863d58ee2fd12b8480a69f0",
+    "hidden_state_sha256": "4a9ba10028cdf306da337e33da9525813cfb119cec819d36844ed45cd72de22f",
+    "heldout_auroc": 0.8276496,
+    "fixed_alpha4_delta_p_false": 0.08479260484679818,
+    "fixed_alpha4_delta_p_true": -0.10037127836133548,
+    "split_half_mean": 0.9664786208890513
+  },
+  "legacy_triviaqa": {
+    "direction_artifact": "results/e8_probe_identifiability/directions/qwen_triviaqa_D0_D5_f32.safetensors",
+    "direction_key": "D0",
+    "unit_vector_sha256": "a80449314753ededa2445660b825d84c7aac603baf54606fe4048306a2a70455",
+    "cosine_with_corrected": 0.8803995847702026,
+    "fixed_alpha4_delta_p_false": 0.12611646116640013,
+    "fixed_alpha4_delta_p_true": -0.17752698641458134
+  },
+  "paper_facing_legacy_consumers": [
+    "appendix/c3/c3_full_intervention_summary.csv",
+    "appendix/c3/c3_full_intervention_by_seed.csv",
+    "appendix/c4/c4_random_direction_summary.csv",
+    "appendix/c4/c4_norm_matched_random_summary.csv",
+    "scripts/build_appendix_c3.py",
+    "scripts/build_appendix_c4.py"
+  ],
+  "random_null_reuse_decision": {
+    "reuse_allowed": false,
+    "reason": "The stored Qwen TriviaQA random-null compares against the legacy fixed effect (+0.12611646, -0.17752699), not the corrected fixed effect (+0.08479260, -0.10037128). Artifact-level equivalence therefore fails."
+  },
+  "required_rerun": {
+    "protocol": "fixed alpha=4, matched r=0.10, r approximately 0.05 sensitivity, five seeds x 200 paired items, and 127 norm-matched random directions using the corrected D0 hash above",
+    "runner_basis": "scripts/run_triviaqa_selected_lr_intervention.py protocol semantics, extended with pre-frozen corrected random directions",
+    "blocked_by": "NVIDIA driver unavailable in the current execution environment (nvidia-smi cannot communicate with the driver)",
+    "paper_facing_outputs_unchanged": true
+  }
+}

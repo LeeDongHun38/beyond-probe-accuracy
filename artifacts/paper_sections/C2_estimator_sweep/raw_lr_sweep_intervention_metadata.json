@@ -1,0 +1,17 @@
+{
+  "alpha": 4.0,
+  "qwen_7b_seeds": [42, 123, 456, 789, 999],
+  "qwen_14b_seeds": [42, 123, 456],
+  "ministral_14b_seeds": [42, 123, 456],
+  "eval_pairs_per_seed": 200,
+  "same_sample_ids_across_directions": true,
+  "explicit_system_prompt": true,
+  "system_prompt": "You are a helpful assistant.",
+  "delta_p_aggregation": "B: calculate the paired row-level delta mean within each seed (200 rows), then take the arithmetic mean of those seed means. Baselines are likewise averaged within seed, then across seeds.",
+  "verification": {
+    "freeze_spec": "results/triviaqa_selected_lr_sweep_v1/protocol/freeze_spec.json",
+    "implementation": "scripts/analyze_triviaqa_selected_lr_sweep.py",
+    "sample_id_check": "The analyzer requires baseline and steered sample-ID lists, including order, to equal the frozen per-seed list for every model, estimator, seed, and side.",
+    "prompt_implementation": "scripts/run_triviaqa_selected_lr_intervention.py::level3_messages"
+  }
+}

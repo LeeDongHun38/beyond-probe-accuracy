@@ -1,0 +1,10 @@
+scope,dataset,k2,k_ge5,all
+7-8B models,TriviaQA,15/15,60/60,75/75
+7-8B models,ARC-Easy,15/15,60/60,75/75
+7-8B models,CommonsenseQA,13/15,60/60,73/75
+Qwen2.5-14B,TriviaQA,5/5,20/20,25/25
+Qwen2.5-14B,ARC-Easy,5/5,20/20,25/25
+Qwen2.5-14B,CommonsenseQA,0/5,20/20,20/25
+Ministral-3-14B,TriviaQA,5/5,20/20,25/25
+Ministral-3-14B,ARC-Easy,5/5,20/20,25/25
+Ministral-3-14B,CommonsenseQA,5/5,20/20,25/25

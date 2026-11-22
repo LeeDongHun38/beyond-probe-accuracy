@@ -1,0 +1,647 @@
+{
+  "paper_pdf_sha256": "b85d714962864d9051ce5940e021a114d02cf4e64b9c41dcef620a87418d50ad",
+  "tables": [
+    {
+      "table": "table01",
+      "generated_file": "table01_triviaqa_estimator_sweep.csv",
+      "status": "KNOWN_DISCREPANCY",
+      "cells": 60,
+      "mismatches": 1,
+      "explained": 1
+    },
+    {
+      "table": "table02",
+      "generated_file": "table02_triviaqa_quant_transfer.csv",
+      "status": "MATCH",
+      "cells": 55,
+      "mismatches": 0,
+      "explained": 0
+    },
+    {
+      "table": "table03",
+      "generated_file": "table03_dataset_counts.csv",
+      "status": "MATCH",
+      "cells": 9,
+      "mismatches": 0,
+      "explained": 0
+    },
+    {
+      "table": "table10",
+      "generated_file": "table10_selected_layers.csv",
+      "status": "MATCH",
+      "cells": 15,
+      "mismatches": 0,
+      "explained": 0
+    },
+    {
+      "table": "table12",
+      "generated_file": "table12_md_auroc_stability.csv",
+      "status": "KNOWN_DISCREPANCY",
+      "cells": 30,
+      "mismatches": 1,
+      "explained": 1
+    },
+    {
+      "table": "table13",
+      "generated_file": "table13_estimator_sensitivity_7_8b.csv",
+      "status": "KNOWN_DISCREPANCY",
+      "cells": 108,
+      "mismatches": 1,
+      "explained": 1
+    },
+    {
+      "table": "table14",
+      "generated_file": "table14_estimator_sensitivity_14b.csv",
+      "status": "MATCH",
+      "cells": 48,
+      "mismatches": 0,
+      "explained": 0
+    },
+    {
+      "table": "table15",
+      "generated_file": "table15_md_intervention_alpha4.csv",
+      "status": "MATCH",
+      "cells": 135,
+      "mismatches": 0,
+      "explained": 0
+    },
+    {
+      "table": "table16",
+      "generated_file": "table16_md_intervention_matched_r010.csv",
+      "status": "MATCH",
+      "cells": 90,
+      "mismatches": 0,
+      "explained": 0
+    },
+    {
+      "table": "table17",
+      "generated_file": "table17_random_direction_alpha4.csv",
+      "status": "MATCH",
+      "cells": 150,
+      "mismatches": 0,
+      "explained": 0
+    },
+    {
+      "table": "table18",
+      "generated_file": "table18_random_direction_r005.csv",
+      "status": "MATCH",
+      "cells": 44,
+      "mismatches": 0,
+      "explained": 0
+    },
+    {
+      "table": "table19",
+      "generated_file": "table19_paired_side_comparison.csv",
+      "status": "MATCH",
+      "cells": 72,
+      "mismatches": 0,
+      "explained": 0
+    },
+    {
+      "table": "table20",
+      "generated_file": "table20_template_length_control.csv",
+      "status": "KNOWN_DISCREPANCY",
+      "cells": 75,
+      "mismatches": 8,
+      "explained": 8
+    },
+    {
+      "table": "table21",
+      "generated_file": "table21_source_style_control.csv",
+      "status": "MATCH",
+      "cells": 12,
+      "mismatches": 0,
+      "explained": 0
+    },
+    {
+      "table": "table22",
+      "generated_file": "table22_owngen_last_token.csv",
+      "status": "MATCH",
+      "cells": 27,
+      "mismatches": 0,
+      "explained": 0
+    },
+    {
+      "table": "table23",
+      "generated_file": "table23_pre_answer_readout.csv",
+      "status": "MATCH",
+      "cells": 36,
+      "mismatches": 0,
+      "explained": 0
+    },
+    {
+      "table": "table24",
+      "generated_file": "table24_answer_span_aggregation.csv",
+      "status": "MATCH",
+      "cells": 24,
+      "mismatches": 0,
+      "explained": 0
+    },
+    {
+      "table": "table25",
+      "generated_file": "table25_cross_precision_transfer.csv",
+      "status": "MATCH",
+      "cells": 180,
+      "mismatches": 0,
+      "explained": 0
+    },
+    {
+      "table": "table26",
+      "generated_file": "table26_rinc_bh_significance.csv",
+      "status": "MATCH",
+      "cells": 27,
+      "mismatches": 0,
+      "explained": 0
+    },
+    {
+      "table": "table27",
+      "generated_file": "table27_quant_geometry_k50.csv",
+      "status": "MATCH",
+      "cells": 225,
+      "mismatches": 0,
+      "explained": 0
+    },
+    {
+      "table": "table28",
+      "generated_file": "table28_mean_error_margin.csv",
+      "status": "MATCH",
+      "cells": 120,
+      "mismatches": 0,
+      "explained": 0
+    }
+  ],
+  "in_text_claims": [
+    {
+      "claim_id": "md_exceeds_null_max",
+      "location": "Sec 5.2, Fig 3(a), Sec 7",
+      "description": "Seed-averaged sides (alpha=4) where |dP_MD| exceeds the max of 127 random directions",
+      "expected": "29/30",
+      "check": "md_exceeds_null_max",
+      "computed": "29/30",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "expected_sign_alpha4",
+      "location": "Sec 5.2",
+      "description": "Seed-averaged sides at alpha=4 with the hypothesised sign",
+      "expected": "30/30",
+      "check": "expected_sign_alpha4",
+      "computed": "30/30",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "fixed_alpha_bh_significant",
+      "location": "App C.4 / Table 11",
+      "description": "Fixed-alpha directional tests with q_BH<.05 (global 30-test family)",
+      "expected": "30/30",
+      "check": "fixed_alpha_bh_significant",
+      "computed": "30/30",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "mistral_tqa_false_p",
+      "location": "App C.4",
+      "description": "Mistral-7B TriviaQA false side Monte Carlo p (one exceedance)",
+      "expected": ".015625",
+      "check": "mistral_tqa_false_p",
+      "computed": ".015625",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "r_ratio_range",
+      "location": "Sec 5.2",
+      "description": "Range across datasets of max/min r at alpha=4 across models",
+      "expected": "13.2-23.9",
+      "check": "r_ratio_range",
+      "computed": "13.3-23.9",
+      "status": "KNOWN_DISCREPANCY"
+    },
+    {
+      "claim_id": "matched_r_range_shrinks",
+      "location": "Sec 5.2",
+      "description": "Dataset-side comparisons whose cross-model effect range shrinks at r=.10 vs alpha=4",
+      "expected": "5/6",
+      "check": "matched_r_range_shrinks",
+      "computed": "5/6",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "r005_zero_exceedances",
+      "location": "Sec 5.2 / Table 18",
+      "description": "Sides at r~.05 with zero random exceedances",
+      "expected": "8/8",
+      "check": "r005_zero_exceedances",
+      "computed": "8/8",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "md_auroc_range",
+      "location": "App C.1",
+      "description": "Held-out MD AUROC range over 15 cells",
+      "expected": ".824-.975",
+      "check": "md_auroc_range",
+      "computed": ".824-.975",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "md_split_range",
+      "location": "App C.1",
+      "description": "MD split-half cosine range over 15 cells",
+      "expected": ".966-.992",
+      "check": "md_split_range",
+      "computed": ".966-.992",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "max_auroc_drop",
+      "location": "Sec 6.1, App E.1",
+      "description": "Maximum AUROC drop over 75 transfer comparisons",
+      "expected": ".040",
+      "check": "max_auroc_drop",
+      "computed": ".040",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "max_auroc_drop_cell",
+      "location": "App E.1",
+      "description": "Cell with the maximum AUROC drop",
+      "expected": "Mistral-7B/TriviaQA/gptq",
+      "check": "max_auroc_drop_cell",
+      "computed": "Mistral-7B/TriviaQA/gptq",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "w8a8_mean_drop",
+      "location": "App E.1",
+      "description": "Mean AUROC drop under W8A8 across 15 model-dataset settings",
+      "expected": ".0018",
+      "check": "w8a8_mean_drop",
+      "computed": ".0018",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "max_drop_qwen14b",
+      "location": "App E.1",
+      "description": "Maximum AUROC drop for Qwen2.5-14B",
+      "expected": ".027",
+      "check": "max_drop_qwen14b",
+      "computed": ".027",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "max_drop_ministral14b",
+      "location": "App E.1",
+      "description": "Maximum AUROC drop for Ministral-3-14B",
+      "expected": ".011",
+      "check": "max_drop_ministral14b",
+      "computed": ".011",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "negative_drops_llama",
+      "location": "App E.1",
+      "description": "Negative W8A8 AUROC drops (both Llama-3.1-8B)",
+      "expected": "2",
+      "check": "negative_drops_llama",
+      "computed": "2",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "rinc_significant",
+      "location": "Sec 6.2, App E.2",
+      "description": "R_inc tests significant in the global 375-test BH family",
+      "expected": "368/375",
+      "check": "rinc_significant",
+      "computed": "368/375",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "rinc_nonsig_cells",
+      "location": "Sec 6.2",
+      "description": "Non-significant R_inc cells (all Qwen CommonsenseQA k=2: Qwen-7B 2 + Qwen-14B 5)",
+      "expected": "Qwen2.5-7B:2;Qwen2.5-14B:5",
+      "check": "rinc_nonsig_cells",
+      "computed": "Qwen2.5-7B:2;Qwen2.5-14B:5",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "rinc_k_ge5",
+      "location": "App E.2",
+      "description": "Significant R_inc tests for k>=5",
+      "expected": "300/300",
+      "check": "rinc_k_ge5",
+      "computed": "300/300",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "rinc_qwen7_csqa_gptq_k2",
+      "location": "App E.2",
+      "description": "Qwen2.5-7B CSQA GPTQ k=2 observed/null mean/p/q",
+      "expected": ".001628/.000972/.06194/.06261",
+      "check": "rinc_qwen7_csqa_gptq_k2",
+      "computed": ".001628/.000972/.06194/.06261",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "rinc_qwen7_csqa_w8a8_k2",
+      "location": "App E.2",
+      "description": "Qwen2.5-7B CSQA W8A8 k=2 observed/null mean/p/q",
+      "expected": ".001215/.000767/.05495/.05584",
+      "check": "rinc_qwen7_csqa_w8a8_k2",
+      "computed": ".001215/.000767/.05495/.05584",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "m_significant",
+      "location": "App E.3",
+      "description": "Significant M tests (global 375 family)",
+      "expected": "268/375",
+      "check": "m_significant",
+      "computed": "268/375",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "m_k2",
+      "location": "App E.3",
+      "description": "Significant M tests at k=2",
+      "expected": "28/75",
+      "check": "m_k2",
+      "computed": "28/75",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "m_k_ge5",
+      "location": "App E.3",
+      "description": "Significant M tests at k>=5",
+      "expected": "240/300",
+      "check": "m_k_ge5",
+      "computed": "240/300",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "ministral_tqa_m",
+      "location": "App E.3",
+      "description": "Ministral-3-14B TriviaQA significant M tests",
+      "expected": "24/25",
+      "check": "ministral_tqa_m",
+      "computed": "24/25",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "ministral_tqa_awq_k5",
+      "location": "App E.3",
+      "description": "Ministral-3-14B TriviaQA AWQ k=5 M p/q",
+      "expected": ".1888/.2095",
+      "check": "ministral_tqa_awq_k5",
+      "computed": ".1888/.2095",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "margin_contracts",
+      "location": "App E.3",
+      "description": "Conditions where the mean margin contracts",
+      "expected": "73/75",
+      "check": "margin_contracts",
+      "computed": "73/75",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "shrinkage_range",
+      "location": "App E.3",
+      "description": "Relative shrinkage range (%)",
+      "expected": "-0.5-25.5",
+      "check": "shrinkage_range",
+      "computed": "-0.5-25.5",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "flip_range",
+      "location": "App E.3",
+      "description": "Sign-flip rate range (%)",
+      "expected": "0.5-11.6",
+      "check": "flip_range",
+      "computed": "0.5-11.6",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "flip_max_cell",
+      "location": "App E.3",
+      "description": "Cell with maximum shrinkage and flip rate",
+      "expected": "Mistral-7B/TriviaQA/gptq",
+      "check": "flip_max_cell",
+      "computed": "Mistral-7B/TriviaQA/gptq",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "d6_initial",
+      "location": "App D.6",
+      "description": "Initial 200-question +v: accuracy before->after, inc->cor, cor->inc, p",
+      "expected": ".375->.390/3/0/.25",
+      "check": "d6_initial",
+      "computed": ".375->.390/3/0/.25",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "d6_confirm_pos",
+      "location": "App D.6",
+      "description": "Confirmatory 400-question +v: accuracy, transitions, p",
+      "expected": ".4350->.4325/4/5/1.0",
+      "check": "d6_confirm_pos",
+      "computed": ".4350->.4325/4/5/1.0",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "d6_confirm_neg",
+      "location": "App D.6",
+      "description": "Confirmatory 400-question -v: accuracy, transitions, p",
+      "expected": ".4350->.4375/3/2/1.0",
+      "check": "d6_confirm_neg",
+      "computed": ".4350->.4375/3/2/1.0",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "paired_side_sign_test",
+      "location": "App C.4",
+      "description": "Paired side comparisons correct and two-sided exact sign-test p",
+      "expected": "9/9/.0039",
+      "check": "paired_side_sign_test",
+      "computed": "9/9/.0039",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "paired_side_median_ratio",
+      "location": "App C.4",
+      "description": "Median within-cell null-magnitude ratio",
+      "expected": "1.98",
+      "check": "paired_side_median_ratio",
+      "computed": "1.98",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "d1_max_template_range",
+      "location": "App D.1",
+      "description": "Largest template range (Ministral-3-14B TriviaQA)",
+      "expected": ".0374",
+      "check": "d1_max_template_range",
+      "computed": ".0374",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "d1_max_length_gap",
+      "location": "App D.1",
+      "description": "Largest input-length gap (Llama-3.1-8B TriviaQA)",
+      "expected": ".0363",
+      "check": "d1_max_length_gap",
+      "computed": ".0363",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "d3_auroc_range",
+      "location": "App D.3",
+      "description": "Self-generated last-token AUROC range",
+      "expected": ".7330-.8271",
+      "check": "d3_auroc_range",
+      "computed": ".7330-.8271",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "d5_last_range",
+      "location": "App D.5",
+      "description": "Last-token AUROC range",
+      "expected": ".7860-.8566",
+      "check": "d5_last_range",
+      "computed": ".7860-.8566",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "d5_mean_range",
+      "location": "App D.5",
+      "description": "Mean-pooled AUROC range",
+      "expected": ".7564-.8430",
+      "check": "d5_mean_range",
+      "computed": ".7564-.8430",
+      "status": "MATCH"
+    },
+    {
+      "claim_id": "fig2_r_values",
+      "location": "Figure 2",
+      "description": "r induced by alpha=4 on TriviaQA (Llama/Qwen7/Mistral/Qwen14/Ministral)",
+      "expected": ".469/.051/.845/.035/.037",
+      "check": "fig2_r_values",
+      "computed": ".469/.051/.845/.035/.037",
+      "status": "MATCH"
+    }
+  ],
+  "mismatches": [
+    {
+      "table": "table01",
+      "row_key": "MD|Qwen2.5-7B",
+      "column": "stab",
+      "expected": ".967",
+      "generated": ".966",
+      "explained": true,
+      "note": "Source split-half mean is 0.96648 (artifacts/paper_sections/C1_md_stability/result.csv and C2 d0_d5_canonical.csv), which rounds to .966; the paper prints .967. Appendix C.1 text itself states the range as .966-.992, consistent with the source. Paper typo; not corrected here."
+    },
+    {
+      "table": "table12",
+      "row_key": "Qwen2.5-7B|TriviaQA",
+      "column": "split",
+      "expected": ".967",
+      "generated": ".966",
+      "explained": true,
+      "note": "Source split-half mean is 0.96648 (artifacts/paper_sections/C1_md_stability/result.csv and C2 d0_d5_canonical.csv), which rounds to .966; the paper prints .967. Appendix C.1 text itself states the range as .966-.992, consistent with the source. Paper typo; not corrected here."
+    },
+    {
+      "table": "table13",
+      "row_key": "Qwen2.5-7B|D0",
+      "column": "split",
+      "expected": ".967",
+      "generated": ".966",
+      "explained": true,
+      "note": "Source split-half mean is 0.96648 (artifacts/paper_sections/C1_md_stability/result.csv and C2 d0_d5_canonical.csv), which rounds to .966; the paper prints .967. Appendix C.1 text itself states the range as .966-.992, consistent with the source. Paper typo; not corrected here."
+    },
+    {
+      "table": "table20",
+      "row_key": "Llama-3.1-8B|TriviaQA",
+      "column": "g_temp",
+      "expected": ".0220",
+      "generated": ".0224",
+      "explained": true,
+      "note": "Llama-3.1-8B and Mistral-7B template ranges are printed at 3-decimal precision with a padded trailing zero (source 0.022445 -> .022); Qwen2.5-7B rows of the same table are printed at true 4-decimal precision. Source: artifacts/sources/results/ccs_probes*/<model>_level12_results.json at the selected layer."
+    },
+    {
+      "table": "table20",
+      "row_key": "Llama-3.1-8B|ARC-Easy",
+      "column": "g_temp",
+      "expected": ".0220",
+      "generated": ".0216",
+      "explained": true,
+      "note": "Llama-3.1-8B and Mistral-7B template ranges are printed at 3-decimal precision with a padded trailing zero (source 0.021598 -> .022); Qwen2.5-7B rows of the same table are printed at true 4-decimal precision. Source: artifacts/sources/results/ccs_probes*/<model>_level12_results.json at the selected layer."
+    },
+    {
+      "table": "table20",
+      "row_key": "Llama-3.1-8B|CommonsenseQA",
+      "column": "g_temp",
+      "expected": ".0100",
+      "generated": ".0095",
+      "explained": true,
+      "note": "Llama-3.1-8B and Mistral-7B template ranges are printed at 3-decimal precision with a padded trailing zero (source 0.009513 -> .010); Qwen2.5-7B rows of the same table are printed at true 4-decimal precision. Source: artifacts/sources/results/ccs_probes*/<model>_level12_results.json at the selected layer."
+    },
+    {
+      "table": "table20",
+      "row_key": "Mistral-7B|TriviaQA",
+      "column": "g_temp",
+      "expected": ".0140",
+      "generated": ".0135",
+      "explained": true,
+      "note": "Llama-3.1-8B and Mistral-7B template ranges are printed at 3-decimal precision with a padded trailing zero (source 0.013517 -> .014); Qwen2.5-7B rows of the same table are printed at true 4-decimal precision. Source: artifacts/sources/results/ccs_probes*/<model>_level12_results.json at the selected layer."
+    },
+    {
+      "table": "table20",
+      "row_key": "Mistral-7B|ARC-Easy",
+      "column": "g_temp",
+      "expected": ".0130",
+      "generated": ".0134",
+      "explained": true,
+      "note": "Llama-3.1-8B and Mistral-7B template ranges are printed at 3-decimal precision with a padded trailing zero (source 0.013449 -> .013); Qwen2.5-7B rows of the same table are printed at true 4-decimal precision. Source: artifacts/sources/results/ccs_probes*/<model>_level12_results.json at the selected layer."
+    },
+    {
+      "table": "table20",
+      "row_key": "Mistral-7B|ARC-Easy",
+      "column": "g_len",
+      "expected": ".0102",
+      "generated": ".0101",
+      "explained": true,
+      "note": "Source auroc_gap is 0.0101499 (|0.926129 - 0.915979|, mistral_level12_results.json layer 15), which rounds to .0101; .0102 is consistent with double rounding via .01015."
+    },
+    {
+      "table": "table20",
+      "row_key": "Mistral-7B|CommonsenseQA",
+      "column": "g_temp",
+      "expected": ".0120",
+      "generated": ".0117",
+      "explained": true,
+      "note": "Llama-3.1-8B and Mistral-7B template ranges are printed at 3-decimal precision with a padded trailing zero (source 0.011688 -> .012); Qwen2.5-7B rows of the same table are printed at true 4-decimal precision. Source: artifacts/sources/results/ccs_probes*/<model>_level12_results.json at the selected layer."
+    },
+    {
+      "table": "table20",
+      "row_key": "Qwen2.5-14B|CommonsenseQA",
+      "column": "g_temp",
+      "expected": ".0055",
+      "generated": ".0054",
+      "explained": true,
+      "note": "Template AUROCs are stored at 4 decimals, so the exact range is .00545; the stored float is 0.0054499999999998 and rounds to .0054 in binary floating point, while decimal half-up gives the printed .0055 (artifacts/sources/results/qwen14b/validation/phase2.json)."
+    },
+    {
+      "table": "in_text",
+      "row_key": "r_ratio_range",
+      "column": "value",
+      "expected": "13.2-23.9",
+      "generated": "13.3-23.9",
+      "explained": true,
+      "note": "Section 5.2 \"13.2-23.9x\". TriviaQA ratio = .8453 (Mistral-7B explicit-system r, as in Figure 2) / .0354 (Qwen2.5-14B) = 23.87 -> 23.9 reproduces; the CommonsenseQA ratio is .5115/.0385 = 13.28, which rounds to 13.3, not 13.2 (likely truncated). Using legacy Mistral r=.855 would instead give 24.1."
+    }
+  ],
+  "unexplained_mismatches": 0,
+  "status": "PASS"
+}

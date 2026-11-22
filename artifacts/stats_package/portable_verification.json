@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "verification_scope": "all regenerated CSV artifacts, byte-for-byte",
+  "reference_directory": ".",
+  "rebuilt_directory": "isolated output directory",
+  "repository_external_reads": 0,
+  "gpu_or_model_inference": false,
+  "files": [
+    {
+      "file": "rinc_global_375.csv",
+      "byte_identical": true,
+      "reference_sha256": "416c47488319ce0a78b35a8fb65e2409d631761da55124705d0acefa7eb8347c",
+      "rebuilt_sha256": "416c47488319ce0a78b35a8fb65e2409d631761da55124705d0acefa7eb8347c"
+    },
+    {
+      "file": "m_global_375.csv",
+      "byte_identical": true,
+      "reference_sha256": "e459ce7736b904f2e9d64acb5ad15351b0ff0bbc0d2b2a10823be37b414ec5a2",
+      "rebuilt_sha256": "e459ce7736b904f2e9d64acb5ad15351b0ff0bbc0d2b2a10823be37b414ec5a2"
+    },
+    {
+      "file": "a_global_375.csv",
+      "byte_identical": true,
+      "reference_sha256": "7dca4330cf67a89c72bbee6370f4c78960ef4b0a2dfb95eb7b1278d3b9d099c5",
+      "rebuilt_sha256": "7dca4330cf67a89c72bbee6370f4c78960ef4b0a2dfb95eb7b1278d3b9d099c5"
+    },
+    {
+      "file": "rinc_nonsignificant_cells.csv",
+      "byte_identical": true,
+      "reference_sha256": "08a9f455645ab4f1ca2a977576118e607751324bf0901c51e0e0f2c7d49e88dd",
+      "rebuilt_sha256": "08a9f455645ab4f1ca2a977576118e607751324bf0901c51e0e0f2c7d49e88dd"
+    },
+    {
+      "file": "missing_raw_artifacts.csv",
+      "byte_identical": true,
+      "reference_sha256": "edb027947c5e975ed9675b954cf3ea01a77a0acb12d4670c096954ae858b0f59",
+      "rebuilt_sha256": "edb027947c5e975ed9675b954cf3ea01a77a0acb12d4670c096954ae858b0f59"
+    },
+    {
+      "file": "previous_family_comparison.csv",
+      "byte_identical": true,
+      "reference_sha256": "99a5ac6453a78da9d16215cbfe73b1648f00713cc8223180e705cee781d767c8",
+      "rebuilt_sha256": "99a5ac6453a78da9d16215cbfe73b1648f00713cc8223180e705cee781d767c8"
+    },
+    {
+      "file": "auxiliary_historical_comparison.csv",
+      "byte_identical": true,
+      "reference_sha256": "1b129565cfdee186b26725d4c2d5c9968a934371dc2c86fb6e0c767177413a12",
+      "rebuilt_sha256": "1b129565cfdee186b26725d4c2d5c9968a934371dc2c86fb6e0c767177413a12"
+    },
+    {
+      "file": "steering_fixed_alpha_global_30.csv",
+      "byte_identical": true,
+      "reference_sha256": "ad194a8800aedf7210b69863b63df3195c763b74c442b950b41e15b9efd1df3d",
+      "rebuilt_sha256": "ad194a8800aedf7210b69863b63df3195c763b74c442b950b41e15b9efd1df3d"
+    }
+  ]
+}

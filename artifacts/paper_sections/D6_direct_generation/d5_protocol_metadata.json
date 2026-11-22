@@ -1,0 +1,35 @@
+{
+  "scope": "Direct answer-generation intervention only; the independent 400-question replication is confirmatory and the initial 200-question result is exploratory.",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "dataset": "TriviaQA",
+  "layer": 18,
+  "alpha": 4.0,
+  "direction": {
+    "source": "results/ccs_probes_offset/qwen_probes.pt#[18].v_norm",
+    "unit_normalized": true,
+    "direction_refit": false
+  },
+  "independent_samples": {
+    "initial_n": 200,
+    "confirmation_n": 400,
+    "overlap_n": 0,
+    "initial_selection_seed": 20260725,
+    "confirmation_selection_seed": 20260726,
+    "confirmation_excluded_prior_ids": 200,
+    "verification_artifact": "results/direct_answer_generation/combined_analysis.json#/protocol_check"
+  },
+  "generation": {
+    "decoding": "greedy (do_sample=False); temperature is not a generation parameter in the actual call, so it is deterministic rather than an explicitly supplied temperature=0.",
+    "max_new_tokens": 24,
+    "prompt": "Same short-answer few-shot system+user prompt and source-pair template_id for baseline, +v, and -v within every paired question.",
+    "intervention": "Add \u00b1alpha*v_norm at L18 layer output for the prompt prefill and every cached decoding forward pass."
+  },
+  "scoring": {
+    "answer_extraction": "First generated line after stripping common chatty prefixes.",
+    "correctness": "SQuAD-style lowercase/punctuation/article/whitespace normalization followed by exact equality to any TriviaQA gold alias.",
+    "span_matching": false,
+    "empty_outputs": "Excluded only if either member of a paired comparison has an empty normalized answer; none were excluded in the reported three rows.",
+    "test": "Two-sided exact McNemar/binomial test on paired discordant outcomes."
+  },
+  "conclusion": "The independent 400-question confirmation shows no direct-generation accuracy improvement: +v delta=-.0025 (p=1.0) and -v delta=+.0025 (p=1.0)."
+}

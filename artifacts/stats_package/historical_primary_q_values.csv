@@ -1,0 +1,376 @@
+metric,model,dataset,quantization,k,p_raw,historical_family_id,q_bh_historical
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,AWQ W4A16,2,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,AWQ W4A16,5,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,AWQ W4A16,10,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,AWQ W4A16,20,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,AWQ W4A16,50,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,GPTQ W4A16,2,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,GPTQ W4A16,5,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,GPTQ W4A16,10,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,GPTQ W4A16,20,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,GPTQ W4A16,50,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,RTN W4A16,2,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,RTN W4A16,5,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,RTN W4A16,10,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,RTN W4A16,20,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,RTN W4A16,50,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,simulated W8A8,2,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,simulated W8A8,5,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,simulated W8A8,10,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,simulated W8A8,20,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,simulated W8A8,50,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,simulated W4A8,2,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,simulated W4A8,5,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,simulated W4A8,10,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,simulated W4A8,20,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,TriviaQA,simulated W4A8,50,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,AWQ W4A16,2,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,AWQ W4A16,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,AWQ W4A16,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,AWQ W4A16,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,AWQ W4A16,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,GPTQ W4A16,2,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,GPTQ W4A16,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,GPTQ W4A16,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,GPTQ W4A16,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,GPTQ W4A16,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,RTN W4A16,2,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,RTN W4A16,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,RTN W4A16,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,RTN W4A16,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,RTN W4A16,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,simulated W8A8,2,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,simulated W8A8,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,simulated W8A8,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,simulated W8A8,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,simulated W8A8,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,simulated W4A8,2,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,simulated W4A8,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,simulated W4A8,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,simulated W4A8,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,ARC-Easy,simulated W4A8,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,AWQ W4A16,2,0.002997002997002997,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0031658482362707714
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,AWQ W4A16,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,AWQ W4A16,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,AWQ W4A16,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,AWQ W4A16,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,GPTQ W4A16,2,0.001998001998001998,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0021561172640309333
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,GPTQ W4A16,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,GPTQ W4A16,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,GPTQ W4A16,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,GPTQ W4A16,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,RTN W4A16,2,0.001998001998001998,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0021561172640309333
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,RTN W4A16,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,RTN W4A16,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,RTN W4A16,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,RTN W4A16,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,simulated W8A8,2,0.002997002997002997,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0031658482362707714
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,simulated W8A8,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,simulated W8A8,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,simulated W8A8,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,simulated W8A8,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,simulated W4A8,2,0.003996003996003996,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.004133797237245513
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,simulated W4A8,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,simulated W4A8,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,simulated W4A8,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Llama-3.1-8B-Instruct,CommonsenseQA,simulated W4A8,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,AWQ W4A16,2,0.001998001998001998,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00440735734853382
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,AWQ W4A16,5,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,AWQ W4A16,10,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,AWQ W4A16,20,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,AWQ W4A16,50,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,GPTQ W4A16,2,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,GPTQ W4A16,5,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,GPTQ W4A16,10,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,GPTQ W4A16,20,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,GPTQ W4A16,50,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,RTN W4A16,2,0.001998001998001998,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00440735734853382
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,RTN W4A16,5,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,RTN W4A16,10,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,RTN W4A16,20,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,RTN W4A16,50,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,simulated W8A8,2,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,simulated W8A8,5,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,simulated W8A8,10,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,simulated W8A8,20,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,simulated W8A8,50,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,simulated W4A8,2,0.002997002997002997,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.006075006075006075
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,simulated W4A8,5,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,simulated W4A8,10,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,simulated W4A8,20,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,TriviaQA,simulated W4A8,50,0.000999000999000999,historical Qwen-7B TriviaQA 75-test joint-statistic family,0.00267589553303839
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,AWQ W4A16,2,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,AWQ W4A16,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,AWQ W4A16,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,AWQ W4A16,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,AWQ W4A16,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,GPTQ W4A16,2,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,GPTQ W4A16,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,GPTQ W4A16,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,GPTQ W4A16,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,GPTQ W4A16,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,RTN W4A16,2,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,RTN W4A16,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,RTN W4A16,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,RTN W4A16,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,RTN W4A16,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,simulated W8A8,2,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,simulated W8A8,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,simulated W8A8,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,simulated W8A8,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,simulated W8A8,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,simulated W4A8,2,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,simulated W4A8,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,simulated W4A8,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,simulated W4A8,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,ARC-Easy,simulated W4A8,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,AWQ W4A16,2,0.025974025974025976,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.026685643123999292
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,AWQ W4A16,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,AWQ W4A16,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,AWQ W4A16,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,AWQ W4A16,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,GPTQ W4A16,2,0.061938061938061936,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.06193806193806194
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,GPTQ W4A16,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,GPTQ W4A16,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,GPTQ W4A16,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,GPTQ W4A16,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,RTN W4A16,2,0.03396603396603397,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.03465921833268772
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,RTN W4A16,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,RTN W4A16,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,RTN W4A16,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,RTN W4A16,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,simulated W8A8,2,0.054945054945054944,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.05531381370307544
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,simulated W8A8,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,simulated W8A8,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,simulated W8A8,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,simulated W8A8,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,simulated W4A8,2,0.04695304695304695,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.04758754758754759
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,simulated W4A8,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,simulated W4A8,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,simulated W4A8,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-7B-Instruct,CommonsenseQA,simulated W4A8,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,AWQ W4A16,2,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,AWQ W4A16,5,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,AWQ W4A16,10,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,AWQ W4A16,20,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,AWQ W4A16,50,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,GPTQ W4A16,2,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,GPTQ W4A16,5,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,GPTQ W4A16,10,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,GPTQ W4A16,20,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,GPTQ W4A16,50,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,RTN W4A16,2,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,RTN W4A16,5,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,RTN W4A16,10,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,RTN W4A16,20,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,RTN W4A16,50,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,simulated W8A8,2,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,simulated W8A8,5,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,simulated W8A8,10,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,simulated W8A8,20,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,simulated W8A8,50,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,simulated W4A8,2,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,simulated W4A8,5,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,simulated W4A8,10,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,simulated W4A8,20,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,TriviaQA,simulated W4A8,50,0.000999000999000999,historical Llama+Mistral TriviaQA 150-test joint-statistic family,0.001362274089546817
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,AWQ W4A16,2,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,AWQ W4A16,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,AWQ W4A16,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,AWQ W4A16,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,AWQ W4A16,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,GPTQ W4A16,2,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,GPTQ W4A16,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,GPTQ W4A16,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,GPTQ W4A16,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,GPTQ W4A16,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,RTN W4A16,2,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,RTN W4A16,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,RTN W4A16,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,RTN W4A16,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,RTN W4A16,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,simulated W8A8,2,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,simulated W8A8,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,simulated W8A8,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,simulated W8A8,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,simulated W8A8,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,simulated W4A8,2,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,simulated W4A8,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,simulated W4A8,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,simulated W4A8,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,ARC-Easy,simulated W4A8,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,AWQ W4A16,2,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,AWQ W4A16,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,AWQ W4A16,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,AWQ W4A16,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,AWQ W4A16,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,GPTQ W4A16,2,0.002997002997002997,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0031658482362707714
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,GPTQ W4A16,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,GPTQ W4A16,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,GPTQ W4A16,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,GPTQ W4A16,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,RTN W4A16,2,0.003996003996003996,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.004133797237245513
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,RTN W4A16,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,RTN W4A16,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,RTN W4A16,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,RTN W4A16,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,simulated W8A8,2,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,simulated W8A8,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,simulated W8A8,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,simulated W8A8,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,simulated W8A8,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,simulated W4A8,2,0.003996003996003996,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.004133797237245513
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,simulated W4A8,5,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,simulated W4A8,10,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,simulated W4A8,20,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Mistral-7B-Instruct-v0.3,CommonsenseQA,simulated W4A8,50,0.000999000999000999,historical 7B ARC-Easy+CommonsenseQA R_inc 150-test family,0.0010937967142346705
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,AWQ W4A16,2,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,AWQ W4A16,5,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,AWQ W4A16,10,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,AWQ W4A16,20,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,AWQ W4A16,50,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,GPTQ W4A16,2,0.001998001998001998,historical 14B R_inc 125-test family,0.0020812520812520815
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,GPTQ W4A16,5,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,GPTQ W4A16,10,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,GPTQ W4A16,20,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,GPTQ W4A16,50,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,RTN W4A16,2,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,RTN W4A16,5,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,RTN W4A16,10,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,RTN W4A16,20,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,RTN W4A16,50,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,simulated W8A8,2,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,simulated W8A8,5,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,simulated W8A8,10,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,simulated W8A8,20,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,simulated W8A8,50,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,simulated W4A8,2,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,simulated W4A8,5,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,simulated W4A8,10,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,simulated W4A8,20,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,TriviaQA,simulated W4A8,50,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,AWQ W4A16,2,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,AWQ W4A16,5,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,AWQ W4A16,10,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,AWQ W4A16,20,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,AWQ W4A16,50,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,GPTQ W4A16,2,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,GPTQ W4A16,5,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,GPTQ W4A16,10,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,GPTQ W4A16,20,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,GPTQ W4A16,50,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,RTN W4A16,2,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,RTN W4A16,5,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,RTN W4A16,10,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,RTN W4A16,20,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,RTN W4A16,50,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,simulated W8A8,2,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,simulated W8A8,5,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,simulated W8A8,10,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,simulated W8A8,20,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,simulated W8A8,50,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,simulated W4A8,2,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,simulated W4A8,5,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,simulated W4A8,10,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,simulated W4A8,20,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,ARC-Easy,simulated W4A8,50,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,AWQ W4A16,2,0.11288711288711288,historical 14B R_inc 125-test family,0.11566302549909106
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,AWQ W4A16,5,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,AWQ W4A16,10,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,AWQ W4A16,20,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,AWQ W4A16,50,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,GPTQ W4A16,2,0.7182817182817183,historical 14B R_inc 125-test family,0.7182817182817183
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,GPTQ W4A16,5,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,GPTQ W4A16,10,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,GPTQ W4A16,20,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,GPTQ W4A16,50,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,RTN W4A16,2,0.057942057942057944,historical 14B R_inc 125-test family,0.0598574978740268
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,RTN W4A16,5,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,RTN W4A16,10,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,RTN W4A16,20,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,RTN W4A16,50,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,simulated W8A8,2,0.18581418581418582,historical 14B R_inc 125-test family,0.18731268731268733
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,simulated W8A8,5,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,simulated W8A8,10,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,simulated W8A8,20,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,simulated W8A8,50,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,simulated W4A8,2,0.14685314685314685,historical 14B R_inc 125-test family,0.14924100289953948
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,simulated W4A8,5,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,simulated W4A8,10,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,simulated W4A8,20,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Qwen2.5-14B-Instruct,CommonsenseQA,simulated W4A8,50,0.000999000999000999,historical 14B R_inc 125-test family,0.001049370797269957
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,AWQ W4A16,2,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,AWQ W4A16,5,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,AWQ W4A16,10,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,AWQ W4A16,20,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,AWQ W4A16,50,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,GPTQ W4A16,2,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,GPTQ W4A16,5,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,GPTQ W4A16,10,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,GPTQ W4A16,20,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,GPTQ W4A16,50,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,RTN W4A16,2,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,RTN W4A16,5,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,RTN W4A16,10,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,RTN W4A16,20,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,RTN W4A16,50,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,simulated W8A8,2,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,simulated W8A8,5,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,simulated W8A8,10,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,simulated W8A8,20,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,simulated W8A8,50,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,simulated W4A8,2,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,simulated W4A8,5,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,simulated W4A8,10,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,simulated W4A8,20,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,TriviaQA,simulated W4A8,50,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,AWQ W4A16,2,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,AWQ W4A16,5,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,AWQ W4A16,10,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,AWQ W4A16,20,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,AWQ W4A16,50,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,GPTQ W4A16,2,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,GPTQ W4A16,5,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,GPTQ W4A16,10,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,GPTQ W4A16,20,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,GPTQ W4A16,50,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,RTN W4A16,2,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,RTN W4A16,5,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,RTN W4A16,10,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,RTN W4A16,20,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,RTN W4A16,50,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,simulated W8A8,2,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,simulated W8A8,5,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,simulated W8A8,10,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,simulated W8A8,20,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,simulated W8A8,50,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,simulated W4A8,2,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,simulated W4A8,5,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,simulated W4A8,10,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,simulated W4A8,20,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,ARC-Easy,simulated W4A8,50,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,AWQ W4A16,2,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,AWQ W4A16,5,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,AWQ W4A16,10,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,AWQ W4A16,20,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,AWQ W4A16,50,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,GPTQ W4A16,2,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,GPTQ W4A16,5,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,GPTQ W4A16,10,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,GPTQ W4A16,20,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,GPTQ W4A16,50,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,RTN W4A16,2,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,RTN W4A16,5,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,RTN W4A16,10,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,RTN W4A16,20,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,RTN W4A16,50,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,simulated W8A8,2,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,simulated W8A8,5,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,simulated W8A8,10,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,simulated W8A8,20,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,simulated W8A8,50,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,simulated W4A8,2,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,simulated W4A8,5,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,simulated W4A8,10,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,simulated W4A8,20,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999
+R_incremental,Ministral-3-14B-Instruct,CommonsenseQA,simulated W4A8,50,0.000999000999000999,historical Ministral-14B R_inc 75-test reporting family,0.000999000999000999

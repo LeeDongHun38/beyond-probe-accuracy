@@ -1,0 +1,29 @@
+{
+  "llama": {
+    "layer": 14,
+    "false_median_residual_norm": 8.509920597076416,
+    "true_median_residual_norm": 8.55377721786499,
+    "pooled_median_residual_norm": 8.533081531524658,
+    "n_false": 1000,
+    "n_true": 1000,
+    "measurement": "baseline forward, selected-layer output at final input token"
+  },
+  "qwen": {
+    "layer": 18,
+    "false_median_residual_norm": 78.48823928833008,
+    "true_median_residual_norm": 77.92635726928711,
+    "pooled_median_residual_norm": 78.14604949951172,
+    "n_false": 1000,
+    "n_true": 1000,
+    "measurement": "baseline forward, selected-layer output at final input token"
+  },
+  "mistral": {
+    "layer": 13,
+    "false_median_residual_norm": 4.731632232666016,
+    "true_median_residual_norm": 4.73182225227356,
+    "pooled_median_residual_norm": 4.731810092926025,
+    "n_false": 1000,
+    "n_true": 1000,
+    "measurement": "baseline forward, selected-layer output at final input token"
+  }
+}

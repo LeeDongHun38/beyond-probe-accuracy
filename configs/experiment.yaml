@@ -1,0 +1,65 @@
+# Experiment configuration: models, the 15 model-dataset cells, and fixed settings
+# (Sec. 3-4; App. B; Tables 7 and 10).
+# Layers are zero-based transformer-block indices, selected by training-split MD AUROC only.
+
+models:
+  llama-3.1-8b:
+    hf_id: meta-llama/Llama-3.1-8B-Instruct
+    blocks: 32
+    hidden_size: 4096
+    reference_precision: fp16
+  qwen2.5-7b:
+    hf_id: Qwen/Qwen2.5-7B-Instruct
+    blocks: 28
+    hidden_size: 3584
+    reference_precision: fp16
+  mistral-7b:
+    hf_id: mistralai/Mistral-7B-Instruct-v0.3
+    blocks: 32
+    hidden_size: 4096
+    reference_precision: fp16
+  qwen2.5-14b:
+    hf_id: Qwen/Qwen2.5-14B-Instruct
+    blocks: 48
+    hidden_size: 5120
+    reference_precision: fp16
+  ministral-3-14b:
+    hf_id: mistralai/Ministral-3-14B-Instruct-2512-BF16
+    blocks: 40
+    hidden_size: 5120
+    reference_precision: fp16  # BF16 checkpoint cast to FP16 (Table 7, footnote)
+
+datasets:
+  triviaqa:      {pairs_dir: data/pairs/triviaqa,      n_pairs: 4999,  train: 2499, heldout: 2500}
+  arc_easy:      {pairs_dir: data/pairs/arc_easy,      n_pairs: 5197,  train: 2598, heldout: 2599}
+  commonsenseqa: {pairs_dir: data/pairs/commonsenseqa, n_pairs: 10962, train: 5481, heldout: 5481}
+  # App. D.2 control: TriviaQA questions with a gold answer from another question as a-
+  triviaqa_gold_donor: {pairs_dir: data/controls/gold_donor, n_pairs: 4999, train: 2499, heldout: 2500}
+
+selected_layers:   # Table 10
+  llama-3.1-8b:    {triviaqa: 14, arc_easy: 14, commonsenseqa: 14}
+  qwen2.5-7b:      {triviaqa: 18, arc_easy: 18, commonsenseqa: 17}
+  mistral-7b:      {triviaqa: 13, arc_easy: 15, commonsenseqa: 17}
+  qwen2.5-14b:     {triviaqa: 29, arc_easy: 30, commonsenseqa: 27}
+  ministral-3-14b: {triviaqa: 36, arc_easy: 19, commonsenseqa: 15}
+
+quantization_conditions:   # Sec. 4, App. E; FP16 layer and MD direction are reused without refitting
+  - awq_w4a16
+  - gptq_w4a16
+  - rtn_w4a16
+  - w8a8_simulated
+  - w4a8_simulated
+
+intervention:   # Sec. 3.3-3.4, 4
+  default_alpha: 4.0
+  matched_r: 0.10
+  triviaqa_7b_8b_specificity_r: 0.05
+  heldout_pairs_per_seed: 200
+  seeds_7b_8b: [42, 123, 456, 789, 999]
+  seeds_14b: [42, 123, 456]
+  random_directions: 127
+
+geometry:   # Sec. 3.5
+  k: [1, 2, 5, 10, 20, 50]
+  null_subspaces: 1000
+  bh_family_size: 375

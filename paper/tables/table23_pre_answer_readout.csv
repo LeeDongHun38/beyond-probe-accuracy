@@ -1,0 +1,5 @@
+model,dataset,layer,valid,total,gen_per_question,rho,ci_low,ci_high,random_exc,random_p
+Qwen2.5-7B,TriviaQA,18,"2,499","2,500",16,.3568,.3203,.3903,1,.0020
+Llama-3.1-8B,TriviaQA,14,"2,500","2,500",16,.3110,.2753,.3450,1,.0020
+Mistral-7B,TriviaQA,13,"2,500","2,500",16,.1338,.0922,.1715,52,.0529
+Qwen2.5-7B,ARC-Easy,18,500,500,32,.0560,-.0322,.1395,-,-

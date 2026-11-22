@@ -1,0 +1,50 @@
+{
+  "package_mode": "self-contained portable CPU verification",
+  "script": "portable_recalculate.py",
+  "runtime_dependencies": {
+    "python": "3.11.14",
+    "numpy": "2.4.3",
+    "scipy": "1.17.1"
+  },
+  "portable_inputs": [
+    "raw_geometry/",
+    "steering_direction_effects.csv",
+    "steering_cell_inputs.csv",
+    "geometry_cell_inputs.csv",
+    "frozen_p_value_reference.csv",
+    "historical_primary_q_values.csv",
+    "historical_auxiliary_q_values.csv",
+    "geometry_direction_provenance.csv",
+    "geometry_direction_vectors.npz"
+  ],
+  "external_repository_reads": [],
+  "gpu_or_model_inference": false,
+  "raw_coverage": {
+    "primary_R_inc": "375/375",
+    "auxiliary_M_A": "700/750",
+    "auxiliary_frozen_summary_rows": 50,
+    "limitation": "Ministral-3-14B/TriviaQA M/A raw draw arrays were not preserved; frozen summary and exceedance counts are used. Primary R_inc is unaffected."
+  },
+  "geometry_direction_audit": {
+    "geometry_qwen7_direction_hash_matches_expected": true,
+    "geometry_qwen7_legacy_direction_absent": true,
+    "geometry_all_rows_have_direction_provenance": true,
+    "qwen7_geometry_hashes": {
+      "TriviaQA": "b36d026381a46d31ed3db45fa1740534eea7b2e6018fe1329b4acfb23c7a09f0",
+      "ARC-Easy": "85bb3623e12ab9720753b402e28b9a7526cbaf83e080caa095be9ff04fadb969",
+      "CommonsenseQA": "b68397154e48254566e1ff2cccba912b8d49960c810fb01176d899263bec0ca2"
+    },
+    "qwen7_expected_geometry_hashes": {
+      "TriviaQA": "b36d026381a46d31ed3db45fa1740534eea7b2e6018fe1329b4acfb23c7a09f0",
+      "ARC-Easy": "85bb3623e12ab9720753b402e28b9a7526cbaf83e080caa095be9ff04fadb969",
+      "CommonsenseQA": "b68397154e48254566e1ff2cccba912b8d49960c810fb01176d899263bec0ca2"
+    },
+    "qwen7_triviaqa_geometry_vs_intervention_reference": {
+      "geometry_hash": "b36d026381a46d31ed3db45fa1740534eea7b2e6018fe1329b4acfb23c7a09f0",
+      "intervention_reference_hash": "74f826d049c5530c3c9c8a1f42fd0d21a8014a7f9863d58ee2fd12b8480a69f0",
+      "cosine": 1.0000000012206767,
+      "max_abs_component_difference": 7.450580596923828e-09,
+      "interpretation": "Same corrected L18 MD direction; hash differs only because the frozen geometry and intervention builders use slightly different floating-point reduction/normalization order."
+    }
+  }
+}

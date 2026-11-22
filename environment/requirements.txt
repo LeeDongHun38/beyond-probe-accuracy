@@ -1,0 +1,25 @@
+# Main environment used for the EACL 2026 experiments (all models except the
+# Ministral-3-14B runs; see requirements-ministral.txt).
+# Versions marked "recorded" come from run metadata kept with the results
+# (results/quant_transfer_arc_csqa_7b_v1/protocol/freeze_spec.json,
+#  results/ministral3_14b/protocol/environment_lock.txt, extraction summaries,
+#  artifacts/stats_package/provenance_manifest.json).
+# Python 3.11.14 (recorded). CUDA 12.8 wheels (torch 2.10.0+cu128, recorded).
+torch==2.10.0               # recorded (+cu128)
+transformers==4.46.0        # recorded
+autoawq==0.2.7.post3        # recorded (AWQ W4A16 checkpoints)
+auto_gptq==0.7.1            # recorded (GPTQ W4A16 checkpoints)
+optimum==1.23.3             # recorded in the shared environment lock
+numpy==2.4.3                # recorded for the statistics package
+scipy==1.17.1               # recorded
+scikit-learn==1.8.0         # recorded in the shared environment lock (LR probes)
+pandas==3.0.1               # recorded in the shared environment lock
+safetensors                 # not recorded for this environment (0.8.0 in the Ministral venv)
+accelerate                  # not recorded for this environment
+tokenizers>=0.20,<0.21      # not recorded; range required by transformers 4.46.0
+huggingface_hub<1.0         # not recorded; range required by transformers 4.46.0
+datasets==4.7.0             # recorded in the shared environment lock (ARC-Easy / CSQA download)
+openai==2.26.0              # recorded in the shared environment lock (GPT-4.1 distractors, step 01 only)
+matplotlib==3.10.8          # recorded in the shared environment lock
+tqdm==4.67.3                # recorded in the shared environment lock
+sentencepiece==0.2.1        # recorded in the shared environment lock

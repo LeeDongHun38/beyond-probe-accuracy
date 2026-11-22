@@ -1,0 +1,31 @@
+{
+  "qwen_direction_comparison": {
+    "cos_legacy_corrected": 0.8803995847702026,
+    "angle_degrees": 28.309397284984833,
+    "mismatched_pairs": 1419,
+    "total_pairs": 4999,
+    "mismatch_rate": 0.28385677135427084
+  },
+  "definitions": {
+    "participation_ratio": "(sum_i v_i^2)^2 / sum_i v_i^4; invariant to unit normalization",
+    "positive_class": "correct representation (label=1)",
+    "heldout_orientation": "no held-out sign flip and no max(AUC,1-AUC)",
+    "qwen_vector_sha256": "SHA-256 of np.asarray(unit_normalized_direction, dtype=np.float32).tobytes(order='C'); native little-endian on this host. It is neither a safetensors-file SHA nor an unnormalized-vector hash."
+  },
+  "qwen_vector_sources": {
+    "legacy": "results/e8_probe_identifiability/directions/qwen_triviaqa_D0_D5_f32.safetensors (key D0)",
+    "corrected": "results/qwen7b_corrected_l18_reexecution/protocol/D0_D5_corrected_train_only_f32.safetensors (key D0)"
+  },
+  "mistral_integrity": {
+    "rows_per_direction_side": 1000,
+    "canonical_aggregation": "job1_e8_with A1_direction_by_cell; 5x200 rows/side",
+    "yes_candidates": [
+      "Yes",
+      "yes",
+      " Yes",
+      " yes",
+      "YES"
+    ],
+    "malformed_yes_row_included": "No separate malformed row exclusion is recorded; all 1000 rows per side were aggregated"
+  }
+}

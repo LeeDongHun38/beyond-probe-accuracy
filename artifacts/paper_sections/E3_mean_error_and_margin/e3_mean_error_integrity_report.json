@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "heldout_ids_n": 2500,
+  "heldout_ids_unique": 2500,
+  "train_test_overlap": false,
+  "pair_order_verified_all_quantizations": true,
+  "true_false_ordering": "h_true, h_false as frozen source tensors",
+  "layer": 36,
+  "v_md_unit_norm": 1.0000000000000002,
+  "fixed_vs_recomputed_direction_cosine": 0.9999999999999994,
+  "max_gram_error_U50": 2.7241717770465357e-08,
+  "max_abs_dot_residual_PCs_v_MD": 2.1984323766157342e-08,
+  "finite_all": true,
+  "n_null_per_cell": 1000,
+  "M_A_rank_equivalence_verified": true,
+  "existing_125_raw_p_values_match_source": true,
+  "bh_separate_families": {
+    "M": 150,
+    "A": 150
+  },
+  "null_master_seed": 20260731,
+  "null_seeds_by_quantization": {
+    "awq": 75273620,
+    "gptq": 3241221665,
+    "rtn": 3135309577,
+    "w8a8": 2696998349,
+    "w4a8": 1605800089
+  },
+  "legacy_r_raw_artifacts": {
+    "awq": "results/ministral3_14b/quant_grid_v1/analysis/activation_matched_null/triviaqa_L36_awq.npz",
+    "gptq": "results/ministral3_14b/quant_grid_v1/analysis/activation_matched_null/triviaqa_L36_gptq.npz",
+    "rtn": "results/ministral3_14b/quant_grid_v1/analysis/activation_matched_null/triviaqa_L36_rtn.npz",
+    "w8a8": "results/ministral3_14b/quant_grid_v1/analysis/activation_matched_null/triviaqa_L36_w8a8.npz",
+    "w4a8": "results/ministral3_14b/quant_grid_v1/analysis/activation_matched_null/triviaqa_L36_w4a8.npz"
+  }
+}
