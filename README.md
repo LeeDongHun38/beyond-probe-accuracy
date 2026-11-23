@@ -1,6 +1,6 @@
 # Beyond Probe Accuracy: Estimation Stability, Intervention Specificity, and Representation Geometry of Probe Directions
 
-Code, data, and results for the EACL 2026 paper.
+Code, data, and results for the EACL 2027 paper.
 
 Linear probes with similar held-out AUROC can point in very different directions. With the model,
 dataset, layer, and training representations held fixed, we vary only the probe estimator and
