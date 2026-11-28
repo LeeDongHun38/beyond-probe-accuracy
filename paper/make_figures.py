@@ -14,6 +14,7 @@ and is not regenerated here.
 """
 from __future__ import annotations
 
+import argparse
 from pathlib import Path
 
 import matplotlib
@@ -65,17 +66,17 @@ def style() -> None:
     })
 
 
-def save(fig: plt.Figure, stem: str) -> None:
-    OUT.mkdir(parents=True, exist_ok=True)
-    fig.savefig(OUT / f"{stem}.pdf", metadata={"CreationDate": None})  # deterministic output
-    fig.savefig(OUT / f"{stem}.png", dpi=300)
+def save(fig: plt.Figure, stem: str, out_dir: Path = OUT) -> None:
+    out_dir.mkdir(parents=True, exist_ok=True)
+    fig.savefig(out_dir / f"{stem}.pdf", metadata={"CreationDate": None})  # deterministic output
+    fig.savefig(out_dir / f"{stem}.png", dpi=300)
     plt.close(fig)
 
 
 # --------------------------------------------------------------------------
 # Figure 2: estimator-induced direction paths on TriviaQA at alpha = 4
 # --------------------------------------------------------------------------
-def figure2() -> None:
+def figure2(out_dir: Path = OUT) -> None:
     est_order = ["MD", "1e-4", "1e-2", "1"]
     markers = {"MD": "o", "1e-4": "s", "1e-2": "D", "1": "^"}
     labels = {"MD": "MD", "1e-4": r"Raw $C=10^{-4}$", "1e-2": r"Raw $C=10^{-2}$", "1": r"Raw $C=1$"}
@@ -115,13 +116,13 @@ def figure2() -> None:
     fig.legend(handles=handles, loc="upper center", ncol=6, frameon=False, bbox_to_anchor=(0.52, 1.12),
                handlelength=1.6, columnspacing=1.0, handletextpad=0.4)
     fig.tight_layout(w_pad=0.6)
-    save(fig, "fig2_estimator_paths")
+    save(fig, "fig2_estimator_paths", out_dir)
 
 
 # --------------------------------------------------------------------------
 # Figure 3: directional specificity (a) and magnitude control (b)
 # --------------------------------------------------------------------------
-def figure3() -> None:
+def figure3(out_dir: Path = OUT) -> None:
     ds_colors = {"TriviaQA": BLUE, "ARC-Easy": ORANGE, "CommonsenseQA": GREEN}
     c4 = fixed_null().rename(columns={"md_effect": "md_signed"})
     c4["md_abs"] = c4.md_signed.abs()
@@ -209,12 +210,12 @@ def figure3() -> None:
                       (bx, r"(b) Fixed $\alpha = 4$ vs. matched $r = .10$")):
         box = axis.get_position()
         fig.text((box.x0 + box.x1) / 2, 0.0, cap, ha="center", va="bottom", fontsize=8.5)
-    save(fig, "fig3_specificity_and_magnitude")
+    save(fig, "fig3_specificity_and_magnitude", out_dir)
 
 
 # --------------------------------------------------------------------------
 # Figure 4: enrichment relative to the pair-label permutation null.
-def figure4() -> None:
+def figure4(out_dir: Path = OUT) -> None:
     rows = geometry_panel()
     panels = [("qwen14b", "triviaqa"), ("qwen14b", "arc_easy"), ("qwen14b", "commonsenseqa"),
               ("ministral14b", "arc_easy"), ("ministral14b", "commonsenseqa")]
@@ -239,16 +240,18 @@ def figure4() -> None:
     fig.legend(h, labels, ncol=5, loc="upper center", frameon=False)
     fig.text(.98, .01, "Hollow markers indicate BH q ≥ .05", ha="right", fontsize=7)
     fig.tight_layout(rect=(0, .05, 1, .84))
-    save(fig, "fig4_quant_error_excess")
+    save(fig, "fig4_quant_error_excess", out_dir)
 
 
-def main() -> None:
+def main(out_dir: Path = OUT) -> None:
     style()
-    figure2()
-    figure3()
-    figure4()
-    print(f"wrote figures to {OUT.relative_to(ROOT)}")
+    figure2(out_dir)
+    figure3(out_dir)
+    figure4(out_dir)
+    print(f"wrote figures to {out_dir}")
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Render Figures 2–4 from the released experiment outputs.")
+    parser.add_argument("--out-dir", type=Path, default=OUT)
+    main(parser.parse_args().out_dir)

@@ -20,10 +20,9 @@ From a source checkout with Python 3.10 or newer, run the following on CPU. The 
 
 ```bash
 python -m pip install -e '.[paper,dev]'
-python paper/make_tables.py
-python paper/make_figures.py
-python verify/verify_paper_numbers.py
-python verify/check_checksums.py --skip-stats
+python verify/check_checksums.py
+python paper/make_tables.py --out-dir results/paper/tables
+python paper/make_figures.py --out-dir results/paper/figures
 python -m pytest -q
 ```
 

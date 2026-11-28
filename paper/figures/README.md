@@ -1,6 +1,6 @@
 # Figures
 
-Run `python paper/make_figures.py` from the checkout to render Figures 2–4 as PDF and PNG. These are data-based reconstructions. The [manuscript PDF](../Beyond%20Probe%20Accuracy.pdf) contains the typeset figures, captions and Figure 1.
+Run `python paper/make_figures.py --out-dir results/paper/figures` from the checkout to render Figures 2–4 as PDF and PNG. These are data-based reconstructions. The [manuscript PDF](../Beyond%20Probe%20Accuracy.pdf) contains the typeset figures, captions and Figure 1.
 
 | Figure | Released inputs |
 |---|---|

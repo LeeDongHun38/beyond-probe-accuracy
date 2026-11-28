@@ -85,7 +85,7 @@ def build(out):
                                             for s in ("all", "train", "test")}})
     save("table03_dataset_counts", counts)
     md = raw[raw.estimator == "D0"][["model", "layer", "auc", "stab"]].assign(dataset="TriviaQA")
-    other = pd.read_csv(ART / "probes/arc_csqa_md_stability.csv")
+    other = read("probes/arc_csqa_md_stability.csv")
     other = other[other.dataset != "triviaqa"].rename(columns={"recomputed_heldout_md_auroc": "auc",
                                                                "split_half_mean": "stab"})
     other["dataset"] = other.dataset.map(DATASETS)
@@ -136,7 +136,7 @@ def build(out):
     save("table19_random_direction_r005", iso)
     save("table20_covariance_and_dose_controls", nulls[nulls.family != "isotropic"])
 
-    template = pd.read_csv(ART / "controls/template_length/arc_csqa.csv")
+    template = read("controls/template_length/arc_csqa.csv")
     template = template[template.dataset != "TriviaQA"]
     rows = []
     for key, model in MODELS.items():
@@ -162,12 +162,12 @@ def build(out):
     own["generations_per_question"] = 16
     own["valid"] = own.n_questions
     own["random_exc"] = (own.rho_random_p * 1001 - 1).round()
-    arc = pd.read_csv(ART / "controls/own_generation/arc_easy_pre_answer.csv")
+    arc = read("controls/own_generation/arc_easy_pre_answer.csv")
     arc = arc[arc.dataset == "ARC-Easy"].rename(columns={"spearman_rho": "rho", "ci95_low": "rho_ci_low",
         "ci95_high": "rho_ci_high", "outcome_valid_questions": "valid"})
     save("table24_pre_answer_readout", pd.concat([own, arc])[["model", "dataset", "layer", "valid", "n_questions",
          "generations_per_question", "rho", "rho_ci_low", "rho_ci_high", "random_exc", "rho_random_p"]])
-    quant = pd.read_csv(ART / "transfer/arc_csqa_auroc.csv")
+    quant = read("transfer/arc_csqa_auroc.csv")
     quant = quant[quant.dataset != "TriviaQA"].rename(columns={"quantization": "precision",
         "quantized_auroc": "full_test_auroc", "auroc_drop": "fp16_auroc_drop"})
     fp = quant[["model", "dataset", "fp16_auroc"]].drop_duplicates().rename(columns={"fp16_auroc":"full_test_auroc"})
