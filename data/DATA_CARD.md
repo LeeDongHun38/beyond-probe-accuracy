@@ -47,7 +47,7 @@ excluded, `match_type`), and `p_correct` = correct / (correct + incorrect).
 - `arc_easy_qwen_questions.json` lists the selected questions in shard order and the 200 pilot
   question ids that were excluded before selection (`probedir.controls.select_arc_owngen_questions`
   reproduces the selection). `arc_easy_qwen_protocol.md` is the note written before generation.
-- `span_control_questions.json` preserves the original record IDs for joining the three model files, along with the source TriviaQA question IDs.
+- Join each of the three model files to [the question list](owngen/span_control_questions.json) on `id` (for example, `three_model_owngen_position_robustness_00000`). Each model has one record per question. The question list also provides `source_question_id` for lookup in TriviaQA.
 
 ## Pair-construction inputs
 

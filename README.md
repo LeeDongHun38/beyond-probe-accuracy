@@ -29,6 +29,8 @@ python -m pytest -q
 
 The table builder exports the 22 numerical result tables using the numbering of the final PDF. Tables 4–8 describe prompts, examples, models and estimators. Table 10 defines the statistical families. The CSVs retain extra precision and use one row per experimental condition or side. The verifier checks them against the printed values, including the documented rounding differences in Table 21. [Verification details](verify/VERIFY_REPORT.md)
 
+To look up a result by its paper number, open the [numerical tables](paper/tables). To trace it to the experiment, use the [table and figure guide](artifacts/README.md). For example, [Table 12](paper/tables/table12_scale_normalized_lr.csv) is built from the [scale-normalized logistic regression results](artifacts/probes/scale_normalized_lr.csv).
+
 ## Reuse the experiments
 
 The final TriviaQA split assigns all rows with the same normalized question to the same partition. There are 2,508 training pairs and 2,491 held-out pairs, with 2,203 distinct questions on each side. Training-only layer selection gives L16 for Llama-3.1-8B, L18 for Qwen2.5-7B, L13 for Mistral-7B, L29 for Qwen2.5-14B and L36 for Ministral-3-14B. [Split manifest](artifacts/probes/split_manifest.csv) · [Configuration](configs/experiment.yaml)

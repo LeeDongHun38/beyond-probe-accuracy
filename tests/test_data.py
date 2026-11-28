@@ -1,7 +1,27 @@
-"""Tests for probedir.data (pair construction and the gold-donor control)."""
+"""Tests for pair construction and released control datasets."""
+import json
+import re
 from types import SimpleNamespace
 
 from probedir import data
+from probedir.config import REPO_ROOT
+
+
+def test_span_control_records_join_to_questions():
+    folder = REPO_ROOT / "data/owngen"
+    questions = json.loads((folder / "span_control_questions.json").read_text())
+    by_id = {q["id"]: q for q in questions}
+    assert len(by_id) == len(questions) == 2500
+    assert all(re.fullmatch(r"three_model_owngen_position_robustness_[0-9]{5}", key) for key in by_id)
+
+    for model in ("llama", "mistral", "qwen"):
+        records = json.loads((folder / f"span_control_{model}.json").read_text())["records"]
+        assert len(records) == len(by_id)
+        assert {record["id"] for record in records} == by_id.keys()
+        for record in records:
+            question = by_id[record["id"]]
+            for field in ("question", "ground_truth_aliases", "split", "template_id"):
+                assert record[field] == question[field], (model, record["id"], field)
 
 
 def _records(n):
