@@ -4,11 +4,11 @@ Implements the paper's probe-side quantities:
 
 * mean-difference (MD) direction, Eq. 2 (Sec. 3.2)
 * L2-regularized logistic-regression (LR) directions on raw or feature-wise
-  standardized representations, mapped back to activation space, Eq. 10 (App. B.2)
-* training-only layer selection by MD AUROC, Eq. 11 (App. B.2, Table 9)
+  standardized representations, mapped back to activation space, Eq. 9 (App. B.2)
+* training-only layer selection by MD AUROC, Eq. 10 (App. B.2, Table 9)
 * held-out AUROC of the projection score s(h; v) = h^T v (Sec. 3.3)
 * split-half estimation stability, Eq. 3 (Sec. 3.3, App. C.1)
-* cosine alignment with MD and participation ratio (App. C.2, Tables 1, 13, 14)
+* cosine alignment with MD (Tables 1, 13 and 14) and participation ratio (Tables 13 and 14)
 * the prompt-template and input-length controls G_temp and G_len (App. D.1, Table 21)
 
 All functions take NumPy arrays ``h_plus`` / ``h_minus`` of shape ``[n, d]``
@@ -30,10 +30,10 @@ from sklearn.preprocessing import StandardScaler
 
 from .stats import auroc, cosine, unit
 
-# Split-half partitions (Eq. 3): one permutation of the training pairs per seed, K = 5.
+# Split-half stability (Eq. 3) uses question groups on TriviaQA and pair rows on ARC-Easy and CommonsenseQA.
 SPLIT_SEEDS: tuple[int, ...] = (42, 123, 456, 789, 999)
 
-# Logistic-regression settings shared by every LR direction (App. B.2).
+# LR settings for the D1–D5 estimators in Table 8.
 LR_SETTINGS: dict[str, Any] = dict(solver="lbfgs", penalty="l2", max_iter=1000, tol=1e-4,
                                    fit_intercept=True, class_weight=None, random_state=42)
 
@@ -89,7 +89,7 @@ def fit_lr(h_plus: np.ndarray, h_minus: np.ndarray, C: float,
     Features are passed to scikit-learn as float32, which represents FP16 hidden
     states exactly. For standardized probes the scaler is fit on the given
     (training) rows only, and the coefficient is mapped back with
-    v_LR = w_z / sigma (Eq. 10).
+    v_LR = w_z / sigma (Eq. 9).
     """
     x = np.concatenate((h_plus, h_minus)).astype(np.float32, copy=False)
     y = np.r_[np.ones(len(h_plus), dtype=np.int8), np.zeros(len(h_minus), dtype=np.int8)]
@@ -191,12 +191,12 @@ def layer_profile(cache, layers: Sequence[int] | None = None) -> list[dict[str, 
 
 
 def select_layer_from_profile(rows: Sequence[dict[str, Any]]) -> int:
-    """Layer with the highest training MD AUROC; ties go to the lower layer (Eq. 11)."""
+    """Layer with the highest training MD AUROC; ties go to the lower layer (Eq. 10)."""
     return int(max(rows, key=lambda r: (r["train_auroc"], -r["layer"]))["layer"])
 
 
 def select_layer(cache) -> int:
-    """Training-only probing-layer selection (Eq. 11, Table 9)."""
+    """Training-only probing-layer selection (Eq. 10, Table 9)."""
     return select_layer_from_profile(layer_profile(cache))
 
 

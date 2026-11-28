@@ -1,4 +1,4 @@
-"""Differential quantization-error geometry (Sec. 3.5, Eq. 8; App. E.2-E.3).
+"""Differential quantization-error geometry (Sec. 3.5, Eq. 8 and App. E.2).
 
 For one model-dataset cell the FP16-selected layer and the FP16 training
 mean-difference (MD) direction ``v`` are fixed. Quantized models are never
@@ -20,9 +20,9 @@ Statistics, per k
     energy inside ``U_k``. ``R_inc,k = R_k - R_1`` is the share captured by the
     contrastive axes beyond ``v`` (the incremental statistic).
     ``M_k = ||mean(E) U_k||^2`` and ``A_k = M_k / ||mean(E)||^2`` are the
-    auxiliary mean-error statistics (App. E.3).
+    auxiliary mean-error statistics used in the supplementary activation-matched analysis.
 
-Camera-ready label-permutation null (B = 10,000)
+Table 26 label-permutation null (B = 10,000)
     Each training pair independently swaps labels. The MD and 49 residual PCs are
     refitted per permutation. Table 26 tests R1 and R50 jointly and R50-R1 separately.
 
@@ -76,8 +76,7 @@ class SeedScheme:
         return derive_seed(self.master, *self.null_prefix, quantization, self.null_suffix, sep=self.sep)
 
 
-# Seed labels used for the runs reported in the paper. They reproduce the
-# reported PCA axes and null draws exactly. New analyses may use any scheme.
+# Seed labels for PCA and null draws in the supplementary activation-matched analysis.
 _TAG_7B = {"llama-3.1-8b": "llama", "qwen2.5-7b": "qwen", "mistral-7b": "mistral"}
 _TAG_14B = {"qwen2.5-14b": "qwen14b", "ministral-3-14b": "ministral14b"}
 
@@ -139,8 +138,8 @@ def contrastive_subspace(h_plus_train: np.ndarray, h_minus_train: np.ndarray, v:
     basis = orthonormal_basis(v, pca.components_.astype(np.float64).T, k_max - 1)
     # Null pool: the same residual activations, with v removed once more in float64.
     # A pair with identical representations (h+ = h-) leaves only a roundoff-size
-    # residual. It is kept when its norm exceeds POOL_MIN_NORM, as in the paper's
-    # runs, so that pool rows (and hence the sampled null draws) match them.
+    # residual. It is kept when its norm exceeds POOL_MIN_NORM, to reproduce
+    # the activation-matched residual pool and its null draws.
     pool64 = residual32.astype(np.float64)
     pool64 -= np.outer(pool64 @ v, v)
     pool = pool64[np.linalg.norm(pool64, axis=1) > POOL_MIN_NORM].astype(np.float32)
@@ -206,7 +205,7 @@ def geometry_tests(observed: dict[str, np.ndarray], null: dict[str, np.ndarray],
 
 
 def add_bh(rows: list[dict]) -> list[dict]:
-    """BH q-values within each measure across all supplied cells (the paper's 375-test families)."""
+    """BH q-values within each measure across all supplied cells in the supplementary activation-matched analysis."""
     for measure in {r["measure"] for r in rows}:
         family = [r for r in rows if r["measure"] == measure]
         for r, q in zip(family, bh_qvalues([r["p"] for r in family])):
@@ -231,8 +230,8 @@ def run(model: str, dataset: str, n_null: int = N_NULL, direction_file: str | No
     """Run all quantization conditions of one cell.
 
     The direction is the FP16 training MD direction (float64), unless
-    ``direction_file`` (.npy) supplies a fixed vector, e.g. the exact vectors of
-    the paper's runs (7-8B ARC-Easy/CommonsenseQA used an MD vector stored at
+    ``direction_file`` (.npy) supplies a fixed vector, e.g. the vectors used
+    in the activation-matched analysis (7-8B ARC-Easy/CommonsenseQA used an MD vector stored at
     float16 precision).
     """
     from .config import Cell, results_dir
@@ -354,14 +353,14 @@ def add_cli(subparsers: argparse._SubParsersAction) -> None:
     panel.add_argument("--n-permutations", type=int, default=10000)
     panel.set_defaults(func=lambda a: run_permutation(a.model, a.dataset, a.n_permutations))
 
-    p = subparsers.add_parser("geometry", help="quantization-error geometry and activation-matched null (Sec. 3.5)")
+    p = subparsers.add_parser("geometry", help="supplementary activation-matched geometry analysis")
     p.add_argument("--model", required=True)
     p.add_argument("--dataset", required=True)
     p.add_argument("--n-null", type=int, default=N_NULL)
     p.add_argument("--direction", help="optional .npy direction (default: FP16 training MD)")
     p.set_defaults(func=lambda a: run(a.model, a.dataset, a.n_null, a.direction))
 
-    f = subparsers.add_parser("geometry-bh", help="BH-FDR over all geometry tests (375 per measure)")
+    f = subparsers.add_parser("geometry-bh", help="BH-FDR for the supplementary activation-matched families (375 tests per measure)")
     f.set_defaults(func=lambda a: _write_families())
 
 

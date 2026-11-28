@@ -7,7 +7,7 @@ Commands, in pipeline order:
   probes            layer selection, MD direction, split-half          Sec. 3.2-3.3, Tables 9, 11
   estimator-sweep   MD vs. L2-LR directions at the selected layer      Table 1, Tables 13-14
   steer             bidirectional steering, P(Yes) readout             Sec. 3.3-3.4, Tables 15-16
-  null-family       random-direction specificity tests + BH            App. C.4, Tables 18-20
+  null-family       fixed-alpha isotropic tests + BH                  Fig. 3a, Table 18
   transfer          fixed FP16 direction on quantized models           Table 2, App. E.1, E.3
   geometry-permutation  refitted within-pair label-permutation panel   Fig. 4, Table 26
   geometry          supplementary activation-matched null

@@ -38,12 +38,12 @@ excluded, `match_type`), and `p_correct` = correct / (correct + incorrect).
 
 | File | Model | Questions | Samples | Used in |
 |---|---|---|---|---|
-| `triviaqa_{llama,mistral,qwen}.json` | each 7-8B model | all 4,999 TriviaQA pair questions (held-out half evaluated) | 16, seed 42 | D.3, D.4 |
-| `arc_easy_qwen.json` | Qwen2.5-7B | 1,000 ARC-Easy questions (`arc_easy_qwen_questions.json`) | 32, seeds 20260725 / 20260726 (two shards) | D.3, D.4 |
-| `span_control_{llama,mistral,qwen}.json` | each 7-8B model | 2,500 TriviaQA questions disjoint from the pair data (`span_control_questions.json`) | 16, seed 20260728 | Earlier answer-span control |
+| `triviaqa_{llama,mistral,qwen}.json` | each 7-8B model | 4,999 pair rows, of which 2,491 held-out rows cover 2,203 distinct questions | 16, seed 42 | Tables 23 and 24 |
+| `arc_easy_qwen.json` | Qwen2.5-7B | 1,000 ARC-Easy questions (`arc_easy_qwen_questions.json`) | 32, seeds 20260725 / 20260726 (two shards) | Table 24 (500 held-out questions) |
+| `span_control_{llama,mistral,qwen}.json` | each 7-8B model | 2,500 TriviaQA questions disjoint from the pair data (`span_control_questions.json`) | 16, seed 20260728 | Supplementary answer-span control |
 
-- TriviaQA answer files were labeled with span matching enabled (`metadata.allow_span_match`);
-  Tables 23–24 retain answers labeled correct or incorrect under the original representative-alias policy. The separate historical span-control dataset used exact matching with full aliases.
+- The three `triviaqa_*.json` answer files were labeled with span matching enabled (`metadata.allow_span_match`);
+  Tables 23–24 retain answers labeled correct or incorrect under the original representative-alias policy. The supplementary span-control dataset used exact matching with full aliases.
 - `arc_easy_qwen_questions.json` lists the selected questions in shard order and the 200 pilot
   question ids that were excluded before selection (`probedir.controls.select_arc_owngen_questions`
   reproduces the selection). `arc_easy_qwen_protocol.md` is the note written before generation.

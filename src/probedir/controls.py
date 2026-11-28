@@ -133,7 +133,7 @@ def load_records(path: Path) -> list[dict]:
 # ---------------------------------------------------------------------------
 def select_arc_owngen_questions(pairs: list[dict], excluded_ids: Iterable[str], seed: int = 20260725,
                                 per_split: int = 500) -> list[list[dict]]:
-    """ARC-Easy own-generation questions (App. D.3): 500 train + 500 held-out questions
+    """ARC-Easy own-generation questions used for the Table 24 pre-answer readout: 500 train + 500 held-out questions
     not used in earlier pilots, returned as two computational shards of 250 + 250."""
     excluded = set(excluded_ids)
     available = [p for p in pairs if p["id"] not in excluded]
@@ -167,7 +167,7 @@ def readout_messages(question: str, answer: str, template_id: int, context: str,
 
     ``assistant``: the generation prompt with the answer teacher-forced as the assistant turn
     (TriviaQA D.3 and the span control). ``external_user``: the pair-representation prompt ``Q: .. A: ..``
-    (ARC-Easy D.3), identical to the representation used for probe training.
+    used for supplementary ARC-Easy answer-token scoring.
     """
     from . import prompts
 
@@ -421,7 +421,7 @@ def gaussian_directions_batched(d: int, n: int = N_RANDOM, seed: int = SPAN_SEED
                                 batch: int = 32) -> np.ndarray:
     """Unit Gaussian directions from a seeded ``torch.Generator`` in column batches of 32.
 
-    The stream depends on the generator device; the paper's run used ``device="cuda"``.
+    The supplementary span-control run used ``device="cuda"``.
     """
     import torch
 

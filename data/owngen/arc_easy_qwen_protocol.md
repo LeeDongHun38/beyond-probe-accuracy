@@ -1,5 +1,7 @@
 # ARC-Easy Qwen own-generation main experiment
 
+The paper reports the held-out pre-answer Spearman correlation from this collection in [Table 24](../../paper/tables/table24_pre_answer_readout.csv). The protocol below records the outcomes specified before generation.
+
 This main experiment is pre-specified before generation. It evaluates the
 corrected Qwen2.5-7B L18 ARC-Easy CCS direction on independently generated
 closed-book answers. The two earlier 100-question pilots (seeds 42 and 43)

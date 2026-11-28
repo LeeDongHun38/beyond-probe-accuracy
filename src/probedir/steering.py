@@ -1,15 +1,15 @@
 """Activation steering and the constrained correctness-judgment readout (Sec. 3.3-3.4; App. B.3).
 
-Intervention (Eq. 4 / Eq. 12). At the selected transformer block, a forward hook adds
+Intervention (Eq. 4). At the selected transformer block, a forward hook adds
 ``alpha * v`` (v unit-normalized; the sign s is folded into alpha) to the block output at
 every non-padding prefill position. The judgment endpoint uses a single prefill forward
 pass, so nothing is applied during decoding unless ``prefill_only=False``.
 
-Bidirectional protocol (Eq. 13). The false side (incorrect proposed answer a-) is moved
+Bidirectional effects (Eqs. 5 and 15). The false side (incorrect proposed answer a-) is moved
 along +v, the true side (correct answer a+) along -v; the expected signs are
 Delta P_F > 0 and Delta P_T < 0.
 
-Readout (Eqs. 14-17). For the next-token logits z at the last prefill position,
+Readout (Eqs. 11–12). For the next-token logits z at the last prefill position,
 P(Yes) is the full-vocabulary softmax probability of the highest-logit token in the Yes
 candidate set, and the margin m is the max Yes logit minus the max No logit.
 
@@ -36,7 +36,7 @@ from .io import HiddenCache, cache_path, write_json
 
 YES_CANDIDATES = ("Yes", "yes", " Yes", " yes", "YES")
 NO_CANDIDATES = ("No", "no", " No", " no", "NO")
-# Qwen2.5-14B uses the expanded readout for all new TriviaQA conditions
+# Qwen2.5-14B uses the expanded readout for the TriviaQA conditions
 # and for the fixed-alpha runs on the other datasets.
 EXTENDED_YES = ("Yes", "yes", " Yes", " yes", "YES", "True", "true", " True", "Correct", "correct")
 EXTENDED_NO = ("No", "no", " No", " no", "NO", "False", "false", " False", "Incorrect", "incorrect")

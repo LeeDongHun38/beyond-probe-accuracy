@@ -144,6 +144,6 @@ def _cmd_family(args: argparse.Namespace) -> None:
 
 
 def add_cli(subparsers) -> None:
-    p = subparsers.add_parser("null-family", help="random-direction specificity tests + BH (App. C.4)")
+    p = subparsers.add_parser("null-family", help="fixed-alpha isotropic specificity tests + BH (Figure 3a, Table 18)")
     p.add_argument("--root", default=None, help="steering results root (default: results/steering)")
     p.set_defaults(func=_cmd_family)

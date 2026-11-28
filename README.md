@@ -27,7 +27,7 @@ python verify/check_checksums.py --skip-stats
 python -m pytest -q
 ```
 
-The table builder exports the 22 numerical result tables using the numbering of the final PDF. Tables 4–8 describe prompts, examples, models and estimators. Table 10 defines the statistical families. The CSVs retain extra precision and use one row per experimental condition or side. The verifier checks them against the printed values, including the documented rounding differences in Table 21. [Verification details](verify/VERIFY_REPORT.md)
+The table builder exports the 22 numerical result tables using the numbering of the final PDF. Tables 4–8 describe prompts, examples, models and estimators. Table 10 defines the statistical families. The CSVs retain extra precision and use one row per experimental condition or side. The verification report documents the Table 21 rounding differences and the question-level bootstrap that reproduces the three TriviaQA intervals in Table 24. [Verification details](verify/VERIFY_REPORT.md)
 
 To look up a result by its paper number, open the [numerical tables](paper/tables). To trace it to the experiment, use the [table and figure guide](artifacts/README.md). For example, [Table 12](paper/tables/table12_scale_normalized_lr.csv) is built from the [scale-normalized logistic regression results](artifacts/probes/scale_normalized_lr.csv).
 

@@ -18,8 +18,8 @@ def _md(hp, hm):
     return v / np.linalg.norm(v)
 
 
-def test_paper_seed_labels():
-    # Seeds of two runs reported in the paper (7-8B TriviaQA null; 14B / Ministral TriviaQA PCA).
+def test_activation_matched_seed_labels():
+    # Seed fixtures for the supplementary activation-matched null and PCA fits.
     assert G.paper_seed_scheme("llama-3.1-8b", "triviaqa").null_seed("rtn") == 4292478624
     assert G.derive_seed(20260731, "triviaqa", 36, "pca", sep="|") == G.paper_seed_scheme(
         "ministral-3-14b", "triviaqa").pca_seed()
