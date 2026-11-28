@@ -3,7 +3,7 @@
     "stage": "final",
     "model_family": "qwen",
     "model_name": "Qwen/Qwen2.5-7B-Instruct",
-    "pairs_path": "data/owngen/three_model_owngen_position_robustness_v1_pairs.json",
+    "pairs_path": "data/owngen/span_control_questions.json",
     "n": 16,
     "temperature": 0.8,
     "top_p": 0.95,

@@ -1,0 +1,42 @@
+{
+  "identity": {
+    "config_sha256": "93cb4bc7d88e854731b22077e1dfc81657d9719a8b5e4abbb5b6d9950a2570e3",
+    "manifest_sha256": "0c846911ee90e03db2b4a9506ca6dbce85d03708264a720986db6e8aa03ef8ee",
+    "direction_sha256": "f2ecd31f25ccc565e47d70d489223ad344d37e4540584b1f03a0ed9be79c25bb",
+    "code_sha256": "8d6c7f485b0654befd3382d40a135631a721fc5fc30583715005ef7409f6da8e",
+    "sample_sha256": "1e7419c171e00790c4d38d08414de3a35b695796a21588925224d86c1cd2e6bc",
+    "model": "llama",
+    "layer": 16
+  },
+  "yes_strings": [
+    "Yes",
+    "yes",
+    " Yes",
+    " yes",
+    "YES"
+  ],
+  "no_strings": [
+    "No",
+    "no",
+    " No",
+    " no",
+    "NO"
+  ],
+  "yes_ids": [
+    9642,
+    9891,
+    7566,
+    10035,
+    14331
+  ],
+  "no_ids": [
+    2822,
+    2201,
+    2360,
+    912,
+    9173
+  ],
+  "tokenizer_class": "TokenizersBackend",
+  "winner": "max candidate logit; exp(max-logsumexp full vocabulary)",
+  "system": "You are a helpful assistant."
+}

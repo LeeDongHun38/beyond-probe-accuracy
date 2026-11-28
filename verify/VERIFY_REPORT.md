@@ -6,4 +6,4 @@ The reference PDF has SHA-256 `207a6cce60fa0efef236cb32d5c9fa4f7b61b7fb28213b809
 
 The same command checks the question split, layer choices, stored projection AUROCs, calibration thresholds and changed-decision counts. Table 18 rebuilds the 30-condition fixed-α family from 3,810 direction-by-side effects. Table 26 rebuilds the permutation p-values and BH families from all five arrays of 10,000 draws. GPU inference is a separate workflow.
 
-`check_checksums.py` validates the release manifest and runs the retained review-version statistics-package integrity check.
+`check_checksums.py` checks every file listed in the release manifest and runs the numerical verification above. Use `--skip-stats` to check file hashes separately.

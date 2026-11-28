@@ -1,0 +1,38 @@
+{
+  "random_count": 127,
+  "random_generation": "canonical CPU float32 Gaussian then unit normalization; same vectors across seeds and sides",
+  "random_seed_rule": "2026073200 + 100*2 (TriviaQA dataset ordinal) + model ordinal in [llama,qwen,mistral,qwen14,ministral14]",
+  "alpha": 4,
+  "models": {
+    "mistral": {
+      "seed": 2026073402,
+      "vector_sha256": "b6e115adc2e458a26f69de76b1cbc9b43ffc622f01a37d844937459b704ef177",
+      "direction_sha256": "ba6bd7e1761be5e49dcfea1b676f9c10106779e51256f2763bac1ebc253eef4b",
+      "sample_sha256": "1e7419c171e00790c4d38d08414de3a35b695796a21588925224d86c1cd2e6bc"
+    },
+    "llama": {
+      "seed": 2026073400,
+      "vector_sha256": "66b2429e44ae983717f62421ac4c5f7f5d37642c3878d7a4e50c0e3ab3509873",
+      "direction_sha256": "f2ecd31f25ccc565e47d70d489223ad344d37e4540584b1f03a0ed9be79c25bb",
+      "sample_sha256": "1e7419c171e00790c4d38d08414de3a35b695796a21588925224d86c1cd2e6bc"
+    },
+    "qwen": {
+      "seed": 2026073401,
+      "vector_sha256": "d9babb3634efcf042b94ed53cfe5ab4dbbc43a40c188e3699a30d3ec08dc1010",
+      "direction_sha256": "13bb4285f0e7f8b5b235de4cbc6ddd4e8fe41a25a67b8e4de176bcf6e50ee773",
+      "sample_sha256": "1e7419c171e00790c4d38d08414de3a35b695796a21588925224d86c1cd2e6bc"
+    },
+    "qwen14": {
+      "seed": 2026073403,
+      "vector_sha256": "74bbe1df2aed14eb14085741204a3f9fe190f9db1cb903e379d5a72aaecd263f",
+      "direction_sha256": "4b31219ce99451a4d7adbf1a7dab1a2aaf4c124f318f15cc2c548793780af358",
+      "sample_sha256": "352851b5c1bb6a0eb4441769d5a71e84e4043d5920e2a1ceb08feebead93a2a7"
+    },
+    "ministral14": {
+      "seed": 2026073404,
+      "vector_sha256": "7f99fc991e90d33d6157828184ec9374f12d0a32e69b60ec67e9c723d26a6077",
+      "direction_sha256": "e991ef902e22437b5daed036503f372d2d2de5db6026238f55799b08e5147353",
+      "sample_sha256": "352851b5c1bb6a0eb4441769d5a71e84e4043d5920e2a1ceb08feebead93a2a7"
+    }
+  }
+}

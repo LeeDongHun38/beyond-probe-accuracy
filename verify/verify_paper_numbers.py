@@ -78,7 +78,7 @@ def compare_tables(dest):
 
 
 def check_runs():
-    split = pd.read_csv(ART / "v2/split_manifest.csv")
+    split = pd.read_csv(ART / "probes/split_manifest.csv")
     assert split.row_id.is_unique
     for side, n in (("train", 2508), ("test", 2491)):
         subset = split[split.split == side]
@@ -86,22 +86,22 @@ def check_runs():
         assert subset.row_id.tolist() == [r["id"] for r in pairs]
         assert len(pairs) == n and subset.question_key.nunique() == 2203
     assert split.question_key.nunique() == 4406
-    sweep = pd.read_csv(ART / "v2/table1_comparison.csv")
-    transfer = pd.read_csv(ART / "v3/A/results.csv")
+    sweep = pd.read_csv(ART / "probes/estimator_sweep.csv")
+    transfer = pd.read_csv(ART / "transfer/triviaqa/results.csv")
     for model in MODELS:
-        profile = pd.read_csv(ART / f"v2/models/{model}/layer_train_auroc.csv")
+        profile = pd.read_csv(ART / f"probes/models/{model}/layer_train_auroc.csv")
         layer = profile.loc[profile.train_auroc.idxmax(), "layer"]
         est = sweep[sweep.model_name == MODELS[model].replace("Ministral-3", "Ministral")]
         assert len(est) == 4 and (est.layer == layer).all()
-        partitions = pd.read_csv(ART / f"v3/manifests/threshold_{model}.csv")
+        partitions = pd.read_csv(ART / f"transfer/triviaqa/partitions/threshold_{model}.csv")
         evaluation = partitions.assignment == "evaluation"
         assert partitions.row_id.tolist() == split.loc[split.split == "test", "row_id"].tolist()
         assert partitions.groupby("question_key").assignment.nunique().max() == 1
-        with np.load(ART / f"v2/models/{model}/test_scores.npz") as scores:
+        with np.load(ART / f"probes/models/{model}/test_scores.npz") as scores:
             np.testing.assert_array_equal(scores["row_id"], partitions.row_id)
             for r in est.itertuples():
                 np.testing.assert_allclose(auc(scores[r.estimator+"_true"], scores[r.estimator+"_false"]), r.auc)
-        with np.load(ART / f"v3/A/{model}_fp16_scores.npz") as fp:
+        with np.load(ART / f"transfer/triviaqa/{model}_fp16_scores.npz") as fp:
             cal = ~evaluation
             p, m = fp["true"], fp["false"]
             cal_p, cal_m = p[cal], m[cal]
@@ -114,7 +114,7 @@ def check_runs():
             t = max(candidates, key=threshold_key)
             refs = np.r_[p[evaluation], m[evaluation]] >= t
         for r in transfer[transfer.model == model].itertuples():
-            with np.load(ART / f"v3/A/{model}_{r.precision}_scores.npz") as s:
+            with np.load(ART / f"transfer/triviaqa/{model}_{r.precision}_scores.npz") as s:
                 np.testing.assert_array_equal(s["row_id"], partitions.row_id)
                 p, m = s["true"], s["false"]
             np.testing.assert_allclose(auc(p, m), r.full_test_auroc)
@@ -123,19 +123,19 @@ def check_runs():
             np.testing.assert_allclose([t, auc(p, m), (m >= t).mean(), (p < t).mean()],
                                        [r.threshold, r.evaluation_auroc, r.fpr, r.fnr])
             assert (decisions != refs).sum() == r.flip_numerator and len(refs) == r.flip_denominator
-    scale = pd.read_csv(ART / "v2/table14_results.csv")
+    scale = pd.read_csv(ART / "probes/scale_normalized_lr.csv")
     assert len(scale) == 66 and (scale.lr_auc > scale.md_auc).all() and (scale.lr_stab < scale.md_stab).all()
     assert (scale.ci_low > 0).sum() == 64
     by_name = {v: k for k, v in MODELS.items()}
     for row in scale.itertuples():
         name = by_name[row.model_name]
-        folder = ART / "v2/table14" / name / f"L{row.layer}"
+        folder = ART / "probes/scale_normalized_scores" / name / f"L{row.layer}"
         with np.load(folder / f"{row.scaling}_lambda{row.lambda_value:g}_scores.npz") as fit:
             np.testing.assert_allclose(auc(fit["true"], fit["false"]), row.lr_auc)
             np.testing.assert_allclose(np.quantile(fit["delta_bootstrap"], [.025, .975]), [row.ci_low, row.ci_high])
-    generation = pd.read_csv(ART / "v4/E15/results.csv")
+    generation = pd.read_csv(ART / "controls/own_generation/triviaqa/results.csv")
     for row in generation.itertuples():
-        folder = ART / "v4/E15" / row.model
+        folder = ART / "controls/own_generation/triviaqa" / row.model
         with np.load(folder / "scores.npz") as scores:
             observed_auc = roc_auc_score(scores["labels"], scores["post"])
             observed_rho = spearmanr(scores["pre"], scores["p_correct"]).statistic
@@ -151,7 +151,7 @@ def check_runs():
     exception = null.loc[null.exceedance > 0, ["model", "dataset", "side", "exceedance"]]
     assert exception.values.tolist() == [["mistral", "triviaqa", "false", 1]]
     geo = geometry_panel().set_index(["model", "dataset", "quantization", "statistic"]).sort_index()
-    archived = pd.read_csv(ART / "v3/B/results_75_tests.csv").set_index(geo.index.names).sort_index()
+    archived = pd.read_csv(ART / "geometry/results_75_tests.csv").set_index(geo.index.names).sort_index()
     assert geo.index.equals(archived.index)
     fields = ["observed", "null_mean", "p_upper", "q_bh_family"]
     np.testing.assert_allclose(geo[fields], archived[fields], atol=1e-14, rtol=0)

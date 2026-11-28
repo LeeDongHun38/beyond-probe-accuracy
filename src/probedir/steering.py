@@ -311,8 +311,7 @@ def run_cell(model_key: str, dataset: str, alpha: float | None = None, r: float 
 
     Exactly one of ``alpha`` or ``r`` is given; with ``r`` the coefficient is
     ``r * median baseline residual norm`` measured on the same seeds' baselines.
-    ``system=False`` reproduces the earlier no-system-prompt Mistral-7B TriviaQA run
-    from the review-version experiments.
+    Set ``system=False`` to run the no-system-prompt ablation.
     """
     from .models import load_model
     from .nulls import cell_random_directions
@@ -395,8 +394,8 @@ def add_cli(subparsers) -> None:
     p.add_argument("--r", type=float, default=None, help="residual-relative magnitude (overrides --alpha)")
     p.add_argument("--random-null", action="store_true", help="also run the 127 random directions")
     p.add_argument("--sensitivity-null", action="store_true",
-                   help="use the separate TriviaQA r~.05 random sets (Table 18)")
+                   help="use the separate TriviaQA r~.05 random sets (Table 19)")
     p.add_argument("--seeds", type=int, nargs="*", default=None)
     p.add_argument("--no-system", dest="system", action="store_false",
-                   help="omit the system message (earlier Mistral-7B TriviaQA run, Tables 15-16)")
+                   help="omit the system message for the prompt ablation")
     p.set_defaults(func=_cmd_steer)

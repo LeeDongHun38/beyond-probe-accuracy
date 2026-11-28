@@ -1,0 +1,32 @@
+{
+  "cells": {
+    "qwen14b/triviaqa": 29,
+    "qwen14b/arc_easy": 30,
+    "qwen14b/commonsenseqa": 27,
+    "ministral14b/arc_easy": 19,
+    "ministral14b/commonsenseqa": 15
+  },
+  "quantizations": [
+    "awq",
+    "gptq",
+    "rtn",
+    "w8a8",
+    "w4a8"
+  ],
+  "ks": [
+    1,
+    2,
+    5,
+    10,
+    20,
+    50
+  ],
+  "B": 10000,
+  "seed": 2026091801,
+  "primary_family": "Upper-tail R1 and R50 across all 5 cells x 5 quantizations: 50 BH-adjusted tests, fixed before panel results",
+  "secondary": "Rinc50=R50-R1, also BH-adjusted as a separate 25-test family; k=2,5,10,20 descriptive only; original-MD overlap diagnostic",
+  "pipeline": "Identical float64 observed/permuted MD, centering, MD removal, sklearn randomized PCA n_components=49 n_oversamples=20 iterated_power=7 fixed solver seed, reproject and QR",
+  "limitations": "Original second-moment of pair differences is preserved by sign swaps; significant results do not establish semantic specificity. Panel choice and R1/R50 primary statistics follow the already completed single-cell recheck, so this is an extension rather than blind preregistration.",
+  "permutation_unit": "independent sign per TRAIN PAIR ROW; NOT grouped by question",
+  "heldout_errors": "same original float32 arithmetic (quant_plus-fp_plus-quant_minus+fp_minus), then cast float64"
+}

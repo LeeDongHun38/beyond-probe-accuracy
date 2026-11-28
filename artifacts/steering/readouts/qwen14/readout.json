@@ -1,0 +1,62 @@
+{
+  "identity": {
+    "config_sha256": "93cb4bc7d88e854731b22077e1dfc81657d9719a8b5e4abbb5b6d9950a2570e3",
+    "manifest_sha256": "0c846911ee90e03db2b4a9506ca6dbce85d03708264a720986db6e8aa03ef8ee",
+    "direction_sha256": "4b31219ce99451a4d7adbf1a7dab1a2aaf4c124f318f15cc2c548793780af358",
+    "code_sha256": "8d6c7f485b0654befd3382d40a135631a721fc5fc30583715005ef7409f6da8e",
+    "sample_sha256": "352851b5c1bb6a0eb4441769d5a71e84e4043d5920e2a1ceb08feebead93a2a7",
+    "model": "qwen14",
+    "layer": 29
+  },
+  "yes_strings": [
+    "Yes",
+    "yes",
+    " Yes",
+    " yes",
+    "YES",
+    "True",
+    "true",
+    " True",
+    "Correct",
+    "correct"
+  ],
+  "no_strings": [
+    "No",
+    "no",
+    " No",
+    " no",
+    "NO",
+    "False",
+    "false",
+    " False",
+    "Incorrect",
+    "incorrect"
+  ],
+  "yes_ids": [
+    9454,
+    9693,
+    7414,
+    9834,
+    14004,
+    2514,
+    1866,
+    3007,
+    33092,
+    19928
+  ],
+  "no_ids": [
+    2753,
+    2152,
+    2308,
+    902,
+    8996,
+    4049,
+    3849,
+    3557,
+    40468,
+    61954
+  ],
+  "tokenizer_class": "Qwen2Tokenizer",
+  "winner": "max candidate logit; exp(max-logsumexp full vocabulary)",
+  "system": "You are a helpful assistant."
+}

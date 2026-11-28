@@ -4,8 +4,6 @@ Run `python paper/make_figures.py` from the checkout to render Figures 2–4 as 
 
 | Figure | Released inputs |
 |---|---|
-| 2. Estimator paths | v4 alignment and fixed-α effects for D0–D3 at the five selected TriviaQA layers |
-| 3. Specificity and magnitude | v4 ARC-Easy/CommonsenseQA and v5 TriviaQA direction effects for panel a, v4 cross-model fixed and matched effects for panel b |
-| 4. Observed/null error energy | v3 label-permutation draws for 25 conditions of the two 14B models. Hollow markers indicate BH q ≥ .05. |
-
-[Experiment inputs](../../artifacts/camera_ready)
+| 2. Estimator paths | [Alignment and fixed-α effects](../../artifacts/figure_inputs/figure2_input.csv) for the four estimators at each selected TriviaQA layer |
+| 3. Specificity and magnitude | [MD and isotropic direction effects](../../artifacts/steering/fixed_alpha) for panel a and [fixed and matched doses](../../artifacts/figure_inputs/figure3b_input.csv) for panel b |
+| 4. Observed/null error energy | [Label-permutation draws](../../artifacts/geometry) for 25 model–dataset–precision conditions. Hollow markers indicate BH q ≥ .05. |

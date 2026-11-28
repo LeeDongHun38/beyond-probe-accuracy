@@ -1,4 +1,4 @@
-"""Answer-final residual representations (Sec. 3.1, Eq. 1; App. B.1, Table 8).
+"""Answer-final residual representations (Sec. 3.1, Eq. 1; App. B.1).
 
 For every pair, x+ = (q, a+) and x- = (q, a-) are run separately (batch size 1,
 no padding) and the output of each transformer block is read at the last token
@@ -21,8 +21,7 @@ Locating that token:
   common prefix and suffix, it must decode to the answer, and the target is its
   last non-special token.
 
-Quantized conditions reuse the FP16 example order and target positions
-(Table 8, "Quantized transfer").
+Quantized conditions reuse the FP16 example order and target positions (App. B.1).
 """
 from __future__ import annotations
 
@@ -78,7 +77,7 @@ def _token_match_index(input_ids: list[int], tokenizer: Any, answer: str) -> int
 
 
 def ministral_answer_span(tokenizer: Any, question: str, answer: str, template_id: int) -> dict[str, Any]:
-    """Answer span by longest common prefix/suffix of prompts with and without the answer (Table 8)."""
+    """Answer span by longest common prefix/suffix of prompts with and without the answer (App. B.1)."""
     full = prompts.encode(tokenizer, "ministral-3-14b", prompts.pair_messages(question, answer, template_id))
     prefix = prompts.encode(tokenizer, "ministral-3-14b", prompts.pair_messages(question, "", template_id))
     lcp = 0
@@ -118,7 +117,7 @@ def forward_capture(model: Any, input_ids: list[int], position: int, layers: lis
 
     Stored as float16 (the hidden-state caches) or float32 (the 14B template
     control, which scored unrounded block outputs). ``attention_mask=False`` runs the
-    forward pass with input ids only (Ministral-3-14B, Table 8).
+    forward pass with input ids only (Ministral-3-14B, App. B.1).
     """
     import torch
 
@@ -202,7 +201,7 @@ def extract_template_control(model_key: str, dataset: str, pair_ids: list[str] |
                              ) -> dict[int, HiddenCache]:
     """Selected-layer FP16 representations of one fixed pair subset under every template.
 
-    14B design of Table 20: the same held-out pairs (default
+    14B design of Table 21: the same held-out pairs (default
     ``probes.template_control_subset`` of the test split: 200 pairs, seed 20260713)
     are rendered under each of the five system messages in
     ``prompts.TEMPLATE_SYSTEM_MESSAGES``. Block outputs are kept in float32, as

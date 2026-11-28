@@ -26,7 +26,7 @@ Camera-ready label-permutation null (B = 10,000)
     Each training pair independently swaps labels. The MD and 49 residual PCs are
     refitted per permutation. Table 26 tests R1 and R50 jointly and R50-R1 separately.
 
-Review-version activation-matched null (B = 1,000)
+Supplementary activation-matched null (B = 1,000)
     Each draw samples ``k_max - 1`` rows, without replacement, from the
     FP16-training residual pool (centred pair differences with ``v`` removed).
     It builds ``[v, q_1, ...]`` by float64 two-pass QR in the ambient hidden

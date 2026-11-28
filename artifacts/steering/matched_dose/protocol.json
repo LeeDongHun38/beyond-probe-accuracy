@@ -1,0 +1,35 @@
+{
+  "candidate_rule": "first encoded token for each string; max candidate logit; exp(max_yes-logsumexp(full vocabulary))",
+  "intervention": "false +alpha; true -alpha; selected block output; all nonpadding prefill positions",
+  "norm": "median baseline final-prefill residual norm pooled over both sides and all 5 seed slots (repeated IDs count repeatedly)",
+  "covariance": "new train final-prefill JUDGMENT representations, false then true; not answer-final probe activations",
+  "nulls": [
+    "pooled",
+    "within_class",
+    "md_orthogonal",
+    "oas_shrinkage",
+    "standardized_dose"
+  ],
+  "pooled": "float32 normalize(randn(127,2*n_train) @ pooled-centered judgment X), seed2026091601",
+  "within": "float64 class-centered, float32 Gaussian then cast double, normalize to f32",
+  "oas": "OAS same covariance_alternatives.py; gaussian seed2026091601 and isotropic seed+1931",
+  "dose": "alpha_j=alpha_MD*sigma_j/sigma_MD, pooled train covariance ddof1, no clipping",
+  "system_prompt": "You are a helpful assistant.",
+  "random_seed": 2026091601,
+  "isotropic_seeds_7_8b": {
+    "llama": 2026073001,
+    "qwen": 2026073002,
+    "mistral": 2026073003
+  },
+  "matched_r": [
+    0.05,
+    0.1
+  ],
+  "bootstrap_replicates": 10000,
+  "bootstrap_seed": 42,
+  "bootstrap_unit": "normalized-question cluster, preserve all rows and original seed memberships; normalize weights within seed per replicate then equal mean across seeds",
+  "bh_families": {
+    "isotropic": 8,
+    "covariance_and_dose": 30
+  }
+}

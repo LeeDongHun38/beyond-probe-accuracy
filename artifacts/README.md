@@ -1,0 +1,16 @@
+# Experiment artifacts
+
+Find the table or figure in the first column to locate its inputs. The [paper](../paper/Beyond%20Probe%20Accuracy.pdf) defines the estimators, dose and statistical families. The [table exports](../paper/tables) contain the results at higher precision than the printed tables.
+
+| Paper result | Inputs |
+|---|---|
+| Tables 1, 3, 9 and 11 · Dataset splits, layers and probe stability | [Probes](probes) contains the grouped TriviaQA split and split-half assignments, per-model training layer profiles, fitted directions and held-out scores. It also contains the ARC-Easy and CommonsenseQA MD stability estimates. Table 3 counts the [released pairs](../data/pairs). |
+| Figure 2 and Tables 12–14 · Estimator sensitivity | [Scale-normalized LR scores](probes/scale_normalized_scores) contain the paired projections and bootstrap draws for 66 comparisons. [Standardized LR](probes/standardized_lr) contains the D4/D5 fits and steering effects for the three smaller models. [Figure 2 inputs](figure_inputs/figure2_input.csv) give alignment and fixed-dose effects for D0–D3. |
+| Figure 3b and Tables 15–17 · Fixed and matched doses | [Figure 3b inputs](figure_inputs/figure3b_input.csv) give MD effects for both doses across datasets. [Matched-dose steering](steering/matched_dose) contains estimator effects, sample IDs and question-cluster intervals. The [readouts](steering/readouts) list the exact candidate strings and token IDs by model, including the expanded Qwen2.5-14B set. |
+| Figure 3a and Table 18 · Isotropic null at α = 4 | [Fixed-dose steering](steering/fixed_alpha) contains MD effects and 127 random-direction effects per side, grouped by dataset. The analysis takes absolute values after averaging over seeds and applies one BH correction across all 30 sides. |
+| Tables 19–20 · Null families at matched dose | [Matched-dose steering](steering/matched_dose) includes the Qwen2.5-14B isotropic results and the three smaller models’ isotropic, covariance and dose controls. Table 19 corrects eight tests together. Table 20 corrects a separate family of 30. |
+| Tables 21–24 · Validity controls | [Controls](controls) contains template and length effects, gold-donor comparisons and own-generation readouts. The TriviaQA generation files include held-out projection scores, label audits and 1,000 random-direction results per model. |
+| Tables 2, 25, 27 and 28 · Quantization transfer | [Transfer](transfer) contains paired projections, model-specific calibration partitions, operating points and margin diagnostics. Table 2 uses all held-out TriviaQA pairs. Table 28 evaluates a fixed FP16 threshold on the independent evaluation partition. |
+| Figure 4 and Table 26 · Error geometry | [Geometry](geometry) contains the observed energies and 10,000 within-pair permutation draws per condition. R1 and R50 share a 50-test BH family. R50−R1 has its own 25-test family. |
+| Supporting data checks | [Row-split audits](data_audits/row_split) measure question overlap, alias collisions, token-position exceptions and sensitivity to exclusions under a row-wise partition. The [grouped split](probes/split_validation.json) gives the TriviaQA counts used in the paper. |
+| Reusable MD vectors | [Directions](directions) contains FP16 vectors for each model and dataset. |

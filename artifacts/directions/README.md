@@ -1,5 +1,5 @@
 # Mean-difference directions
 
-Each NumPy file contains the fixed FP16 direction for one model and dataset. The five TriviaQA vectors are the camera-ready v2 D0 fits. The transfer and geometry copies for TriviaQA are identical. ARC-Easy and CommonsenseQA retain their original vectors.
+Each NumPy file holds an FP16-trained mean-difference (MD) direction for one model and dataset. The TriviaQA vectors use the grouped training split. Use a transfer vector with `probedir transfer --direction PATH`.
 
-Use a transfer vector with `probedir transfer --direction PATH`. The label-permutation experiment refits MD and the residual PCA basis after every swap. Its original draws are in the [geometry panel](../camera_ready/v3/B). The complete TriviaQA D0–D3 safetensors and training AUROC profiles are in the [v2 fits](../camera_ready/v2/models).
+The [probe fits](../probes/models) contain the complete TriviaQA D0–D3 directions and training AUROC profiles. The [geometry panel](../geometry) stores the permutation draws from refitting MD and the residual PCA basis after every swap.

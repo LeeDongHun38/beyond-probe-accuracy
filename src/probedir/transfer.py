@@ -1,4 +1,4 @@
-"""Fixed-direction cross-precision transfer (Sec. 3.5, 6.1; App. E.1, E.3; Tables 2, 25, 28).
+"""Fixed-direction cross-precision transfer (Sec. 3.5, 6.1; App. E.1, E.3; Tables 2, 25, 27).
 
 The probing layer and the unit MD direction ``v`` are estimated once, on the FP16
 training split. They are applied unchanged to the held-out representations of
@@ -9,7 +9,7 @@ Predictive transfer (Table 2, Table 25)
     candidates are scored as independent samples. The drop is
     ``AUROC_FP16 - AUROC_q``.
 
-Pair margins (App. E.3, Table 28)
+Pair margins (App. E.3, Table 27)
     ``g_i = v^T (h+_i - h-_i)`` per held-out pair; positive means the correct
     answer scores higher. Reported quantities:
     - relative shrinkage ``(mean g^FP16 - mean g^q) / mean g^FP16``, a ratio of means;

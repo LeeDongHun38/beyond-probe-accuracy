@@ -1,4 +1,0 @@
-model,layer,direction_source,direction_refit,train_pairs,heldout_pairs,original_auroc,gold_donor_transfer_auroc,artifact_path
-Qwen2.5-7B,18,Original corrected-offset TriviaQA train split MD direction (canonical L18),False,2499,2500,0.82766912,0.98359072,results/source_matched_control/qwen_gold_source_matched_probe.json#/canonical_l18_transfer_to_control/test_auroc
-Llama-3.1-8B,14,Original TriviaQA train split MD direction (canonical L14),False,2499,2500,0.8296496,0.9808049600000001,results/crossmodel_source_matched_v1/llama_probe.json#/canonical_transfer_to_control/test_auroc
-Mistral-7B,13,Original TriviaQA train split MD direction (canonical L13),False,2499,2500,0.82366128,0.98433184,results/crossmodel_source_matched_v1/mistral_probe.json#/canonical_transfer_to_control/test_auroc

@@ -1,6 +1,0 @@
-[
-  {
-    "reason": "Remove logits_to_keep=1 optimization to retain canonical FP16 lm_head matrix shape; retain old attempt separately and regenerate baseline/output caches. Statistical policy unchanged.",
-    "old_attempt": "diagnostic_attempt_logits_keep1"
-  }
-]

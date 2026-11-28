@@ -1,0 +1,2 @@
+model,dataset,layer,n_questions,generations_per_question,pre_answer_states,outcome_definition,outcome_valid_questions,spearman_rho,ci95_low,ci95_high,bootstrap_repetitions,bootstrap_unit,random_direction_count,random_exceedance_count,random_p
+Qwen2.5-7B,ARC-Easy,18,500,32,500,exact-correct / (exact-correct + incorrect) across retained 32 sampled answers,500,0.055989647001846055,-0.032154360462471325,0.1395394484169619,1000,question-clustered,not run,not available,not available

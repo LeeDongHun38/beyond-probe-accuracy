@@ -1,0 +1,8 @@
+{
+  "threshold": "max balanced_accuracy; exact ties higher threshold; positive iff score >= threshold",
+  "metric_denominator": "flip: individual answers 2*n_evaluation_pairs",
+  "direction": "Float64 unit mean-difference vector fitted to FP16 training pairs.",
+  "calibration_rng": "Shuffle sorted unique held-out question keys per model with one default_rng(20260916), in model order llama, qwen, mistral, qwen14, ministral14.",
+  "bootstrap_replicates": 1000,
+  "bootstrap_seed": "20260917 XOR first4_sha256(original model label)"
+}

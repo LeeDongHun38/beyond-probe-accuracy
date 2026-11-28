@@ -10,10 +10,10 @@ Commands, in pipeline order:
   null-family       random-direction specificity tests + BH            App. C.4, Tables 18-20
   transfer          fixed FP16 direction on quantized models           Table 2, App. E.1, E.3
   geometry-permutation  refitted within-pair label-permutation panel   Fig. 4, Table 26
-  geometry          review-version activation-matched null
-  geometry-bh       review-version activation-matched BH families
+  geometry          supplementary activation-matched null
+  geometry-bh       supplementary activation-matched BH families
   template-control  prompt-template and input-length control           App. D.1, Table 21
-  controls          validity controls                                  App. D.2-D.4 and earlier sensitivity analyses
+  controls          validity controls                                  App. D.2-D.4 and supplementary sensitivity analyses
 """
 from __future__ import annotations
 

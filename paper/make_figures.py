@@ -26,7 +26,6 @@ from matplotlib.lines import Line2D  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 ART = ROOT / "artifacts"
-FINAL = ART / "camera_ready"
 from make_tables import fixed_null, geometry_panel
 OUT = ROOT / "paper" / "figures"
 
@@ -81,7 +80,7 @@ def figure2() -> None:
     markers = {"MD": "o", "1e-4": "s", "1e-2": "D", "1": "^"}
     labels = {"MD": "MD", "1e-4": r"Raw $C=10^{-4}$", "1e-2": r"Raw $C=10^{-2}$", "1": r"Raw $C=1$"}
 
-    points = pd.read_csv(FINAL / "v4/figures/figure2_input.csv", dtype={"side": str})
+    points = pd.read_csv(ART / "figure_inputs/figure2_input.csv", dtype={"side": str})
     points["model"] = points.model.map(norm_model)
     points["est"] = points.direction.map(dict(zip(["D0", "D1", "D2", "D3"], est_order)))
     r_vals = points.groupby("model").r.first()
@@ -135,7 +134,7 @@ def figure3() -> None:
     exc = c4[c4.md_abs <= c4.null_max]
     assert list(zip(exc.model, exc.dataset, exc.side)) == [("Mistral-7B", "TriviaQA", "false")]
 
-    c3 = pd.read_csv(FINAL / "v4/figures/figure3b_input.csv", dtype={"side": str})
+    c3 = pd.read_csv(ART / "figure_inputs/figure3b_input.csv", dtype={"side": str})
 
     fig, (ax, bx) = plt.subplots(1, 2, figsize=(TEXTWIDTH_IN, 2.45), gridspec_kw={"width_ratios": [1, 1.08]})
 

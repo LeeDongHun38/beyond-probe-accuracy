@@ -1,20 +1,12 @@
-"""Validity controls (App. D.2-D.6).
+"""Validity controls for Appendix D.2–D.4.
 
-D.2  Gold-donor source/style control: answer-only character TF-IDF classifier, and
-     transfer of the fixed original MD direction to gold-vs-gold pairs (Table 21).
-D.3  Correctness readout from the final token of self-generated answers (Table 22).
-D.4  Pre-answer readout: Spearman correlation of the MD projection at the final
-     generation-prompt token with sampled-answer accuracy (Table 23).
-D.5  Answer-span aggregation: last answer token vs. mean over the answer span (Table 24).
-D.6  Direct answer-generation steering with exact-match scoring and McNemar tests.
+Table 22 compares the original and gold-donor answer distributions using an
+answer-only classifier and the fixed TriviaQA MD direction. Table 23 scores
+the last token of self-generated answers. Table 24 correlates the pre-answer
+projection with sampled-answer accuracy.
 
-The canonical MD direction is never refit and its sign is never adjusted here; it is
-passed in by the caller (see :func:`probedir.probes.md_direction`).
-
-Resampling schemes deliberately differ between analyses because they reproduce the
-procedures used for the paper: D.3/D.4 use ``random.Random(seed)`` question-clustered
-bootstraps and a ``torch.manual_seed`` Gaussian-direction stream; D.5 uses
-``numpy.random.default_rng`` bootstraps and a ``torch.Generator`` direction stream.
+The module also includes supplementary answer-span and direct-generation
+experiments. Each analysis retains its own sampling and bootstrap procedure.
 """
 from __future__ import annotations
 
@@ -37,7 +29,7 @@ from .stats import auroc as _auroc_pos_neg
 OWNGEN_DIR = REPO_ROOT / "data" / "owngen"
 GOLD_DONOR_DIR = REPO_ROOT / "data" / "controls" / "gold_donor"
 
-# Own-generation sampling (App. D.3-D.5)
+# Own-generation sampling (App. D.3–D.4 and the span control)
 OWNGEN_TEMPERATURE = 0.8
 OWNGEN_TOP_P = 0.95
 OWNGEN_MAX_NEW_TOKENS = 24
@@ -49,9 +41,9 @@ N_BOOT = 1000
 BOOT_SEED = {"triviaqa": 42, "arc_easy": 20260725}   # D.3/D.4 question-clustered bootstrap
 N_RANDOM = 1000
 RANDOM_SEED = 123              # D.3/D.4 Gaussian-direction stream (torch.manual_seed)
-SPAN_SEED = 20260728           # D.5: bootstrap seed; random directions use SPAN_SEED + 1
+SPAN_SEED = 20260728           # span-control bootstrap seed; random directions use SPAN_SEED + 1
 
-# Direct answer-generation steering (App. D.6)
+# Direct answer-generation steering
 DIRECT_LAYER = 18
 DIRECT_ALPHA = 4.0
 DIRECT_RUNS = {"initial": (200, 20260725), "confirmation": (400, 20260726)}  # (n questions, selection seed)
@@ -160,7 +152,7 @@ def select_arc_owngen_questions(pairs: list[dict], excluded_ids: Iterable[str], 
 
 def select_direct_generation_questions(pairs: list[dict], n: int, seed: int,
                                        exclude_ids: Iterable[str] = ()) -> list[dict]:
-    """Held-out questions for App. D.6, sorted by id; the confirmation run excludes the initial run."""
+    """Held-out questions for the direct-generation control, sorted by id; the confirmation run excludes the initial run."""
     excluded = set(exclude_ids)
     pool = [p for p in pairs if p["id"] not in excluded]
     return sorted(random.Random(seed).sample(pool, n), key=lambda p: p["id"])
@@ -174,7 +166,7 @@ def readout_messages(question: str, answer: str, template_id: int, context: str,
     """Messages for reading out a generated answer.
 
     ``assistant``: the generation prompt with the answer teacher-forced as the assistant turn
-    (TriviaQA D.3, D.5). ``external_user``: the pair-representation prompt ``Q: .. A: ..``
+    (TriviaQA D.3 and the span control). ``external_user``: the pair-representation prompt ``Q: .. A: ..``
     (ARC-Easy D.3), identical to the representation used for probe training.
     """
     from . import prompts
@@ -286,7 +278,7 @@ def extract_owngen_states(model, tokenizer, model_key: str, records: list[dict],
 
     Returns ``pre`` (final generation-prompt token per question; D.4) and, for each
     labeled sample (correct/incorrect), the answer ``first``/``last`` token state or the
-    ``mean`` over the answer span (D.3, D.5). Samples whose answer cannot be located are
+    ``mean`` over the answer span (D.3 and the span control). Samples whose answer cannot be located are
     skipped and counted in ``match_types``.
     """
     import torch
@@ -400,7 +392,7 @@ def bootstrap_ci_python(ids: np.ndarray, stat: Callable[[np.ndarray], float | No
 
 def bootstrap_auc_ci_numpy(ids: np.ndarray, labels: np.ndarray, scores: np.ndarray,
                            n_boot: int = N_BOOT, seed: int = SPAN_SEED) -> list[float]:
-    """Question-clustered percentile AUROC CI with ``numpy.random.default_rng(seed)`` (D.5);
+    """Question-clustered percentile AUROC CI with ``numpy.random.default_rng(seed)``;
     resamples containing a single class are skipped."""
     rng = np.random.default_rng(seed)
     unique = np.unique(ids)
@@ -427,7 +419,7 @@ def gaussian_directions_sequential(d: int, n: int = N_RANDOM, seed: int = RANDOM
 
 def gaussian_directions_batched(d: int, n: int = N_RANDOM, seed: int = SPAN_SEED + 1, device: str = "cpu",
                                 batch: int = 32) -> np.ndarray:
-    """Unit Gaussian directions from a seeded ``torch.Generator`` in column batches of 32 (D.5).
+    """Unit Gaussian directions from a seeded ``torch.Generator`` in column batches of 32.
 
     The stream depends on the generator device; the paper's run used ``device="cuda"``.
     """
@@ -487,7 +479,7 @@ def gold_donor_control(direction: np.ndarray, original: tuple[np.ndarray, np.nda
             "gold_donor_transfer_auroc": heldout_auroc(*control, direction)}
 
 
-def semantic_audit(path: Path = REPO_ROOT / "artifacts/camera_ready/v1/review_split_donor_sample.csv") -> dict:
+def semantic_audit(path: Path = REPO_ROOT / "artifacts/data_audits/row_split/donor_sample.csv") -> dict:
     import csv
 
     rows = list(csv.DictReader(Path(path).open(newline="")))
@@ -580,12 +572,12 @@ def random_direction_pvalues(direction: np.ndarray, answer: dict | None = None, 
 
 
 # ---------------------------------------------------------------------------
-# D.5 answer-span aggregation
+# Supplementary answer-span aggregation
 # ---------------------------------------------------------------------------
 def span_readout(h: np.ndarray, labels: np.ndarray, ids: np.ndarray, direction: np.ndarray,
                  n_boot: int = N_BOOT, seed: int = SPAN_SEED, n_random: int = N_RANDOM,
                  random_device: str = "cpu") -> dict:
-    """D.5: AUROC of one answer-position readout (last token or span mean) on held-out
+    """AUROC of one answer-position readout (last token or span mean) on held-out
     self-generated answers, a question-clustered CI, and an orientation-invariant random-direction
     p-value (max(AUC, 1 - AUC) for random directions)."""
     s = project(h, direction)
@@ -599,7 +591,7 @@ def span_readout(h: np.ndarray, labels: np.ndarray, ids: np.ndarray, direction: 
 
 
 # ---------------------------------------------------------------------------
-# D.6 direct answer-generation steering
+# Supplementary direct answer-generation steering
 # ---------------------------------------------------------------------------
 def paired_accuracy(baseline: Sequence[bool | None], condition: Sequence[bool | None]) -> dict:
     """Paired exact-match accuracy change with a two-sided exact McNemar (binomial) test;
@@ -628,7 +620,7 @@ def direct_generation(model, tokenizer, model_key: str, pairs: list[dict], direc
                       layer: int = DIRECT_LAYER, alpha: float = DIRECT_ALPHA,
                       max_new_tokens: int = OWNGEN_MAX_NEW_TOKENS) -> list[dict]:
     """Greedy short answers without steering and with +alpha*v / -alpha*v added to the layer
-    output at every position, during prefill and every cached decoding step (App. D.6)."""
+    output at every position, during prefill and every cached decoding step."""
     import contextlib
 
     import torch
@@ -718,7 +710,7 @@ def _cmd_generate(args) -> None:
 
 
 def _cmd_readout(args) -> None:
-    """Extract own-generation states (GPU) and compute D.3/D.4 (and D.5 when --span)."""
+    """Extract own-generation states (GPU) and compute D.3/D.4 (with optional span pooling)."""
     from .models import load_model
 
     records = load_records(Path(args.answers))
@@ -787,7 +779,7 @@ def _cmd_direct(args) -> None:
 
 
 def add_cli(subparsers) -> None:
-    p = subparsers.add_parser("controls", help="validity controls (App. D.2-D.6)")
+    p = subparsers.add_parser("controls", help="validity controls (App. D.2–D.4 and supplementary analyses)")
     sub = p.add_subparsers(dest="control", required=True)
 
     def common(q, model_default="qwen2.5-7b", dataset_default="triviaqa"):
@@ -811,15 +803,15 @@ def add_cli(subparsers) -> None:
     q.add_argument("--output", required=True)
     q.set_defaults(func=_cmd_generate)
 
-    q = sub.add_parser("readout", help="D.3/D.4 (or D.5 with --span) readouts of own-generated answers (GPU)")
+    q = sub.add_parser("readout", help="D.3/D.4 (with optional span pooling) readouts of own-generated answers (GPU)")
     common(q)
     q.add_argument("--answers", required=True, help="answers JSON from `controls generate` or data/owngen/")
     q.add_argument("--context", choices=("assistant", "external_user"), default="assistant")
-    q.add_argument("--span", action="store_true", help="D.5: last-token vs mean-pooled answer span")
+    q.add_argument("--span", action="store_true", help="last-token vs mean-pooled answer span")
     q.add_argument("--random-control", action="store_true", help="D.3/D.4 Gaussian-direction p-values")
     q.add_argument("--output", required=True)
     q.set_defaults(func=_cmd_readout)
 
-    q = sub.add_parser("direct-generation", help="D.6 direct answer-generation steering (GPU)")
+    q = sub.add_parser("direct-generation", help="direct answer-generation steering (GPU)")
     common(q)
     q.set_defaults(func=_cmd_direct, layer=DIRECT_LAYER)

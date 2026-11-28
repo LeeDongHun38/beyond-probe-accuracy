@@ -64,7 +64,7 @@ label_permutation_geometry:  # Figure 4, Table 26
   joint_r1_r50_tests: 50
   incremental_r50_tests: 25
 
-geometry:   # Earlier activation-matched sensitivity analysis
+geometry:   # Supplementary activation-matched sensitivity analysis
   k: [1, 2, 5, 10, 20, 50]
   null_subspaces: 1000
   bh_family_size: 375

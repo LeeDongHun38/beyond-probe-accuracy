@@ -1,6 +1,6 @@
 # Data card
 
-Released data and earlier sensitivity datasets. Paths below are relative to `data/`.
+Datasets for the paper and supplementary sensitivity analyses. Paths below are relative to `data/`.
 
 ## Answer-conditional contrastive pairs (Sec. 3.1, 4; App. A.1, Table 3)
 
@@ -10,7 +10,7 @@ Released data and earlier sensitivity datasets. Paths below are relative to `dat
 | ARC-Easy (all official splits) | `pairs/arc_easy/` | 5,197 | 2,598 | 2,599 | One of three provided distractors (seed 42) |
 | CommonsenseQA (official train + validation) | `pairs/commonsenseqa/` | 10,962 | 5,481 | 5,481 | One of four provided distractors (seed 42) |
 
-TriviaQA contains 4,406 distinct normalized questions. Seed 42 shuffles the sorted question keys with NumPy. The first 2,203 keys go to training and the remaining 2,203 go to evaluation. All rows for a question stay together, including repeated pairs. ARC-Easy and CommonsenseQA retain the original row splits. The v1 audit found 10 and 1 held-out rows respectively whose normalized question also appears in training.
+TriviaQA contains 4,406 distinct normalized questions. Seed 42 shuffles the sorted question keys with NumPy. The first 2,203 keys go to training and the remaining 2,203 go to evaluation. All rows for a question stay together, including repeated pairs. ARC-Easy and CommonsenseQA retain the original row splits. The [row-split overlap audit](../artifacts/data_audits/row_split/duplicate_counts.json) found 10 and 1 held-out rows respectively whose normalized question also appears in training.
 
 Each dataset folder has `all.json`, `train.json`, `test.json`
 and `stats.json` (counts and mean answer lengths).
@@ -26,7 +26,7 @@ Record fields:
 
 `controls/gold_donor/` replaces each GPT-4.1 TriviaQA distractor with a gold answer
 from another question (same train/held-out split). `source_matching_audit.json` records donor
-selection and alias-collision checks for the final split. The completed manual sample for the earlier donor assignments is preserved in the v1 audit archive.
+selection and alias-collision checks for the final split. The [manual donor audit](../artifacts/data_audits/row_split/donor_sample.csv) covers assignments under the row-wise partition.
 
 ## Self-generated answers (App. D.3–D.4, Tables 23–24)
 
@@ -47,7 +47,7 @@ excluded, `match_type`), and `p_correct` = correct / (correct + incorrect).
 - `arc_easy_qwen_questions.json` lists the selected questions in shard order and the 200 pilot
   question ids that were excluded before selection (`probedir.controls.select_arc_owngen_questions`
   reproduces the selection). `arc_easy_qwen_protocol.md` is the note written before generation.
-- `span_control_questions.json` keeps the original question ids.
+- `span_control_questions.json` preserves the original record IDs for joining the three model files, along with the source TriviaQA question IDs.
 
 ## Pair-construction inputs
 

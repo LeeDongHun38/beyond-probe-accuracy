@@ -9,7 +9,7 @@ tokenizer chat template. Three prompt families are used:
   200-pair subset under all five;
 * correctness judgment (Sec. 3.3): the pair text followed by a Yes/No question,
   with the fixed system message ``You are a helpful assistant.``;
-* five-shot short-answer generation (App. D.3-D.6, Table 5).
+* five-shot short-answer generation (App. D.3–D.4, Table 5).
 """
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ from typing import Any
 
 # System messages of the pair representation, indexed by template_id. Pairs are
 # assigned templates 0-2 (``data.assign_split_and_templates``); templates 3-4 are
-# used only by the 14B template control (App. D.1, Table 20).
+# used only by the 14B template control (App. D.1, Table 21).
 TEMPLATE_SYSTEM_MESSAGES: tuple[str, ...] = (
     "You are a helpful assistant.",
     "You are a helpful assistant. Answer the user's question directly.",
@@ -76,8 +76,7 @@ def pair_messages(question: str, answer: str, template_id: int = CANONICAL_TEMPL
 def judgment_messages(question: str, answer: str, system: bool = True) -> list[dict[str, str]]:
     """Yes/No correctness-judgment prompt used for the steering readout (Sec. 3.3).
 
-    ``system=False`` reproduces the earlier no-system-message protocol that the
-    Mistral-7B TriviaQA fixed-alpha and matched-r rows of Tables 15-16 used.
+    Pass ``system=False`` to run the prompt ablation without a system message.
     """
     user = {"role": "user", "content": f"{pair_text(question, answer)}\n\n{JUDGMENT_QUESTION}"}
     if not system:
@@ -126,7 +125,7 @@ def encode(tokenizer: Any, model_key: str, messages: list[dict[str, str]],
 
     HF tokenizers: ``tokenizer(render(...))["input_ids"]``. Ministral-3-14B
     (mistral-common backend): the backend's own chat-template tokenization,
-    which is the canonical encoding for that model (Table 8).
+    which is the canonical encoding for that model (App. B.1).
     """
     if is_mistral_common(tokenizer):
         enc = tokenizer.apply_chat_template(messages, tokenize=True,

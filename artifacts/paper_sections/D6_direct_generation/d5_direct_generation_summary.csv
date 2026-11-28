@@ -1,4 +1,0 @@
-split,condition,n,baseline_correct,condition_correct,baseline_accuracy,condition_accuracy,accuracy_delta,baseline_correct_condition_wrong,baseline_wrong_condition_correct,mcnemar_exact_two_sided_p,artifact_path
-initial_200,plus_v,200,75,78,0.375,0.39,0.015,0,3,0.25,results/direct_answer_generation/qwen7b_l18_alpha4_heldout200.json#/summary/plus_v_vs_baseline
-confirmation_400,plus_v,400,174,173,0.435,0.4325,-0.0025,5,4,1.0,results/direct_answer_generation/qwen7b_l18_alpha4_replication400.json#/summary/plus_v_vs_baseline
-confirmation_400,minus_v,400,174,175,0.435,0.4375,0.0025,2,3,1.0,results/direct_answer_generation/qwen7b_l18_alpha4_replication400.json#/summary/minus_v_vs_baseline
