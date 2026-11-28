@@ -1,0 +1,16 @@
+{
+  "original": {
+    "n_train_pairs": 2508,
+    "n_test_pairs": 2491,
+    "n_features": 16956,
+    "test_auroc": 0.525430530238042,
+    "test_accuracy": 0.5182657567242072
+  },
+  "gold_donor": {
+    "n_train_pairs": 2508,
+    "n_test_pairs": 2491,
+    "n_features": 22212,
+    "test_auroc": 0.49986881718385295,
+    "test_accuracy": 0.4997992773986351
+  }
+}

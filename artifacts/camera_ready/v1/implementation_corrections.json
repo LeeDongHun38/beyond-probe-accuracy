@@ -1,0 +1,45 @@
+{
+  "protocol_unchanged": true,
+  "corrections": [
+    {
+      "item": "T3 reproduction gate",
+      "error": "Initial code additionally gated every seed-level diagnostic, although protocol.json freezes the gate on reported primary point estimates. The paper reports the K=5 split-half mean.",
+      "evidence": "Mistral D5 K=5 mean reproduced 0.1333489755636462 vs 0.1329827659741596: absolute discrepancy 0.0003662095894866, below 0.001. Seed 123 diagnostic differs by 0.0010110536735191.",
+      "correction": "Apply the unchanged 0.001 gate to the reported K=5 mean for every estimator. Preserve all per-seed diagnostics and their maximum discrepancy. Reuse existing original/grouped checkpoints; compute the initially skipped Mistral D5 grouped halves. No fitting settings, partition seeds, estimands, or thresholds change."
+    },
+    {
+      "item": "T4 Ministral BH provenance",
+      "evidence": "scripts/build_appendix_e2.py defines a reporting-only 75-cell family across TriviaQA, ARC-Easy, and CommonsenseQA, although the raw quant-grid null artifact itself does not contain q values.",
+      "correction": "Use this existing family, as already required by protocol.json, and retain unaffected ARC/CSQA p values."
+    },
+    {
+      "item": "Checkpoint durability and complete null-probability diagnostics",
+      "correction": "T8 random projection cache is published only after all batches complete; partial batches resume with the frozen protocol hash. T4 finalization also compares original Ministral and label-permuted null probabilities against their saved reports. No directions, seeds, labels, populations, thresholds, or statistical policies changed."
+    }
+  ],
+  "revalidation": {
+    "status": "REVALIDATED_WITH_RECORDED_EXCEPTIONS",
+    "reviewed_utc": "2026-11-24T11:49:00.653236+00:00",
+    "rows": 582,
+    "verdict_counts": {
+      "유지": 250,
+      "FLAG": 16,
+      "REPRODUCTION_FAILED": 3,
+      "계산완료": 221,
+      "약화": 4,
+      "BLOCKED": 18,
+      "유의성변경": 2,
+      "교정 run 일치": 3,
+      "반올림 불일치": 1,
+      "양쪽 공통": 6,
+      "완료": 1,
+      "조사완료": 57
+    },
+    "primary_flags": 4,
+    "diagnostic_flags": 12,
+    "independent_numeric_checks": 512,
+    "qwen_threshold_reproduction_max_difference": 0.0,
+    "new_covariance_rows": 48,
+    "original_protocol_sha256": "daf87ab0c3f14627e1a1cece8a8ef103b673d00ddf47df1093828f03af655df7"
+  }
+}

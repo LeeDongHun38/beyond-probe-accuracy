@@ -1,0 +1,13 @@
+{
+  "total_pairs": 4999,
+  "total_unique_questions": 4406,
+  "train_pairs": 2508,
+  "test_pairs": 2491,
+  "train_unique_questions": 2203,
+  "test_unique_questions": 2203,
+  "question_intersection": 0,
+  "row_missing": 0,
+  "row_duplicate_assignment": 0,
+  "alias_conflicts_included": 21,
+  "alias_conflicts_train": 7
+}

@@ -1,15 +1,5 @@
-# Published mean-difference directions
+# Mean-difference directions
 
-The exact unit-normalized MD direction vectors used in the paper's quantization analyses,
-one per model-dataset cell (FP16 training split, selected layer):
+Each NumPy file contains the fixed FP16 direction for one model and dataset. The five TriviaQA vectors are the camera-ready v2 D0 fits. The transfer and geometry copies for TriviaQA are identical. ARC-Easy and CommonsenseQA retain their original vectors.
 
-- `<model>__<dataset>__transfer.npy`: Table 2, App. E.1 and E.3 (cross-precision AUROC, pair margins)
-- `<model>__<dataset>__geometry.npy`: Fig. 4, App. E.2-E.3 (error-geometry subspace and null)
-
-Pass one with `--direction` to reproduce the published values exactly, e.g.
-
-    probedir geometry --model llama-3.1-8b --dataset triviaqa \
-        --direction artifacts/directions/llama-3.1-8b__triviaqa__geometry.npy
-
-Without `--direction`, the commands re-estimate the MD direction from the cached hidden
-states in float64.
+Use a transfer vector with `probedir transfer --direction PATH`. The label-permutation experiment refits MD and the residual PCA basis after every swap. Its original draws are in the [geometry panel](../camera_ready/v3/B). The complete TriviaQA D0–D3 safetensors and training AUROC profiles are in the [v2 fits](../camera_ready/v2/models).

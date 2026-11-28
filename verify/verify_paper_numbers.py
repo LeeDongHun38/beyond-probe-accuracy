@@ -1,159 +1,170 @@
-#!/usr/bin/env python3
-"""Check every regenerated paper table and key in-text number against the PDF.
-
-1. Regenerates all tables with paper/make_tables.py into a temporary directory.
-2. Compares them cell by cell with verify/expected/tableNN.csv (values
-   transcribed from EACL_2026.pdf, sha256 b85d714962864d9051ce5940e021a114d02cf4e64b9c41dcef620a87418d50ad)
-   at the printed precision.
-3. Recomputes the in-text claims listed in verify/expected/in_text_claims.csv.
-4. Classifies each difference as explained (listed, with the exact regenerated
-   value, in verify/known_discrepancies.csv) or unexplained.
-
-Writes verify/VERIFY_REPORT.md and verify/verify_report.json and exits
-non-zero if any unexplained mismatch remains.  Expected values are never
-edited to make a check pass.
-
-Usage (repository root):  python verify/verify_paper_numbers.py
-Dependencies: Python 3.9+ standard library only.
-"""
-from __future__ import annotations
-
+"""Rebuild the final numerical tables, compare with the PDF, and audit the archived runs."""
 import csv
-import importlib.util
+import hashlib
 import json
-import subprocess
-import sys
 import tempfile
 from pathlib import Path
+import sys
+
+import numpy as np
+import pandas as pd
+from scipy.stats import spearmanr
+from sklearn.metrics import roc_auc_score
 
 ROOT = Path(__file__).resolve().parents[1]
-VER = ROOT / "verify"
-EXP = VER / "expected"
-PDF_SHA256 = "b85d714962864d9051ce5940e021a114d02cf4e64b9c41dcef620a87418d50ad"
-KEY_COLS = {"estimator", "model", "dataset", "dir", "analysis", "scope", "quantization"}
+sys.path.insert(0, str(ROOT / "paper"))
+from make_tables import ART, MODELS, build, fixed_null, geometry_panel
+
+PDF_HASH = "207a6cce60fa0efef236cb32d5c9fa4f7b61b7fb28213b809a6b0797b6918c15"
+# Printed identifiers uniquely select one row in both the reference and rebuilt tables.
+KEYS = set("model model_name dataset estimator precision side condition family scaling lambda_value quantization statistic".split())
 
 
-def norm(v: str) -> str:
-    v = (v or "").strip().replace("−", "-").replace(",", "")
-    if v.startswith("+"):
-        v = v[1:]
-    return "-" if v in ("", "-", "–", "NA") else v
+def rows(path):
+    with path.open(newline="") as stream:
+        return list(csv.DictReader(stream))
 
 
-def read(path: Path) -> list[dict]:
-    with open(path, newline="") as fh:
-        return list(csv.DictReader(fh))
+def key(row, columns):
+    return tuple(float(row[c]) if c == "lambda_value" else row[c] for c in columns)
 
 
-def load_known() -> dict:
-    known = {}
-    for r in read(VER / "known_discrepancies.csv"):
-        known[(r["table"], r["row_key"], r["column"])] = r
-    return known
-
-
-def compare_tables(gen_dir: Path, known: dict) -> tuple[list, list]:
-    results, mismatches = [], []
-    for exp_path in sorted(EXP.glob("table*.csv")):
-        tid = exp_path.stem  # tableNN
-        gen = sorted(gen_dir.glob(f"{tid}_*.csv"))
-        if not gen:
-            results.append({"table": tid, "status": "MISSING_GENERATED", "cells": 0, "mismatches": 0})
-            mismatches.append({"table": tid, "row_key": "*", "column": "*", "expected": "", "generated": "",
-                               "explained": False, "note": "no generated table"})
-            continue
-        exp_rows, gen_rows = read(exp_path), read(gen[0])
-        cols = list(exp_rows[0].keys())
-        keys = [c for c in cols if c in KEY_COLS]
-        index = {tuple(norm(r[k]) for k in keys): r for r in gen_rows}
-        n_cells = n_bad = n_explained = 0
-        for er in exp_rows:
-            rk = tuple(norm(er[k]) for k in keys)
-            gr = index.get(rk)
-            row_key = "|".join(er[k] for k in keys)
-            for c in cols:
-                if c in keys:
+def compare_tables(dest):
+    sources = sorted((ROOT / "verify/expected").glob("table*.csv"))
+    assert len(sources) == len(list(dest.glob("table*.csv"))) == 22
+    notes_path = ROOT / "verify/known_discrepancies.csv"
+    notes = {(r["table"], r["model"], r["dataset"], r["column"]): r for r in rows(notes_path)}
+    seen = set()
+    count = 0
+    problems = []
+    for source in sources:
+        actual_file, = dest.glob(source.stem + "_*.csv")
+        assert actual_file.read_bytes() == (ROOT / "paper/tables" / actual_file.name).read_bytes(), actual_file.name
+        expected = rows(source)
+        actual = rows(actual_file)
+        cols = [c for c in expected[0] if c in KEYS or (source.stem == "table12" and c == "layer")]
+        index = {key(r, cols): r for r in actual}
+        assert len(index) == len(expected) == len(actual)
+        assert set(index) == {key(r, cols) for r in expected}
+        for row in expected:
+            result = index[key(row, cols)]
+            for field, printed in row.items():
+                if field in cols or not printed:
                     continue
-                n_cells += 1
-                ev = norm(er[c])
-                gv = norm(gr.get(c, "")) if gr else "<row missing>"
-                if ev == gv:
-                    continue
-                k = known.get((tid, row_key, c))
-                explained = bool(k) and norm(k["generated"]) == gv and norm(k["expected"]) == ev
-                n_bad += 1
-                n_explained += explained
-                mismatches.append({"table": tid, "row_key": row_key, "column": c, "expected": er[c],
-                                   "generated": gr.get(c, "") if gr else "<row missing>", "explained": explained,
-                                   "note": k["explanation"] if k else ""})
-        status = "MATCH" if n_bad == 0 else ("KNOWN_DISCREPANCY" if n_bad == n_explained else "MISMATCH")
-        results.append({"table": tid, "generated_file": str(gen[0].name), "status": status, "cells": n_cells,
-                        "mismatches": n_bad, "explained": n_explained})
-    return results, mismatches
+                count += 1
+                name = field.removeprefix("abs_").removeprefix("pct_")
+                value = float(result[name])
+                if field.startswith("abs_"):
+                    value = abs(value)
+                if field.startswith("pct_"):
+                    value *= 100
+                if printed.startswith("<"):
+                    matches = 0 <= value < float(printed[1:])
+                else:
+                    precision = len(printed.split(".")[1]) if "." in printed else 0
+                    tolerance = 0.5 * 10**(-precision) if precision else 0
+                    matches = abs(value - float(printed)) <= tolerance + 1e-11
+                if not matches:
+                    k = (source.stem, row.get("model"), row.get("dataset"), field)
+                    note = notes.get(k)
+                    if note and note["printed"] == printed and np.isclose(value, float(note["source"]), rtol=0, atol=1e-11):
+                        seen.add(k)
+                    else:
+                        problems.append((source.stem, key(row, cols), field, printed, value))
+    if problems:
+        raise ValueError(f"Unexplained paper differences: {problems}")
+    assert seen == set(notes), "Stale discrepancy entries"
+    print(f"{len(sources)} numeric tables, {count} printed values, {len(seen)} documented rounding differences")
 
 
-def check_claims(known: dict) -> tuple[list, list]:
-    spec = importlib.util.spec_from_file_location("claims", VER / "in_text_claims.py")
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    results, mismatches = [], []
-    for r in read(EXP / "in_text_claims.csv"):
-        fn = getattr(mod, r["check"], None)
-        if fn is None:
-            results.append({**r, "computed": "", "status": "NOT_CHECKED"})
-            continue
-        got = str(fn())
-        ok = norm(got) == norm(r["expected"])
-        k = known.get(("in_text", r["claim_id"], "value"))
-        explained = (not ok) and bool(k) and norm(k["generated"]) == norm(got)
-        status = "MATCH" if ok else ("KNOWN_DISCREPANCY" if explained else "MISMATCH")
-        results.append({**r, "computed": got, "status": status})
-        if not ok:
-            mismatches.append({"table": "in_text", "row_key": r["claim_id"], "column": "value",
-                               "expected": r["expected"], "generated": got, "explained": explained,
-                               "note": k["explanation"] if k else ""})
-    return results, mismatches
+def check_runs():
+    split = pd.read_csv(ART / "v2/split_manifest.csv")
+    assert split.row_id.is_unique
+    for side, n in (("train", 2508), ("test", 2491)):
+        subset = split[split.split == side]
+        pairs = json.loads((ROOT / f"data/pairs/triviaqa/{side}.json").read_text())
+        assert subset.row_id.tolist() == [r["id"] for r in pairs]
+        assert len(pairs) == n and subset.question_key.nunique() == 2203
+    assert split.question_key.nunique() == 4406
+    sweep = pd.read_csv(ART / "v2/table1_comparison.csv")
+    transfer = pd.read_csv(ART / "v3/A/results.csv")
+    for model in MODELS:
+        profile = pd.read_csv(ART / f"v2/models/{model}/layer_train_auroc.csv")
+        layer = profile.loc[profile.train_auroc.idxmax(), "layer"]
+        est = sweep[sweep.model_name == MODELS[model].replace("Ministral-3", "Ministral")]
+        assert len(est) == 4 and (est.layer == layer).all()
+        partitions = pd.read_csv(ART / f"v3/manifests/threshold_{model}.csv")
+        evaluation = partitions.assignment == "evaluation"
+        assert partitions.row_id.tolist() == split.loc[split.split == "test", "row_id"].tolist()
+        assert partitions.groupby("question_key").assignment.nunique().max() == 1
+        with np.load(ART / f"v2/models/{model}/test_scores.npz") as scores:
+            np.testing.assert_array_equal(scores["row_id"], partitions.row_id)
+            for r in est.itertuples():
+                np.testing.assert_allclose(auc(scores[r.estimator+"_true"], scores[r.estimator+"_false"]), r.auc)
+        with np.load(ART / f"v3/A/{model}_fp16_scores.npz") as fp:
+            cal = ~evaluation
+            p, m = fp["true"], fp["false"]
+            cal_p, cal_m = p[cal], m[cal]
+
+            def threshold_key(t):
+                return ((np.mean(cal_p >= t) + np.mean(cal_m < t)) / 2, t)
+
+            candidates = np.r_[np.unique(np.r_[p[cal], m[cal]]), np.inf]
+            # The run evaluated all distinct FP16 calibration scores, breaking ties upward.
+            t = max(candidates, key=threshold_key)
+            refs = np.r_[p[evaluation], m[evaluation]] >= t
+        for r in transfer[transfer.model == model].itertuples():
+            with np.load(ART / f"v3/A/{model}_{r.precision}_scores.npz") as s:
+                np.testing.assert_array_equal(s["row_id"], partitions.row_id)
+                p, m = s["true"], s["false"]
+            np.testing.assert_allclose(auc(p, m), r.full_test_auroc)
+            p, m = p[evaluation], m[evaluation]
+            decisions = np.r_[p, m] >= t
+            np.testing.assert_allclose([t, auc(p, m), (m >= t).mean(), (p < t).mean()],
+                                       [r.threshold, r.evaluation_auroc, r.fpr, r.fnr])
+            assert (decisions != refs).sum() == r.flip_numerator and len(refs) == r.flip_denominator
+    scale = pd.read_csv(ART / "v2/table14_results.csv")
+    assert len(scale) == 66 and (scale.lr_auc > scale.md_auc).all() and (scale.lr_stab < scale.md_stab).all()
+    assert (scale.ci_low > 0).sum() == 64
+    by_name = {v: k for k, v in MODELS.items()}
+    for row in scale.itertuples():
+        name = by_name[row.model_name]
+        folder = ART / "v2/table14" / name / f"L{row.layer}"
+        with np.load(folder / f"{row.scaling}_lambda{row.lambda_value:g}_scores.npz") as fit:
+            np.testing.assert_allclose(auc(fit["true"], fit["false"]), row.lr_auc)
+            np.testing.assert_allclose(np.quantile(fit["delta_bootstrap"], [.025, .975]), [row.ci_low, row.ci_high])
+    generation = pd.read_csv(ART / "v4/E15/results.csv")
+    for row in generation.itertuples():
+        folder = ART / "v4/E15" / row.model
+        with np.load(folder / "scores.npz") as scores:
+            observed_auc = roc_auc_score(scores["labels"], scores["post"])
+            observed_rho = spearmanr(scores["pre"], scores["p_correct"]).statistic
+        random = pd.read_csv(folder / "random_effects.csv")
+        assert len(random) == 1000
+        np.testing.assert_allclose([observed_auc, observed_rho], [row.auc, row.rho])
+        np.testing.assert_allclose([(1 + (random.auc >= observed_auc).sum()) / 1001,
+                                    (1 + (random.rho >= observed_rho).sum()) / 1001],
+                                   [row.auc_random_p, row.rho_random_p])
+
+    null = fixed_null()
+    assert len(null) == 30 and (null.n == 127).all() and (null.q < .05).all()
+    exception = null.loc[null.exceedance > 0, ["model", "dataset", "side", "exceedance"]]
+    assert exception.values.tolist() == [["mistral", "triviaqa", "false", 1]]
+    geo = geometry_panel().set_index(["model", "dataset", "quantization", "statistic"]).sort_index()
+    archived = pd.read_csv(ART / "v3/B/results_75_tests.csv").set_index(geo.index.names).sort_index()
+    assert geo.index.equals(archived.index)
+    fields = ["observed", "null_mean", "p_upper", "q_bh_family"]
+    np.testing.assert_allclose(geo[fields], archived[fields], atol=1e-14, rtol=0)
+    print("Verified question partitions, projection AUROCs, FP16 thresholds, decision changes, steering and geometry families")
 
 
-def main() -> int:
-    known = load_known()
-    with tempfile.TemporaryDirectory() as tmp:
-        subprocess.run([sys.executable, str(ROOT / "paper/make_tables.py"), "--out-dir", tmp], check=True,
-                       stdout=subprocess.DEVNULL)
-        tables, mm_t = compare_tables(Path(tmp), known)
-    claims, mm_c = check_claims(known)
-    mismatches = mm_t + mm_c
-    unexplained = [m for m in mismatches if not m["explained"]]
-    report = {"paper_pdf_sha256": PDF_SHA256, "tables": tables, "in_text_claims": claims,
-              "mismatches": mismatches, "unexplained_mismatches": len(unexplained),
-              "status": "PASS" if not unexplained else "FAIL"}
-    (VER / "verify_report.json").write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n")
-
-    lines = ["# Paper-number verification report", "",
-             f"Paper: `EACL_2026.pdf` (sha256 `{PDF_SHA256}`)", "",
-             f"**Status: {report['status']}** — {sum(t['cells'] for t in tables)} table cells and "
-             f"{len(claims)} in-text claims checked; {len(mismatches)} differences, "
-             f"{len(mismatches) - len(unexplained)} explained in `known_discrepancies.csv`, "
-             f"{len(unexplained)} unexplained.", "",
-             "Regenerated by `python verify/verify_paper_numbers.py`; tables come from "
-             "`paper/make_tables.py`, which reads only `artifacts/` and `data/`.", "",
-             "## Tables", "", "| Table | Status | Cells | Differences (explained) |", "|---|---|---|---|"]
-    for t in tables:
-        lines.append(f"| {t['table']} | {t['status']} | {t['cells']} | {t['mismatches']} ({t.get('explained', 0)}) |")
-    lines += ["", "## In-text claims", "", "| Claim | Location | Expected | Computed | Status |", "|---|---|---|---|---|"]
-    for c in claims:
-        lines.append(f"| {c['claim_id']} | {c['location']} | {c['expected']} | {c['computed']} | {c['status']} |")
-    if mismatches:
-        lines += ["", "## Differences", "", "| Where | Row | Column | Paper | Regenerated | Explained | Note |",
-                  "|---|---|---|---|---|---|---|"]
-        for m in mismatches:
-            lines.append(f"| {m['table']} | {m['row_key']} | {m['column']} | {m['expected']} | {m['generated']} | "
-                         f"{'yes' if m['explained'] else '**NO**'} | {m['note']} |")
-    (VER / "VERIFY_REPORT.md").write_text("\n".join(lines) + "\n")
-    print(f"{report['status']}: {len(mismatches)} differences, {len(unexplained)} unexplained "
-          f"(see verify/VERIFY_REPORT.md)")
-    return 0 if not unexplained else 1
+def auc(pos, neg):
+    return roc_auc_score(np.r_[np.ones(len(pos)), np.zeros(len(neg))], np.r_[pos, neg])
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    assert hashlib.sha256((ROOT / "paper/Beyond Probe Accuracy.pdf").read_bytes()).hexdigest() == PDF_HASH
+    with tempfile.TemporaryDirectory() as tmp:
+        build(Path(tmp))
+        compare_tables(Path(tmp))
+    check_runs()

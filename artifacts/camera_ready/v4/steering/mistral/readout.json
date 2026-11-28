@@ -1,0 +1,44 @@
+{
+  "identity": {
+    "config_sha256": "93cb4bc7d88e854731b22077e1dfc81657d9719a8b5e4abbb5b6d9950a2570e3",
+    "manifest_sha256": "0c846911ee90e03db2b4a9506ca6dbce85d03708264a720986db6e8aa03ef8ee",
+    "direction_sha256": "ba6bd7e1761be5e49dcfea1b676f9c10106779e51256f2763bac1ebc253eef4b",
+    "code_sha256": "8d6c7f485b0654befd3382d40a135631a721fc5fc30583715005ef7409f6da8e",
+    "sample_sha256": "1e7419c171e00790c4d38d08414de3a35b695796a21588925224d86c1cd2e6bc",
+    "model": "mistral",
+    "layer": 13
+  },
+  "yes_strings": [
+    "Yes",
+    "yes",
+    " Yes",
+    " yes",
+    "YES"
+  ],
+  "no_strings": [
+    "No",
+    "no",
+    " No",
+    " no",
+    "NO"
+  ],
+  "yes_ids": [
+    6360,
+    5849,
+    6360,
+    5849,
+    1395
+  ],
+  "no_ids": [
+    2538,
+    1476,
+    2538,
+    1476,
+    8697
+  ],
+  "tokenizer_class": "TokenizersBackend",
+  "winner": "max candidate logit; exp(max-logsumexp full vocabulary)",
+  "system": "You are a helpful assistant.",
+  "canonical_source": "scripts/run_job1_e8_with.py",
+  "qwen14_difference": null
+}

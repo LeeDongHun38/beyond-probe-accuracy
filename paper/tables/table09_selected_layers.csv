@@ -1,0 +1,16 @@
+model,dataset,layer
+Llama-3.1-8B,TriviaQA,16
+Qwen2.5-7B,TriviaQA,18
+Mistral-7B,TriviaQA,13
+Qwen2.5-14B,TriviaQA,29
+Ministral-3-14B,TriviaQA,36
+Llama-3.1-8B,ARC-Easy,14
+Llama-3.1-8B,CommonsenseQA,14
+Qwen2.5-7B,ARC-Easy,18
+Qwen2.5-7B,CommonsenseQA,17
+Mistral-7B,ARC-Easy,15
+Mistral-7B,CommonsenseQA,17
+Qwen2.5-14B,ARC-Easy,30
+Qwen2.5-14B,CommonsenseQA,27
+Ministral-3-14B,ARC-Easy,19
+Ministral-3-14B,CommonsenseQA,15

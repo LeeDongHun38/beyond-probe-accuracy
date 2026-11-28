@@ -1,0 +1,8 @@
+{
+  "policy": "original representative alias exact-or-span",
+  "answers_sha256": "bbc77260e262494ce0b7b8770a6c1e51d252a3761a61e2131738f9234d01594e",
+  "rows": 2491,
+  "generated": 39856,
+  "retained": 39827,
+  "mismatches": []
+}

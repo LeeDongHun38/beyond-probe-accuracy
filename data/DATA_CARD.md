@@ -1,17 +1,18 @@
 # Data card
 
-All data used in the paper. Paths below are relative to `data/`.
+Released data and earlier sensitivity datasets. Paths below are relative to `data/`.
 
 ## Answer-conditional contrastive pairs (Sec. 3.1, 4; App. A.1, Table 3)
 
 | Dataset | Path | Pairs | Train | Held-out | Incorrect answer `a-` |
 |---|---|---:|---:|---:|---|
-| TriviaQA (`rc.nocontext` validation, 5,000 sampled with seed 42) | `pairs/triviaqa/` | 4,999 | 2,499 | 2,500 | Generated with GPT-4.1 |
+| TriviaQA (`rc.nocontext` validation, 5,000 sampled with seed 42) | `pairs/triviaqa/` | 4,999 | 2,508 | 2,491 | Generated with GPT-4.1 |
 | ARC-Easy (all official splits) | `pairs/arc_easy/` | 5,197 | 2,598 | 2,599 | One of three provided distractors (seed 42) |
 | CommonsenseQA (official train + validation) | `pairs/commonsenseqa/` | 10,962 | 5,481 | 5,481 | One of four provided distractors (seed 42) |
 
-Each question contributes one pair and appears in exactly one split (`split` = `train` or `test`;
-`test` is the held-out split). Each dataset folder has `all.json`, `train.json`, `test.json`
+TriviaQA contains 4,406 distinct normalized questions. Seed 42 shuffles the sorted question keys with NumPy. The first 2,203 keys go to training and the remaining 2,203 go to evaluation. All rows for a question stay together, including repeated pairs. ARC-Easy and CommonsenseQA retain the original row splits. The v1 audit found 10 and 1 held-out rows respectively whose normalized question also appears in training.
+
+Each dataset folder has `all.json`, `train.json`, `test.json`
 and `stats.json` (counts and mean answer lengths).
 
 Record fields:
@@ -21,13 +22,13 @@ Record fields:
 - TriviaQA only: `llama_fp16` / `qwen_fp16` hold the models' own greedy answers recorded when the
   pairs were built. Correctness labels for the pair analyses come from `true_answer` / `false_answer`.
 
-## Gold-donor source/style control (App. D.2, Table 21)
+## Gold-donor source/style control (App. D.2, Table 22)
 
 `controls/gold_donor/` replaces each GPT-4.1 TriviaQA distractor with a gold answer
 from another question (same train/held-out split). `source_matching_audit.json` records donor
-selection; `manual_review_sample.csv` is the 100-pair semantic audit sample.
+selection and alias-collision checks for the final split. The completed manual sample for the earlier donor assignments is preserved in the v1 audit archive.
 
-## Self-generated answers (App. D.3-D.5, Tables 22-24)
+## Self-generated answers (App. D.3–D.4, Tables 23–24)
 
 `owngen/` holds short answers sampled from each model under the five-shot generation prompt of
 App. A.2 (temperature 0.8, top-p 0.95, at most 24 new tokens), with one greedy answer per
@@ -39,10 +40,10 @@ excluded, `match_type`), and `p_correct` = correct / (correct + incorrect).
 |---|---|---|---|---|
 | `triviaqa_{llama,mistral,qwen}.json` | each 7-8B model | all 4,999 TriviaQA pair questions (held-out half evaluated) | 16, seed 42 | D.3, D.4 |
 | `arc_easy_qwen.json` | Qwen2.5-7B | 1,000 ARC-Easy questions (`arc_easy_qwen_questions.json`) | 32, seeds 20260725 / 20260726 (two shards) | D.3, D.4 |
-| `span_control_{llama,mistral,qwen}.json` | each 7-8B model | 2,500 TriviaQA questions disjoint from the pair data (`span_control_questions.json`) | 16, seed 20260728 | D.5 |
+| `span_control_{llama,mistral,qwen}.json` | each 7-8B model | 2,500 TriviaQA questions disjoint from the pair data (`span_control_questions.json`) | 16, seed 20260728 | Earlier answer-span control |
 
 - TriviaQA answer files were labeled with span matching enabled (`metadata.allow_span_match`);
-  the readouts use exact-match positives only where the protocol requires it (D.5).
+  Tables 23–24 retain answers labeled correct or incorrect under the original representative-alias policy. The separate historical span-control dataset used exact matching with full aliases.
 - `arc_easy_qwen_questions.json` lists the selected questions in shard order and the 200 pilot
   question ids that were excluded before selection (`probedir.controls.select_arc_owngen_questions`
   reproduces the selection). `arc_easy_qwen_protocol.md` is the note written before generation.

@@ -1,0 +1,39 @@
+{
+  "model": "llama",
+  "direction": "D5",
+  "C": 1.0,
+  "auc": 0.7861236622052153,
+  "align": 0.13181605001377075,
+  "stab": 0.0958589837706146,
+  "halves": [
+    {
+      "seed": 42,
+      "cosine": 0.1203612697392265,
+      "warnings": []
+    },
+    {
+      "seed": 123,
+      "cosine": 0.10025411440482077,
+      "warnings": []
+    },
+    {
+      "seed": 456,
+      "cosine": 0.08843654988051702,
+      "warnings": []
+    },
+    {
+      "seed": 789,
+      "cosine": 0.09233437742305045,
+      "warnings": []
+    },
+    {
+      "seed": 999,
+      "cosine": 0.0779086074054582,
+      "warnings": []
+    }
+  ],
+  "warnings": [],
+  "n_iter": 128,
+  "manifest_sha256": "0c846911ee90e03db2b4a9506ca6dbce85d03708264a720986db6e8aa03ef8ee",
+  "source_code_sha256": "54c3d6cc314d6ee58c09a52262f5d95dbf480dcb79c343b29d58a29b80c7aa28"
+}

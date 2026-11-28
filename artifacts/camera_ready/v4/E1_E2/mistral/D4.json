@@ -1,0 +1,39 @@
+{
+  "model": "mistral",
+  "direction": "D4",
+  "C": 0.0001,
+  "auc": 0.8558642506036584,
+  "align": 0.7304221663130911,
+  "stab": 0.7377150764778163,
+  "halves": [
+    {
+      "seed": 42,
+      "cosine": 0.7468676151954896,
+      "warnings": []
+    },
+    {
+      "seed": 123,
+      "cosine": 0.7409579185354104,
+      "warnings": []
+    },
+    {
+      "seed": 456,
+      "cosine": 0.7354339933201424,
+      "warnings": []
+    },
+    {
+      "seed": 789,
+      "cosine": 0.7320335369555155,
+      "warnings": []
+    },
+    {
+      "seed": 999,
+      "cosine": 0.7332823183825234,
+      "warnings": []
+    }
+  ],
+  "warnings": [],
+  "n_iter": 19,
+  "manifest_sha256": "0c846911ee90e03db2b4a9506ca6dbce85d03708264a720986db6e8aa03ef8ee",
+  "source_code_sha256": "54c3d6cc314d6ee58c09a52262f5d95dbf480dcb79c343b29d58a29b80c7aa28"
+}

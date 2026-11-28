@@ -1,0 +1,16 @@
+model,dataset,auc,stab
+Llama-3.1-8B,TriviaQA,.832,.958
+Llama-3.1-8B,ARC-Easy,.931,.982
+Llama-3.1-8B,CommonsenseQA,.838,.987
+Qwen2.5-7B,TriviaQA,.825,.956
+Qwen2.5-7B,ARC-Easy,.962,.989
+Qwen2.5-7B,CommonsenseQA,.894,.989
+Mistral-7B,TriviaQA,.827,.963
+Mistral-7B,ARC-Easy,.923,.989
+Mistral-7B,CommonsenseQA,.856,.992
+Qwen2.5-14B,TriviaQA,.885,.980
+Qwen2.5-14B,ARC-Easy,.975,.992
+Qwen2.5-14B,CommonsenseQA,.895,.991
+Ministral-3-14B,TriviaQA,.834,.973
+Ministral-3-14B,ARC-Easy,.965,.992
+Ministral-3-14B,CommonsenseQA,.862,.989

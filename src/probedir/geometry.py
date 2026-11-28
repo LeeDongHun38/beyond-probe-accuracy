@@ -18,11 +18,15 @@ Differential pair error
 Statistics, per k
     ``R_k = ||E U_k||_F^2 / ||E||_F^2`` is the share of differential error
     energy inside ``U_k``. ``R_inc,k = R_k - R_1`` is the share captured by the
-    contrastive axes beyond ``v`` (Eq. 8; the primary test).
+    contrastive axes beyond ``v`` (the incremental statistic).
     ``M_k = ||mean(E) U_k||^2`` and ``A_k = M_k / ||mean(E)||^2`` are the
     auxiliary mean-error statistics (App. E.3).
 
-Activation-matched null (B = 1,000)
+Camera-ready label-permutation null (B = 10,000)
+    Each training pair independently swaps labels. The MD and 49 residual PCs are
+    refitted per permutation. Table 26 tests R1 and R50 jointly and R50-R1 separately.
+
+Review-version activation-matched null (B = 1,000)
     Each draw samples ``k_max - 1`` rows, without replacement, from the
     FP16-training residual pool (centred pair differences with ``v`` removed).
     It builds ``[v, q_1, ...]`` by float64 two-pass QR in the ambient hidden
@@ -275,7 +279,81 @@ def collect_families() -> list[dict]:
     return rows
 
 
+def permutation_axes(contrasts, seed):
+    mean = contrasts.mean(axis=0)
+    md = mean / np.linalg.norm(mean)
+    residual = contrasts - mean
+    residual -= np.outer(residual @ md, md)
+    pca = PCA(n_components=49, svd_solver="randomized", random_state=seed,
+              n_oversamples=20, iterated_power=7)
+    v = pca.fit(residual).components_.T
+    v -= np.outer(md, md @ v)
+    v = np.linalg.qr(v, mode="reduced")[0]
+    if np.max(np.abs(md @ v)) > 1e-10:
+        raise RuntimeError("PCA basis leaks into fitted MD")
+    return md, v
+
+
+def permutation_energies(errors, denominators, md, v):
+    output = np.empty((len(errors), len(KS)), dtype=np.float64)
+    for j, error in enumerate(errors):
+        r1 = np.square(error @ md).sum() / denominators[j]
+        pc = np.square(error @ v).sum(axis=0)
+        output[j, 0] = r1
+        output[j, 1:] = r1 + np.cumsum(pc)[np.asarray(KS[1:]) - 2] / denominators[j]
+    return output
+
+
+def run_permutation(model, dataset, n_permutations=10000):
+    """Refit MD and 49 residual PCs for every within-pair label swap (Table 26)."""
+    from .config import Cell, results_dir
+    from .io import HiddenCache, cache_path
+    from .probes import training_questions
+
+    if n_permutations < 1:
+        raise ValueError("n_permutations must be positive")
+    panel = [("qwen2.5-14b", "triviaqa"), ("qwen2.5-14b", "arc_easy"), ("qwen2.5-14b", "commonsenseqa"),
+             ("ministral-3-14b", "arc_easy"), ("ministral-3-14b", "commonsenseqa")]
+    if (model, dataset) not in panel:
+        raise ValueError("The published label-permutation panel covers five 14B model–dataset cells")
+    cell = Cell(model, dataset)
+    fp = HiddenCache.load(cache_path(model, dataset))
+    training_questions(fp, dataset)
+    tp, tm = fp.layer(cell.layer, "train")
+    contrasts = (tp.astype(np.float32) - tm.astype(np.float32)).astype(np.float64)
+    ep, em = fp.layer(cell.layer, "test")
+    ids = [rid for rid, split in zip(fp.ids, fp.split) if split == "test"]
+    errors = []
+    for precision in QUANTIZATIONS:
+        quant = HiddenCache.load(cache_path(model, dataset, precision))
+        if ids != [rid for rid, split in zip(quant.ids, quant.split) if split == "test"]:
+            raise ValueError(f"Held-out IDs differ at {precision}")
+        qp, qm = quant.layer(cell.layer, "test")
+        errors.append(differential_error(ep, em, qp, qm))
+    denominators = [np.square(error).sum() for error in errors]
+    if min(denominators) <= 0:
+        raise ValueError("Zero held-out error energy")
+    seed = 2026091801
+    rng = np.random.default_rng(seed + panel.index((model, dataset)))
+    observed = permutation_energies(errors, denominators, *permutation_axes(contrasts, seed))
+    null = np.empty((n_permutations, *observed.shape))
+    for j in range(n_permutations):
+        signs = rng.choice([-1., 1.], size=len(contrasts))
+        axes = permutation_axes(contrasts * signs[:, None], seed)
+        null[j] = permutation_energies(errors, denominators, *axes)
+    dest = results_dir() / "label_permutation" / model / dataset
+    dest.mkdir(parents=True, exist_ok=True)
+    np.savez_compressed(dest / "panel.npz", observed=observed, null=null, ks=KS,
+                        layer=cell.layer, quantizations=QUANTIZATIONS)
+
+
 def add_cli(subparsers: argparse._SubParsersAction) -> None:
+    panel = subparsers.add_parser("geometry-permutation", help="refit the label-permuted PCA panel (Table 26)")
+    panel.add_argument("--model", required=True)
+    panel.add_argument("--dataset", required=True)
+    panel.add_argument("--n-permutations", type=int, default=10000)
+    panel.set_defaults(func=lambda a: run_permutation(a.model, a.dataset, a.n_permutations))
+
     p = subparsers.add_parser("geometry", help="quantization-error geometry and activation-matched null (Sec. 3.5)")
     p.add_argument("--model", required=True)
     p.add_argument("--dataset", required=True)

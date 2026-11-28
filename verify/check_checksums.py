@@ -2,7 +2,7 @@
 """Integrity checks for the release.
 
 1. Every file listed in RELEASE_MANIFEST.csv exists and matches its sha256.
-2. The portable statistics package (artifacts/stats_package) rebuilds all of
+2. The review-version statistics package (artifacts/stats_package) rebuilds all of
    its BH-family CSVs byte-for-byte from its raw null draws
    (portable_recalculate.py --verify-reference), into a temporary directory.
 

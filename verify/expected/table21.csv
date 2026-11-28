@@ -1,5 +1,16 @@
-analysis,model,layer,original,gold_donor
-answer_only_style,Gold vs. incorrect answer,-,.5621,.5001
-hidden_state_transfer,Llama-3.1-8B,14,.8296,.9808
-hidden_state_transfer,Qwen2.5-7B,18,.8277,.9836
-hidden_state_transfer,Mistral-7B,13,.8237,.9843
+model,dataset,n_heldout_pairs,n_small,n_large,g_temp,g_len
+Llama-3.1-8B,TriviaQA,2491,1980,511,.0289,.0406
+Llama-3.1-8B,ARC-Easy,2599,2030,569,.0220,.0159
+Llama-3.1-8B,CommonsenseQA,5481,4919,562,.0100,.0002
+Qwen2.5-7B,TriviaQA,2491,1979,512,.0113,.0123
+Qwen2.5-7B,ARC-Easy,2599,2029,570,.0101,.0085
+Qwen2.5-7B,CommonsenseQA,5481,4915,566,.0047,.0041
+Mistral-7B,TriviaQA,2491,1854,637,.0239,.0122
+Mistral-7B,ARC-Easy,2599,1802,797,.0130,.0102
+Mistral-7B,CommonsenseQA,5481,4558,923,.0120,.0174
+Qwen2.5-14B,TriviaQA,200,157,43,.0066,.0338
+Qwen2.5-14B,ARC-Easy,200,158,42,.0019,.0146
+Qwen2.5-14B,CommonsenseQA,200,100,100,.0055,.0323
+Ministral-3-14B,TriviaQA,200,155,45,.0335,.0379
+Ministral-3-14B,ARC-Easy,200,157,43,.0041,.0119
+Ministral-3-14B,CommonsenseQA,200,174,26,.0040,.0205

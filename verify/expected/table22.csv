@@ -1,4 +1,5 @@
-model,layer,scored,correct,incorrect,excl,auroc,ci_low,ci_high,random_p
-Qwen2.5-7B,18,"39,960","19,282","20,678",40,.8271,.8114,.8412,.0010
-Llama-3.1-8B,14,"39,979","24,301","15,678",21,.7829,.7660,.8009,.0010
-Mistral-7B,13,"39,890","25,196","14,694",110,.7330,.7147,.7514,.0010
+model,original,gold_donor
+Answer-only style,.5254,.4999
+Llama-3.1-8B,.8315,.9785
+Qwen2.5-7B,.8251,.9858
+Mistral-7B,.8272,.9865

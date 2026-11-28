@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "probedir"
 version = "1.0.0"
-description = "Estimation stability, intervention specificity, and quantization geometry of linear probe directions (EACL 2026)"
+description = "Estimation stability, intervention specificity, and quantization geometry of linear probe directions (EACL 2027)"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }

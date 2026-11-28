@@ -481,13 +481,13 @@ def heldout_auroc(h_plus: np.ndarray, h_minus: np.ndarray, direction: np.ndarray
 
 def gold_donor_control(direction: np.ndarray, original: tuple[np.ndarray, np.ndarray],
                        control: tuple[np.ndarray, np.ndarray]) -> dict:
-    """Table 21 hidden-state transfer: the original TriviaQA MD direction (no refit) scored on the
+    """Table 22 hidden-state transfer: the original TriviaQA MD direction (no refit) scored on the
     held-out original pairs and on held-out gold-donor pairs (each a (h_plus, h_minus) tuple)."""
     return {"original_auroc": heldout_auroc(*original, direction),
             "gold_donor_transfer_auroc": heldout_auroc(*control, direction)}
 
 
-def semantic_audit(path: Path = GOLD_DONOR_DIR / "manual_review_sample.csv") -> dict:
+def semantic_audit(path: Path = REPO_ROOT / "artifacts/camera_ready/v1/review_split_donor_sample.csv") -> dict:
     import csv
 
     rows = list(csv.DictReader(Path(path).open(newline="")))
@@ -519,6 +519,26 @@ def pre_answer_readout(h: np.ndarray, p_correct_values: Sequence, ids: np.ndarra
     q = np.asarray(ids)[valid]
     return {"n": int(len(y)), "spearman": spearman(x, y),
             "spearman_ci": bootstrap_ci_python(q, lambda i: spearman(x[i], y[i]), n_boot, seed)}
+
+
+def triviaqa_intervals(post_scores, labels, post_keys, pre_scores, outcomes, pre_keys, n_boot=N_BOOT):
+    """Shared question multiplicities for Tables 23 and 24, conditional on the direction."""
+    from sklearn.metrics import roc_auc_score
+
+    keys, pre_group = np.unique(pre_keys, return_inverse=True)
+    group = {key: i for i, key in enumerate(keys)}
+    post_group = np.asarray([group[key] for key in post_keys])
+    rng = np.random.default_rng(42)
+    aucs, correlations = [], []
+    for _ in range(n_boot):
+        counts = np.bincount(rng.integers(len(keys), size=len(keys)), minlength=len(keys))
+        weights = counts[post_group]
+        if weights[labels == 1].sum() and weights[labels == 0].sum():
+            aucs.append(roc_auc_score(labels, post_scores, sample_weight=weights))
+        idx = np.repeat(np.arange(len(outcomes)), counts[pre_group])
+        idx = idx[np.isfinite(outcomes[idx])]
+        correlations.append(spearman(pre_scores[idx], outcomes[idx]))
+    return _percentile_ci(aucs), _percentile_ci(correlations)
 
 
 def project_many(h: np.ndarray, directions: np.ndarray, device: str = "cpu") -> np.ndarray:
@@ -658,7 +678,7 @@ def _load_direction(args) -> np.ndarray:
     from .probes import md_direction
 
     cache = HiddenCache.load(cache_path(args.model, args.dataset, "fp16"))
-    return md_direction(*cache.layer(args.layer, "train"))
+    return md_direction(*cache.layer(_layer(args), "train"))
 
 
 def _layer(args) -> int:
@@ -674,7 +694,7 @@ def _cmd_style(args) -> None:
     ctrl = json.loads((GOLD_DONOR_DIR / "all.json").read_text())
     out: dict[str, Any] = {"style_classifier": {"original": style_classifier_auroc(orig),
                                                 "gold_donor": style_classifier_auroc(ctrl)},
-                           "semantic_audit": semantic_audit()}
+                           "donor_audit": json.loads((GOLD_DONOR_DIR / "source_matching_audit.json").read_text())}
     for model in args.models:
         args.model, args.dataset = model, "triviaqa"
         layer = _layer(args)
@@ -702,6 +722,8 @@ def _cmd_readout(args) -> None:
     from .models import load_model
 
     records = load_records(Path(args.answers))
+    if args.dataset == "triviaqa" and not args.span:
+        records = [r for r in records if r["split"] == "test"]
     layer = _layer(args)
     v = _load_direction(args)
     model, tok = load_model(args.model)
@@ -716,11 +738,30 @@ def _cmd_readout(args) -> None:
             out[p] = span_readout(a["h"][p], np.asarray(a["labels"]), np.asarray(a["ids"]), v)
     else:
         seed = BOOT_SEED.get(args.dataset, 42)
-        out["answer"] = self_readout(a["h"]["last"], np.asarray(a["labels"]), np.asarray(a["ids"]),
-                                     np.asarray(a["split"]), v, seed=seed)
-        pre = st["pre"]
-        out["pre_answer"] = pre_answer_readout(pre["h"], pre["p_correct"], np.asarray(pre["ids"]),
-                                               np.asarray(pre["split"]), v, seed=seed)
+        if args.dataset == "triviaqa":
+            from .data import question_key
+            lookup = {rec["id"]: question_key(rec["question"]) for rec in records}
+            mask = np.asarray(a["split"]) == "test"
+            labels = np.asarray(a["labels"])[mask]
+            post = np.asarray(a["h"]["last"])[mask] @ v.astype(np.float64)
+            post_keys = [lookup[k] for k in np.asarray(a["ids"])[mask]]
+            pre = st["pre"]
+            mask = np.asarray(pre["split"]) == "test"
+            scores = np.asarray(pre["h"])[mask] @ v.astype(np.float64)
+            outcomes = np.asarray(pre["p_correct"], dtype=float)[mask]
+            keys = [lookup[k] for k in np.asarray(pre["ids"])[mask]]
+            auc_ci, rho_ci = triviaqa_intervals(post, labels, post_keys, scores, outcomes, keys)
+            valid = np.isfinite(outcomes)
+            out["answer"] = dict(n=len(labels), n_positive=int(labels.sum()), n_negative=int((labels == 0).sum()),
+                                 auroc=_auc(labels, post), auroc_ci=auc_ci)
+            out["pre_answer"] = dict(n=int(valid.sum()), spearman=spearman(scores[valid], outcomes[valid]),
+                                     spearman_ci=rho_ci)
+        else:
+            out["answer"] = self_readout(a["h"]["last"], np.asarray(a["labels"]), np.asarray(a["ids"]),
+                                         np.asarray(a["split"]), v, seed=seed)
+            pre = st["pre"]
+            out["pre_answer"] = pre_answer_readout(pre["h"], pre["p_correct"], np.asarray(pre["ids"]),
+                                                   np.asarray(pre["split"]), v, seed=seed)
         if args.random_control:
             out["random_directions"] = random_direction_pvalues(
                 v, {"h": a["h"]["last"], "labels": a["labels"], "split": a["split"]},

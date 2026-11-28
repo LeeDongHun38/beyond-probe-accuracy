@@ -4,15 +4,16 @@ Commands, in pipeline order:
 
   pairs             build contrastive pairs / gold-donor control       Sec. 4, App. A.1, D.2
   extract           answer-final hidden states (FP16 or quantized)     Sec. 3.1, App. B.1
-  probes            layer selection, MD direction, split-half          Sec. 3.2-3.3, Tables 10, 12
+  probes            layer selection, MD direction, split-half          Sec. 3.2-3.3, Tables 9, 11
   estimator-sweep   MD vs. L2-LR directions at the selected layer      Table 1, Tables 13-14
   steer             bidirectional steering, P(Yes) readout             Sec. 3.3-3.4, Tables 15-16
-  null-family       random-direction specificity tests + BH            App. C.4, Tables 17-19
+  null-family       random-direction specificity tests + BH            App. C.4, Tables 18-20
   transfer          fixed FP16 direction on quantized models           Table 2, App. E.1, E.3
-  geometry          quantization-error geometry + matched null         Sec. 3.5, Fig. 4, App. E.2
-  geometry-bh       BH-FDR over the geometry test families             Tables 26-28
-  template-control  prompt-template and input-length control           App. D.1, Table 20
-  controls          validity controls                                  App. D.2-D.6, Tables 21-24
+  geometry-permutation  refitted within-pair label-permutation panel   Fig. 4, Table 26
+  geometry          review-version activation-matched null
+  geometry-bh       review-version activation-matched BH families
+  template-control  prompt-template and input-length control           App. D.1, Table 21
+  controls          validity controls                                  App. D.2-D.4 and earlier sensitivity analyses
 """
 from __future__ import annotations
 

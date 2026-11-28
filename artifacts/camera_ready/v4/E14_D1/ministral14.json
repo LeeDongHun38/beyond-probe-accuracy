@@ -1,0 +1,21 @@
+{
+  "template_aurocs": [
+    0.820875,
+    0.82985,
+    0.8193,
+    0.8528249999999999,
+    0.84495
+  ],
+  "template_range": 0.033524999999999916,
+  "length": {
+    "median": 1.0,
+    "small_n": 155,
+    "large_n": 45,
+    "small_auc": 0.8290530697190427,
+    "large_auc": 0.7911111111111111,
+    "gap": 0.03794195860793159
+  },
+  "auroc_policy": "canonical max(AUC,1-AUC); also save signed scores; no direction refit",
+  "new_unique_forwards": 2000,
+  "gpu_wall_seconds": 94.28602051734924
+}

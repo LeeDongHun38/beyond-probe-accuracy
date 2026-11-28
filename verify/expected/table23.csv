@@ -1,5 +1,4 @@
-model,dataset,layer,valid,total,gen_per_question,rho,ci_low,ci_high,random_exc,random_p
-Qwen2.5-7B,TriviaQA,18,"2,499","2,500",16,.3568,.3203,.3903,1,.0020
-Llama-3.1-8B,TriviaQA,14,"2,500","2,500",16,.3110,.2753,.3450,1,.0020
-Mistral-7B,TriviaQA,13,"2,500","2,500",16,.1338,.0922,.1715,52,.0529
-Qwen2.5-7B,ARC-Easy,18,500,500,32,.0560,-.0322,.1395,-,-
+model,layer,n_retained_answers,n_positive,incorrect,excluded,auc,auc_ci_low,auc_ci_high,auc_random_p
+Qwen2.5-7B,18,39827,19141,20686,29,.8215,.8045,.8374,.0010
+Llama-3.1-8B,16,39829,24416,15413,27,.7859,.7659,.8042,.0010
+Mistral-7B,13,39727,25220,14507,129,.7221,.7009,.7408,.0010

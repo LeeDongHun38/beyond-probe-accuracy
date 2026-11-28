@@ -36,9 +36,8 @@ from .io import HiddenCache, cache_path, write_json
 
 YES_CANDIDATES = ("Yes", "yes", " Yes", " yes", "YES")
 NO_CANDIDATES = ("No", "no", " No", " no", "NO")
-# Extended candidate sets, used only by the Qwen2.5-14B fixed-alpha and random-direction
-# runs (Tables 15, 17, 18). Since P(Yes) is the probability of the highest-logit
-# candidate, extra candidates only matter when one of them outscores every Yes/No token.
+# Qwen2.5-14B uses the expanded readout for all new TriviaQA conditions
+# and for the fixed-alpha runs on the other datasets.
 EXTENDED_YES = ("Yes", "yes", " Yes", " yes", "YES", "True", "true", " True", "Correct", "correct")
 EXTENDED_NO = ("No", "no", " No", " no", "NO", "False", "false", " False", "Incorrect", "incorrect")
 
@@ -313,7 +312,7 @@ def run_cell(model_key: str, dataset: str, alpha: float | None = None, r: float 
     Exactly one of ``alpha`` or ``r`` is given; with ``r`` the coefficient is
     ``r * median baseline residual norm`` measured on the same seeds' baselines.
     ``system=False`` reproduces the earlier no-system-prompt Mistral-7B TriviaQA run
-    reported in Tables 15-16.
+    from the review-version experiments.
     """
     from .models import load_model
     from .nulls import cell_random_directions
@@ -322,7 +321,7 @@ def run_cell(model_key: str, dataset: str, alpha: float | None = None, r: float 
     cell = Cell(model_key, dataset)
     seeds = list(seeds or seeds_for(cell))
     if extended_candidates is None:
-        extended_candidates = model_key == "qwen2.5-14b" and r is None
+        extended_candidates = model_key == "qwen2.5-14b" and (dataset == "triviaqa" or r is None)
     cache = HiddenCache.load(cache_path(model_key, dataset, "fp16"))
     v = md_direction(*cache.layer(cell.layer, "train")).astype(np.float32)
     model, tokenizer = load_model(model_key, precision)
@@ -348,7 +347,7 @@ def run_cell(model_key: str, dataset: str, alpha: float | None = None, r: float 
 
     directions = {"probe": v}
     if random_null or sensitivity_null:
-        rand = cell_random_directions(model_key, dataset, v.shape[0], sensitivity=sensitivity_null)
+        rand = cell_random_directions(model_key, dataset, v.shape[0], sensitivity=sensitivity_null or (dataset == "triviaqa" and r == 0.05))
         directions.update({f"R{i:03d}": rand[i] for i in range(len(rand))})
 
     seed_effects = []

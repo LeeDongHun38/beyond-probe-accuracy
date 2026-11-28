@@ -1,0 +1,2 @@
+# Preserve original line endings in CSV manifests and measured outputs.
+*.csv -text whitespace=cr-at-eol

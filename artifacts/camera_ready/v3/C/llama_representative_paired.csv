@@ -1,0 +1,3 @@
+model,side,comparison,r,difference,ci_low,ci_high
+llama,false,normalized scalar RMS lambda1 minus MD,0.05,-0.01373919177652204,-0.014882343323152932,-0.01264337555635018
+llama,true,normalized scalar RMS lambda1 minus MD,0.05,0.011659809383513676,0.010789408917441592,0.012502212203149109

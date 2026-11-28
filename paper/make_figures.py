@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate Figures 2-4 of the EACL 2026 paper from released artifacts.
+"""Regenerate Figures 2-4 of the EACL 2027 paper from released artifacts.
 
 Run from the repository root:
 
@@ -14,7 +14,6 @@ and is not regenerated here.
 """
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 import matplotlib
@@ -27,8 +26,8 @@ from matplotlib.lines import Line2D  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 ART = ROOT / "artifacts"
-SEC = ART / "paper_sections"
-SRC = ART / "sources" / "results"
+FINAL = ART / "camera_ready"
+from make_tables import fixed_null, geometry_panel
 OUT = ROOT / "paper" / "figures"
 
 # Colour-blind safe palette (same hues as the published figures).
@@ -47,29 +46,14 @@ MODEL_ALIASES = {
     "qwen": "Qwen-7B", "qwen2.5_7b": "Qwen-7B",
     "Mistral-7B": "Mistral-7B", "Mistral-7B-Instruct-v0.3": "Mistral-7B", "mistral": "Mistral-7B",
     "mistral_7b_v0.3": "Mistral-7B",
-    "Qwen2.5-14B": "Qwen-14B", "Qwen2.5-14B-Instruct": "Qwen-14B", "qwen2.5_14b": "Qwen-14B",
+    "Qwen2.5-14B": "Qwen-14B", "Qwen2.5-14B-Instruct": "Qwen-14B", "qwen2.5_14b": "Qwen-14B", "qwen14": "Qwen-14B", "qwen14b": "Qwen-14B",
     "Ministral-3-14B": "Ministral-14B", "Ministral-3-14B-Instruct": "Ministral-14B",
-    "ministral3_14b": "Ministral-14B", "ministral_3_14b": "Ministral-14B",
+    "ministral3_14b": "Ministral-14B", "ministral_3_14b": "Ministral-14B", "ministral14": "Ministral-14B", "ministral14b": "Ministral-14B",
 }
 
 
 def norm_model(name: str) -> str:
     return MODEL_ALIASES[name]
-
-
-def read_csv_tolerant(path: Path) -> pd.DataFrame:
-    """Read a CSV whose free-text last column may contain unquoted commas.
-
-    ``d0_d5_canonical.csv`` has two rows (Qwen D4/D5) whose ``notes`` field
-    contains an unquoted comma; overflow fields are re-joined into the last column.
-    """
-    import csv
-
-    with open(path, newline="") as fh:
-        rows = list(csv.reader(fh))
-    header, n = rows[0], len(rows[0])
-    fixed = [r[: n - 1] + [",".join(r[n - 1:])] if len(r) > n else r for r in rows[1:]]
-    return pd.DataFrame(fixed, columns=header)
 
 
 def style() -> None:
@@ -90,34 +74,6 @@ def save(fig: plt.Figure, stem: str) -> None:
 
 
 # --------------------------------------------------------------------------
-# Shared inputs
-# --------------------------------------------------------------------------
-def corrected_qwen7b_triviaqa() -> dict:
-    """Corrected Qwen2.5-7B TriviaQA L18 MD effects (offset-corrected extraction).
-
-    The C3/C4 summary CSVs still carry the legacy Qwen-7B TriviaQA MD effect
-    (+.126/-.178); the paper figures use the corrected re-execution instead.
-    The random-direction null is direction-independent of the probe and is
-    identical in both runs (max .01858/.02028).
-    """
-    by_seed = pd.read_csv(SEC / "C3_intervention" / "c3_qwen_corrected_triviaqa_by_seed.csv")
-    agg = by_seed.groupby("condition")[["delta_p_false", "delta_p_true"]].mean()
-    summary = json.loads((SRC / "qwen7b_corrected_l18_c3c4_rerun_v1" / "analysis" / "summary.json").read_text())
-    nulls = {row["side"]: row for row in summary["job3_null_distribution"]}
-    out = {
-        "fixed_false": agg.loc["fixed_alpha_4", "delta_p_false"],
-        "fixed_true": agg.loc["fixed_alpha_4", "delta_p_true"],
-        "matched_false": agg.loc["matched_r_0.10", "delta_p_false"],
-        "matched_true": agg.loc["matched_r_0.10", "delta_p_true"],
-        "null_max_false": nulls["false"]["random_T_max"],
-        "null_max_true": nulls["true"]["random_T_max"],
-    }
-    assert np.isclose(out["fixed_false"], nulls["false"]["T_probe"])
-    assert np.isclose(-out["fixed_true"], nulls["true"]["T_probe"])
-    return out
-
-
-# --------------------------------------------------------------------------
 # Figure 2: estimator-induced direction paths on TriviaQA at alpha = 4
 # --------------------------------------------------------------------------
 def figure2() -> None:
@@ -125,43 +81,13 @@ def figure2() -> None:
     markers = {"MD": "o", "1e-4": "s", "1e-2": "D", "1": "^"}
     labels = {"MD": "MD", "1e-4": r"Raw $C=10^{-4}$", "1e-2": r"Raw $C=10^{-2}$", "1": r"Raw $C=1$"}
 
-    c2 = SEC / "C2_estimator_sweep"
-    d05 = read_csv_tolerant(c2 / "d0_d5_canonical.csv")
-    d05 = d05[d05.direction_id.isin(["D0", "D1", "D2", "D3"])].copy()
-    d05["est"] = d05.direction_id.map({"D0": "MD", "D1": "1e-4", "D2": "1e-2", "D3": "1"})
-    d05["model"] = d05.model.map(norm_model)
-    raw = pd.read_csv(c2 / "raw_lr_sweep_completed.csv", dtype={"C": str})
-    raw = raw[raw.dataset == "TriviaQA"].copy()
-    raw["est"] = raw.C.map({"MD": "MD", "0.0001": "1e-4", "0.01": "1e-2", "1.0": "1"})
-    raw["model"] = raw.model.map(norm_model)
-
-    # 7-8B cells: canonical explicit-system D0-D3 table; 14B cells: raw-LR sweep.
-    rows = pd.concat([
-        d05[d05.model.isin(["Llama-8B", "Qwen-7B", "Mistral-7B"])],
-        raw[raw.model.isin(["Qwen-14B", "Ministral-14B"])],
-    ])[["model", "est", "cos_with_md", "delta_p_false", "delta_p_true"]]
-    # The two sources must agree on the shared (corrected) Qwen-7B cell. The LR rows are
-    # independent re-fits of the same estimator (MD rows are identical), so agreement is
-    # checked to 1e-3, well below plotting resolution.
-    q_a = d05[d05.model == "Qwen-7B"].set_index("est")
-    q_b = raw[raw.model == "Qwen-7B"].set_index("est")
-    for col in ["cos_with_md", "delta_p_false", "delta_p_true"]:
-        assert np.allclose(q_a.loc[est_order, col].astype(float), q_b.loc[est_order, col].astype(float), atol=1e-3), col
-
-    # Residual-relative magnitude r = alpha / median ||h|| at the evaluator's final prefill
-    # position (Eq. 7). 7-8B: explicit-system Job-1 baselines; 14B: canonical 15-cell norms.
-    j1 = json.loads((SRC / "gpu_queue_explicit_system_v1" / "job1_e8_with" / "analysis" /
-                     "with_residual_norm_medians.json").read_text())
-    norms = {norm_model(k): v["pooled_median_residual_norm"] for k, v in j1.items()}
-    cn = json.loads((SRC / "canonical_residual_norms_15cell" / "analysis" /
-                     "canonical_residual_norms_15cell.json").read_text())
-    for c in cn["cells"]:
-        if c["dataset"] == "triviaqa" and norm_model(c["model"]) in ("Qwen-14B", "Ministral-14B"):
-            norms[norm_model(c["model"])] = c["median_pooled"]
-    r_vals = {m: ALPHA / norms[m] for m in MODELS}
-    paper_r = {"Llama-8B": ".469", "Qwen-7B": ".051", "Mistral-7B": ".845", "Qwen-14B": ".035", "Ministral-14B": ".037"}
-    for m in MODELS:
-        assert f"{r_vals[m]:.3f}"[1:] == paper_r[m], (m, r_vals[m])
+    points = pd.read_csv(FINAL / "v4/figures/figure2_input.csv", dtype={"side": str})
+    points["model"] = points.model.map(norm_model)
+    points["est"] = points.direction.map(dict(zip(["D0", "D1", "D2", "D3"], est_order)))
+    r_vals = points.groupby("model").r.first()
+    rows = points.pivot(index=["model", "est", "alignment"], columns="side", values="delta_p")
+    rows = rows.reset_index().rename(columns={"alignment": "cos_with_md", "false": "delta_p_false",
+                                             "true": "delta_p_true"})
 
     fig, axes = plt.subplots(1, 5, figsize=(TEXTWIDTH_IN, 2.25), sharey=True)
     for ax, m in zip(axes, MODELS):
@@ -198,22 +124,10 @@ def figure2() -> None:
 # --------------------------------------------------------------------------
 def figure3() -> None:
     ds_colors = {"TriviaQA": BLUE, "ARC-Easy": ORANGE, "CommonsenseQA": GREEN}
-    qc = corrected_qwen7b_triviaqa()
-
-    c4 = pd.read_csv(SEC / "C4_random_direction_null" / "c4_random_direction_summary.csv")
+    c4 = fixed_null().rename(columns={"md_effect": "md_signed"})
+    c4["md_abs"] = c4.md_signed.abs()
     c4["model"] = c4.model.map(norm_model)
-    c4["side"] = c4.side.astype(str).map({"False": "false", "True": "true"})
-    md = c4.md_delta_p.astype(float).copy()
-    nullmax = c4.null_max.astype(float).copy()
-    is_qtqa = (c4.model == "Qwen-7B") & (c4.dataset == "TriviaQA")
-    for side in ("false", "true"):
-        sel = is_qtqa & (c4.side == side)
-        md[sel] = qc[f"fixed_{side}"]
-        assert np.isclose(nullmax[sel].item(), qc[f"null_max_{side}"]), "Qwen-7B null must match corrected run"
-    c4["md_abs"] = md.abs()
-    c4["md_signed"] = md
-    c4["null_max"] = nullmax
-
+    c4["dataset"] = c4.dataset.map({"triviaqa": "TriviaQA", "arc_easy": "ARC-Easy", "commonsenseqa": "CommonsenseQA"})
     expected_sign = np.where(c4.side == "false", c4.md_signed > 0, c4.md_signed < 0)
     assert expected_sign.all() and len(c4) == 30, "paper: all 30 sides have the expected sign"
     above = int((c4.md_abs > c4.null_max).sum())
@@ -221,13 +135,7 @@ def figure3() -> None:
     exc = c4[c4.md_abs <= c4.null_max]
     assert list(zip(exc.model, exc.dataset, exc.side)) == [("Mistral-7B", "TriviaQA", "false")]
 
-    c3 = pd.read_csv(SEC / "C3_intervention" / "c3_full_intervention_summary.csv")
-    c3["model"] = c3.model.map(norm_model)
-    q = (c3.model == "Qwen-7B") & (c3.dataset == "TriviaQA")
-    for side in ("false", "true"):
-        c3.loc[q, f"fixed_delta_p_{side}"] = qc[f"fixed_{side}"]
-        c3.loc[q, f"matched_delta_p_{side}"] = qc[f"matched_{side}"]
-    assert np.allclose(c3.matched_achieved_r, 0.10)
+    c3 = pd.read_csv(FINAL / "v4/figures/figure3b_input.csv", dtype={"side": str})
 
     fig, (ax, bx) = plt.subplots(1, 2, figsize=(TEXTWIDTH_IN, 2.45), gridspec_kw={"width_ratios": [1, 1.08]})
 
@@ -265,9 +173,9 @@ def figure3() -> None:
     y = 0.0
     for di, d in enumerate(DATASETS):
         for side, tag in (("false", "F"), ("true", "T")):
-            sub = c3[c3.dataset == d]
-            fixed = np.abs(sub[f"fixed_delta_p_{side}"].astype(float).values)
-            matched = np.abs(sub[f"matched_delta_p_{side}"].astype(float).values)
+            sub = c3[(c3.dataset == d) & (c3.side == side)]
+            fixed = sub[sub.dose == "alpha4"].delta_p.abs().to_numpy()
+            matched = sub[sub.dose == "r010"].delta_p.abs().to_numpy()
             ranges[(d, side)] = (np.ptp(fixed), np.ptp(matched))
             for vals, color, mk, dy in ((fixed, BLUE, "o", 0.0), (matched, VERMILION, "D", 0.24)):
                 bx.plot([vals.min(), vals.max()], [y + dy, y + dy], color=color, lw=2.6, alpha=0.8,
@@ -306,45 +214,32 @@ def figure3() -> None:
 
 
 # --------------------------------------------------------------------------
-# Figure 4: excess differential quantization-error energy on TriviaQA
-# --------------------------------------------------------------------------
+# Figure 4: enrichment relative to the pair-label permutation null.
 def figure4() -> None:
-    rinc = pd.read_csv(ART / "stats_package" / "rinc_global_375.csv")
-    rinc = rinc[rinc.dataset == "TriviaQA"].copy()
-    rinc["model"] = rinc.model.map(norm_model)
-    rinc["excess"] = rinc.observed_R_inc - rinc.null_mean_R_inc
-    qmap = {"AWQ W4A16": "AWQ", "GPTQ W4A16": "GPTQ", "RTN W4A16": "RTN",
-            "simulated W8A8": "W8A8", "simulated W4A8": "W4A8"}
-    rinc["q"] = rinc.quantization.map(qmap)
-    assert len(rinc) == 125
-    # Paper Sec. 6.2: on TriviaQA every model-quantization-dimension cell has positive excess
-    # and is significant after the pooled 375-test BH-FDR correction.
-    assert (rinc.excess > 0).all() and rinc.significant_q_lt_0_05.all()
-
-    qstyle = {"AWQ": (BLUE, "o"), "GPTQ": (ORANGE, "s"), "RTN": (GREEN, "D"),
-              "W8A8": (PINK, "^"), "W4A8": (VERMILION, "v")}
-    ks = [2, 5, 10, 20, 50]
-    fig, axes = plt.subplots(1, 5, figsize=(TEXTWIDTH_IN, 2.15), sharey=True)
-    for i, (ax, m) in enumerate(zip(axes, MODELS)):
-        sub = rinc[rinc.model == m]
-        ax.axhline(0, color="0.7", lw=0.8, zorder=0)
-        for qn, (color, mk) in qstyle.items():
-            s = sub[sub.q == qn].set_index("k").loc[ks]
-            ax.plot(ks, s.excess, color=color, marker=mk, ms=4.2, lw=1.3, mec="white", mew=0.5, label=qn)
-        ax.set_title(f"({'abcde'[i]}) {m}")
-        ax.set_xticks(ks)
-        ax.set_xticklabels(["2", "5", "10", "20", "50"])
-        ax.tick_params(axis="x", labelsize=6.5)
-        ax.set_ylim(-0.002, 0.075)
-        ax.set_yticks([0.0, 0.02, 0.04, 0.06])
-        ax.grid(axis="y", color="0.9", lw=0.6)
-        ax.set_axisbelow(True)
-    axes[0].set_ylabel("Excess over activation-matched null")
-    fig.supxlabel(r"Task-defined contrastive subspace dimension, $k$", fontsize=8.5, y=0.0)
-    h, lab = axes[0].get_legend_handles_labels()
-    fig.legend(h, lab, loc="upper center", ncol=5, frameon=False, bbox_to_anchor=(0.52, 1.12),
-               handlelength=1.8, columnspacing=1.0)
-    fig.tight_layout(w_pad=0.6)
+    rows = geometry_panel()
+    panels = [("qwen14b", "triviaqa"), ("qwen14b", "arc_easy"), ("qwen14b", "commonsenseqa"),
+              ("ministral14b", "arc_easy"), ("ministral14b", "commonsenseqa")]
+    styles = [("awq", BLUE, "o"), ("gptq", ORANGE, "s"), ("rtn", GREEN, "^"),
+              ("w8a8", VERMILION, "D"), ("w4a8", PINK, "v")]
+    fig, axes = plt.subplots(1, 2, figsize=(TEXTWIDTH_IN, 2.25), sharey=True)
+    for ax, statistic in zip(axes, ("R1", "R50")):
+        indexed = rows[rows.statistic == statistic].set_index(["model", "dataset", "quantization"])
+        for j, (quant, color, marker) in enumerate(styles):
+            for i, (model, dataset) in enumerate(panels):
+                row = indexed.loc[model, dataset, quant]
+                ax.scatter(i + (j - 2) * .13, row.observed / row.null_mean, marker=marker, s=20,
+                           edgecolors=color, facecolors=color if row.q_bh_family < .05 else "white",
+                           label=quant.upper() if i == 0 else None)
+        ax.axhline(1, color="0.5", ls="--", lw=.8)
+        ax.set_xticks(range(5), ["TQA", "ARC-E", "CSQA", "ARC-E", "CSQA"])
+        ax.set_xlabel("Qwen2.5-14B           Ministral-3-14B")
+        ax.set_title(statistic)
+    axes[0].set_ylim(0, 10.5)
+    axes[0].set_ylabel("Observed / null mean")
+    h, labels = axes[0].get_legend_handles_labels()
+    fig.legend(h, labels, ncol=5, loc="upper center", frameon=False)
+    fig.text(.98, .01, "Hollow markers indicate BH q ≥ .05", ha="right", fontsize=7)
+    fig.tight_layout(rect=(0, .05, 1, .84))
     save(fig, "fig4_quant_error_excess")
 
 

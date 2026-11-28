@@ -1,6 +1,6 @@
 # Portable harmonized analysis package
 
-This directory is a self-contained, machine-readable package for the final unified/harmonized analysis families. It can be copied or moved without the original repository. No GPU, model weights, inference, or network access is required.
+This directory archives the review-version statistical families. The camera-ready families and underlying draws are in the [final experiment artifacts](../camera_ready/README.md). It can be copied or moved without the original repository. No GPU, model weights, inference, or network access is required.
 
 ## Run from the package directory
 

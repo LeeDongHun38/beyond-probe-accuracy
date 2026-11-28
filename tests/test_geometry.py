@@ -88,3 +88,23 @@ def test_tests_and_bh():
     assert all(r["exceedance"] == 0 and r["p"] == pytest.approx(0.01) for r in rows)
     G.add_bh(rows)
     assert all(r["significant"] for r in rows)
+
+
+def test_label_permutation_panel_reuses_test_errors_and_refits_basis(tmp_path, monkeypatch):
+    from probedir.io import HiddenCache, cache_path
+
+    monkeypatch.setenv("PROBEDIR_RESULTS", str(tmp_path))
+    model, dataset, layer = "qwen2.5-14b", "arc_easy", 30
+    hp, hm = _pairs(n=90, d=52)
+    rng = np.random.default_rng(42)
+    ids = [str(i) for i in range(len(hp))]
+    split = ["train"] * 60 + ["test"] * 30
+    for precision in ("fp16", *G.QUANTIZATIONS):
+        pos = hp if precision == "fp16" else hp + rng.normal(0, 0.1, hp.shape)
+        HiddenCache(pos[None], hm[None], ids, split, [layer]).save(cache_path(model, dataset, precision))
+    G.run_permutation(model, dataset, n_permutations=2)
+    with np.load(tmp_path / "label_permutation" / model / dataset / "panel.npz") as panel:
+        assert panel["null"].shape == (2, 5, 6)
+        assert panel["observed"].shape == (5, 6)
+        assert np.all(np.diff(panel["observed"], axis=-1) >= 0)
+        assert not np.allclose(panel["null"][0], panel["null"][1])

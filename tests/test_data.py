@@ -60,3 +60,14 @@ def test_gold_donor_control_properties():
         assert by_id[a["target_id"]]["split"] == by_id[a["donor_id"]]["split"]
     assert len({a["donor_id"] for a in assignments}) == 20  # donors used once
     assert out == data.build_gold_donor_control(pairs, review_size=5)[0]
+
+
+def test_triviaqa_partition_keeps_repeated_normalized_questions_together():
+    from collections import defaultdict
+
+    partitions = defaultdict(set)
+    for row in data.load_pairs("triviaqa"):
+        partitions[data.question_key(row["question"])].add(row["split"])
+    assert len(partitions) == 4406
+    assert all(len(sides) == 1 for sides in partitions.values())
+    assert sum(sides == {"train"} for sides in partitions.values()) == 2203

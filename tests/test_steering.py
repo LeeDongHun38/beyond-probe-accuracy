@@ -95,4 +95,4 @@ def test_heldout_sample_is_deterministic_and_heldout():
     assert [p["id"] for p in a] == [p["id"] for p in b]
     assert len(a) == 200 and len({p["id"] for p in a}) == 200
     assert all(p["split"] == "test" for p in a)
-    assert a[0]["id"] == "triviaqa_00947"        # first pair of the paper's seed-42 sample
+    assert a[0]["id"] == "triviaqa_00921"        # first pair of the paper's seed-42 sample

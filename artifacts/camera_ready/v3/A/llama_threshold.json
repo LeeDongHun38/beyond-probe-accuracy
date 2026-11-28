@@ -1,0 +1,16 @@
+{
+  "identity": {
+    "protocol_sha256": "e624fc000064b90f6a773fcea6b8a00616e116e4ffbc175429bcc7599b857624",
+    "manifest_sha256": "0c846911ee90e03db2b4a9506ca6dbce85d03708264a720986db6e8aa03ef8ee",
+    "direction_sha256": "f2ecd31f25ccc565e47d70d489223ad344d37e4540584b1f03a0ed9be79c25bb",
+    "code_sha256": "11f4ffea435f2a44fc8c23c2d2e382ac3e15044ba16cdaa96b15f99fe5faaa38"
+  },
+  "threshold": 1.1228334285695913,
+  "calibration_pairs": 1241,
+  "evaluation_pairs": 1250,
+  "calibration_questions": 1101,
+  "evaluation_questions": 1102,
+  "question_intersection": 0,
+  "bootstrap_seed": 1176859337,
+  "score_unit": "float64 unit MD projection"
+}

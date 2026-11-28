@@ -1,6 +1,0 @@
-model,TriviaQA,ARC-Easy,CommonsenseQA
-Llama-3.1-8B,L14,L14,L14
-Qwen2.5-7B,L18,L18,L17
-Mistral-7B,L13,L15,L17
-Qwen2.5-14B,L29,L30,L27
-Ministral-3-14B,L36,L19,L15

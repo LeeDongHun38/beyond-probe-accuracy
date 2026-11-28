@@ -1,0 +1,8 @@
+{
+  "total_pairs": 4999,
+  "total_conflicts": 21,
+  "heldout_conflicts": 12,
+  "conflicts_already_overlap": 2,
+  "expected_audit_candidates": 21,
+  "normalization": "Standard SQuAD punctuation removal, not punctuation-to-space; frozen before results"
+}

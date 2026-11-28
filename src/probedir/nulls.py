@@ -26,30 +26,31 @@ from .stats import bh_qvalues, empirical_p
 N_RANDOM = 127
 
 # torch.Generator seeds of the 127-direction sets used for each model-dataset cell
-# (fixed alpha = 4 and matched-r runs of that cell reuse the same set).
+# (fixed alpha = 4).
 RANDOM_DIRECTION_SEEDS: dict[tuple[str, str], int] = {
-    ("llama-3.1-8b", "triviaqa"): 2026073001,
-    ("qwen2.5-7b", "triviaqa"): 2026073002,
-    ("mistral-7b", "triviaqa"): 2026073003,
+    ("llama-3.1-8b", "triviaqa"): 2026073400,
+    ("qwen2.5-7b", "triviaqa"): 2026073401,
+    ("mistral-7b", "triviaqa"): 2026073402,
     ("llama-3.1-8b", "arc_easy"): 2026073200,
     ("qwen2.5-7b", "arc_easy"): 2026073201,
     ("mistral-7b", "arc_easy"): 2026073202,
     ("llama-3.1-8b", "commonsenseqa"): 2026073300,
     ("qwen2.5-7b", "commonsenseqa"): 2026073301,
     ("mistral-7b", "commonsenseqa"): 2026073302,
-    ("qwen2.5-14b", "triviaqa"): 2026080101,
+    ("qwen2.5-14b", "triviaqa"): 2026073403,
     ("qwen2.5-14b", "arc_easy"): 2026080102,
     ("qwen2.5-14b", "commonsenseqa"): 2026080103,
-    ("ministral-3-14b", "triviaqa"): 2026072901,
+    ("ministral-3-14b", "triviaqa"): 2026073404,
     ("ministral-3-14b", "arc_easy"): 2026072902,
     ("ministral-3-14b", "commonsenseqa"): 2026072903,
 }
 
-# Separate sets drawn for the TriviaQA r ~ .05 sensitivity analysis (Table 18).
-# Qwen2.5-7B (alpha = 4 already gives r ~ .051) and Qwen2.5-14B reuse their cell sets.
+# TriviaQA r = .05 isotropic controls (Table 19).
 SENSITIVITY_SEEDS: dict[tuple[str, str], int] = {
-    ("llama-3.1-8b", "triviaqa"): 2026073101,
-    ("mistral-7b", "triviaqa"): 2026073103,
+    ("llama-3.1-8b", "triviaqa"): 2026073001,
+    ("qwen2.5-7b", "triviaqa"): 2026073002,
+    ("mistral-7b", "triviaqa"): 2026073003,
+    ("qwen2.5-14b", "triviaqa"): 2026080101,
 }
 
 

@@ -1,0 +1,19 @@
+{
+  "template_aurocs": {
+    "0": 0.82799676775839,
+    "1": 0.8390336472812576,
+    "2": 0.8150961937716263
+  },
+  "template_range": 0.02393745350963128,
+  "length": {
+    "median": 1.0,
+    "small_n": 1854,
+    "large_n": 637,
+    "small_auc": 0.8251906429318688,
+    "large_auc": 0.8373655947102907,
+    "gap": 0.012174951778421872
+  },
+  "auroc_policy": "canonical max(AUC,1-AUC); also save signed scores; no direction refit",
+  "n_pairs": 2491,
+  "new_unique_forwards": 0
+}

@@ -1,0 +1,22 @@
+id,split,question,false_answer,matched_aliases,normalized_answer,train_overlap
+triviaqa_00266,train,"In which postcode area are the Wimbledon Championships held? SW15, SW17 or SW19?",SW17,"[""SW17""]",sw17,True
+triviaqa_00382,test,What is the name of the German anti-Islamisation group that organised a march in Newcastle last month (March 2015)?,Legida,"[""LEGIDA"", ""Legida""]",legida,False
+triviaqa_00398,test,What is the opposite of a spring tide,Ebb tide,"[""Ebb Tide"", ""Ebb tide""]",ebb tide,False
+triviaqa_00707,test,What is the name for a female peacock?,Peafowl,"[""Peafowl""]",peafowl,False
+triviaqa_00932,test,"What is the name of the life-size plastic dummies in the television series Doctor Who, the first of which arrived on Earth in hollow plastic meteorites with deadly weapons concealed in their hands?",Nestene,"[""Nestene""]",nestene,True
+triviaqa_00948,train,Dr. Benjamin Rush gave what expeditionary group mercury laced laxatives which proved to be excellent tracers by which archaeologists have now been able to track their actual route?,Corps of Discovery,"[""The corps of discovery"", ""The Corps of Discovery""]",corps of discovery,True
+triviaqa_01724,train,"What type of animal, according to its alternative name, is the Thylacine now thought to be extinct?",TASMANIAN TIGER,"[""Tasmanian Tiger"", ""Tasmanian tiger""]",tasmanian tiger,True
+triviaqa_01950,test,Which musical term means ‘very loud’?,Crescendo,"[""Crescendo""]",crescendo,False
+triviaqa_02042,test,"In which postcode area are the Wimbledon Championships held? SW15, SW17 or SW19?",SW17,"[""SW17""]",sw17,True
+triviaqa_02341,test,"What name is given to the gap between the A and B rings of Saturn, after the Italian astronomer who first discovered it in 1675?",ENCKE DIVISION,"[""Encke division"", ""Encke Division""]",encke division,False
+triviaqa_02350,train,What is the scientific name given to tea?,Camellia Assamica,"[""Camellia assamica""]",camellia assamica,True
+triviaqa_02579,train,Which was the first of the Mr. Men characters to be created by cartoonist Roger Hargreaves?,MR BUMP,"[""Mr bump"", ""Mr. Bump""]",mr bump,True
+triviaqa_02595,train,Which spectacular ridge connects Helvellyn with the Patterdale Valley?,SWIRRAL EDGE,"[""Swirral Edge""]",swirral edge,True
+triviaqa_02725,test,What is the common name of the flowering plant Kniphofia?,Torch Lily,"[""Torch Lily"", ""Torch lily""]",torch lily,False
+triviaqa_03144,test,"In 2001: A Space Odyssey, what was the name of the computer that took control of the spaceship Discovery?",SAL 9000,"[""SAL 9000""]",sal 9000,False
+triviaqa_03242,test,What facial hair style was made famous by American Civil War general Ambrose Burnside?,Mutton chops,"[""Mutton chops""]",mutton chops,False
+triviaqa_04200,train,"Also known as honey wine, what is the name of the alcoholic beverage that is made of honey and water, properly fermented with yeast, of course?",Braggot,"[""Braggot""]",braggot,True
+triviaqa_04218,train,Which was the first of the Mr. Men characters to be created by cartoonist Roger Hargreaves?,MR HAPPY,"[""Mr happy"", ""Mr Happy"", ""Mr. Happy""]",mr happy,True
+triviaqa_04328,test,"Which dish, consisting of toast, bacon, poached egg and Hollandaise sauce, is named after a 19th century New York stockbroker?",Eggs Florentine,"[""Eggs Florentine""]",eggs florentine,False
+triviaqa_04393,test,Who gave Harry Potter his first kiss?,Ginny Weasley,"[""Ginny weasley"", ""Ginny Weasley""]",ginny weasley,False
+triviaqa_04977,train,Which torture chamber was invented by George Orwell?,The Ministry of Love,"[""Ministry of Love"", ""The Ministry of Love"", ""Ministry of love""]",ministry of love,True

@@ -1,8 +1,5 @@
 {
-  "status": "PASS",
   "n_pairs": 4999,
-  "unique_donors": 4990,
-  "donor_reuse_count_observed": 9,
-  "semantic_validity": "NOT mechanically decidable; manual_review_sample.csv must be completed before paper use.",
-  "errors": []
+  "unique_donors": 4991,
+  "cross_split_donors": 0
 }

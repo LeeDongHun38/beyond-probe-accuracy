@@ -5,11 +5,11 @@ Implements the paper's probe-side quantities:
 * mean-difference (MD) direction, Eq. 2 (Sec. 3.2)
 * L2-regularized logistic-regression (LR) directions on raw or feature-wise
   standardized representations, mapped back to activation space, Eq. 10 (App. B.2)
-* training-only layer selection by MD AUROC, Eq. 11 (App. B.2, Table 10)
+* training-only layer selection by MD AUROC, Eq. 11 (App. B.2, Table 9)
 * held-out AUROC of the projection score s(h; v) = h^T v (Sec. 3.3)
 * split-half estimation stability, Eq. 3 (Sec. 3.3, App. C.1)
 * cosine alignment with MD and participation ratio (App. C.2, Tables 1, 13, 14)
-* the prompt-template and input-length controls G_temp and G_len (App. D.1, Table 20)
+* the prompt-template and input-length controls G_temp and G_len (App. D.1, Table 21)
 
 All functions take NumPy arrays ``h_plus`` / ``h_minus`` of shape ``[n, d]``
 (row i of both arrays is pair i). Directions are oriented with correct answers
@@ -40,7 +40,7 @@ LR_SETTINGS: dict[str, Any] = dict(solver="lbfgs", penalty="l2", max_iter=1000, 
 
 @dataclass(frozen=True)
 class Estimator:
-    """A direction estimator (Table 9)."""
+    """A direction estimator (Table 8)."""
 
     name: str
     kind: str                    # "md" or "lr"
@@ -155,10 +155,19 @@ def split_halves(n: int, seeds: Sequence[int] = SPLIT_SEEDS) -> list[tuple[np.nd
 
 
 def split_half_stability(h_plus: np.ndarray, h_minus: np.ndarray, estimator: Estimator | str = MD,
-                         seeds: Sequence[int] = SPLIT_SEEDS) -> dict[str, Any]:
+                         seeds: Sequence[int] = SPLIT_SEEDS, question_keys=None) -> dict[str, Any]:
     """Mean signed cosine between directions fit independently on random halves (Eq. 3)."""
     cosines = []
-    for a, b in split_halves(len(h_plus), seeds):
+    from .data import question_half
+
+    if question_keys is None:
+        halves = split_halves(len(h_plus), seeds)
+    else:
+        if len(question_keys) != len(h_plus):
+            raise ValueError("training questions and hidden-state rows must align")
+        masks = [question_half(question_keys, seed) for seed in seeds]
+        halves = [(mask, ~mask) for mask in masks]
+    for a, b in halves:
         cosines.append(cosine(estimate(estimator, h_plus[a], h_minus[a]),
                               estimate(estimator, h_plus[b], h_minus[b])))
     return {"seeds": list(seeds), "cosines": cosines, "mean": float(np.mean(cosines)),
@@ -187,7 +196,7 @@ def select_layer_from_profile(rows: Sequence[dict[str, Any]]) -> int:
 
 
 def select_layer(cache) -> int:
-    """Training-only probing-layer selection (Eq. 11, Table 10)."""
+    """Training-only probing-layer selection (Eq. 11, Table 9)."""
     return select_layer_from_profile(layer_profile(cache))
 
 
@@ -198,7 +207,7 @@ def select_layer(cache) -> int:
 def estimator_sweep(train_plus: np.ndarray, train_minus: np.ndarray,
                     test_plus: np.ndarray, test_minus: np.ndarray,
                     estimators: Sequence[str] = SWEEP_7B,
-                    seeds: Sequence[int] = SPLIT_SEEDS) -> dict[str, dict[str, Any]]:
+                    seeds: Sequence[int] = SPLIT_SEEDS, question_keys=None) -> dict[str, dict[str, Any]]:
     """Fit each estimator on the training pairs at a fixed layer and evaluate it.
 
     Returns, per estimator: unit ``direction``, held-out AUROC, cosine alignment
@@ -221,14 +230,14 @@ def estimator_sweep(train_plus: np.ndarray, train_minus: np.ndarray,
             "heldout_auroc": heldout_auroc(v, test_plus, test_minus),
             "cos_with_md": cosine(v, md),
             "participation_ratio": participation_ratio(weight),
-            "split_half": split_half_stability(train_plus, train_minus, est, seeds),
+            "split_half": split_half_stability(train_plus, train_minus, est, seeds, question_keys),
             **info,
         }
     return out
 
 
 # ---------------------------------------------------------------------------
-# App. D.1: prompt-template and input-length controls (Table 20)
+# App. D.1: prompt-template and input-length controls (Table 21)
 # ---------------------------------------------------------------------------
 
 # System messages of the template control. Templates 0-2 are the three
@@ -308,6 +317,22 @@ def template_length_control_rendered(direction: np.ndarray,
 # Command line
 # ---------------------------------------------------------------------------
 
+def training_questions(cache, dataset):
+    if dataset != "triviaqa":
+        return None
+    from .data import load_pairs, question_key
+
+    by_id = {r["id"]: r for r in load_pairs(dataset)}
+    keys = []
+    for row_id, split in zip(cache.ids, cache.split):
+        pair = by_id[row_id]
+        if pair["split"] != split:
+            raise ValueError("TriviaQA cache split differs from the camera-ready pair manifest")
+        if split == "train":
+            keys.append(question_key(pair["question"]))
+    return keys
+
+
 def run_probes(model: str, dataset: str) -> dict[str, Any]:
     """Layer profile and selection, MD at the selected layer, and split-half stability."""
     from safetensors.numpy import save_file
@@ -323,7 +348,7 @@ def run_probes(model: str, dataset: str) -> dict[str, Any]:
     v = md_direction(tp, tm)
     result = {"model": model, "dataset": dataset, "selected_layer": layer,
               "train_n": len(tp), "heldout_n": len(ep), "heldout_auroc": heldout_auroc(v, ep, em),
-              "split_half": split_half_stability(tp, tm), "layer_profile": profile}
+              "split_half": split_half_stability(tp, tm, question_keys=training_questions(cache, dataset)), "layer_profile": profile}
     out = results_dir() / "probes" / model / dataset
     write_json(out / "md.json", result)   # creates ``out``
     save_file({"md": v.astype(np.float32)}, str(out / "md_direction.safetensors"))
@@ -341,7 +366,8 @@ def run_estimator_sweep(model: str, dataset: str, layer: int | None = None) -> d
     cache = HiddenCache.load(cache_path(model, dataset, "fp16"))
     tp, tm = cache.layer(layer, "train")
     ep, em = cache.layer(layer, "test")
-    sweep = estimator_sweep(tp, tm, ep, em, SWEEP_14B if cell.is_14b else SWEEP_7B)
+    sweep = estimator_sweep(tp, tm, ep, em, SWEEP_14B if cell.is_14b else SWEEP_7B,
+                            question_keys=training_questions(cache, dataset))
     out = results_dir() / "estimator_sweep" / model / dataset
     out.mkdir(parents=True, exist_ok=True)
     save_file({k: r["direction"].astype(np.float32) for k, r in sweep.items()}, str(out / "directions.safetensors"))

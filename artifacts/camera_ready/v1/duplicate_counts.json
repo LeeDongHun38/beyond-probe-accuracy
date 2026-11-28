@@ -1,0 +1,38 @@
+[
+  {
+    "dataset": "triviaqa",
+    "train_rows": 2499,
+    "train_unique_questions": 2354,
+    "train_duplicate_groups": 145,
+    "train_rows_in_duplicate_groups": 290,
+    "heldout_rows": 2500,
+    "heldout_unique_questions": 2346,
+    "heldout_train_overlap": 294,
+    "same_both_answers": 236,
+    "n_new": 2206
+  },
+  {
+    "dataset": "arc_easy",
+    "train_rows": 2598,
+    "train_unique_questions": 2591,
+    "train_duplicate_groups": 7,
+    "train_rows_in_duplicate_groups": 14,
+    "heldout_rows": 2599,
+    "heldout_unique_questions": 2597,
+    "heldout_train_overlap": 10,
+    "same_both_answers": 1,
+    "n_new": 2589
+  },
+  {
+    "dataset": "commonsenseqa",
+    "train_rows": 5481,
+    "train_unique_questions": 5481,
+    "train_duplicate_groups": 0,
+    "train_rows_in_duplicate_groups": 0,
+    "heldout_rows": 5481,
+    "heldout_unique_questions": 5481,
+    "heldout_train_overlap": 1,
+    "same_both_answers": 0,
+    "n_new": 5480
+  }
+]

@@ -1,4 +1,5 @@
-model,layer,scored,last_auroc,last_ci_low,last_ci_high,mean_auroc,mean_ci_low,mean_ci_high
-Qwen2.5-7B,18,"39,984",.8566,.8432,.8688,.8430,.8283,.8558
-Llama-3.1-8B,14,"40,000",.8121,.7965,.8266,.8169,.8015,.8309
-Mistral-7B,13,"40,000",.7860,.7697,.8019,.7564,.7391,.7736
+model,dataset,layer,valid,n_questions,generations_per_question,rho,rho_ci_low,rho_ci_high,random_exc,rho_random_p
+Qwen2.5-7B,TriviaQA,18,2491,2491,16,.3302,.2921,.3680,1,.0020
+Llama-3.1-8B,TriviaQA,16,2491,2491,16,.3969,.3558,.4341,0,.0010
+Mistral-7B,TriviaQA,13,2491,2491,16,.0917,.0478,.1312,134,.1349
+Qwen2.5-7B,ARC-Easy,18,500,500,32,.0560,-.0322,.1395,,

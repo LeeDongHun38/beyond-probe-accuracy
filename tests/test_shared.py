@@ -39,7 +39,7 @@ def test_cluster_bootstrap_ci_brackets_mean():
 def test_config_cells_and_layers():
     cells = config.all_cells()
     assert len(cells) == 15
-    assert config.Cell("llama-3.1-8b", "triviaqa").layer == 14
+    assert config.Cell("llama-3.1-8b", "triviaqa").layer == 16
     assert config.Cell("ministral-3-14b", "triviaqa").layer == 36
     assert config.pairs_path("triviaqa", "train").is_file()
 

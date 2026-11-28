@@ -1,8 +1,7 @@
 """Answer-conditional contrastive pairs (Sec. 3.1, Sec. 4, App. A.1).
 
-Each question q_i contributes one pair: a correct answer a+ and a plausible
-incorrect answer a-. Pairs are split 50:50 into training and held-out sets at the
-question level, and each pair is assigned one of three pair-prompt templates.
+Each source row contributes one pair: a correct answer a+ and a plausible
+incorrect answer a-. TriviaQA splits distinct normalized questions 50:50, and each pair is assigned one of three pair-prompt templates.
 
 * TriviaQA (rc.nocontext validation, 5,000 sampled with seed 42): a- is generated
   by GPT-4.1 (:func:`generate_triviaqa_distractors`).
@@ -24,12 +23,14 @@ from collections.abc import Callable, Iterable
 from pathlib import Path
 from typing import Any
 
+import numpy as np
+
 from .config import pairs_path
 
 SPLIT_SEED = 42
 N_TEMPLATES = 3
 GOLD_DONOR_SEED = 20260723
-GOLD_DONOR_VERSION = "triviaqa_gold_source_matched_v1_2026-07-23"
+GOLD_DONOR_VERSION = "triviaqa_gold_source_matched_group50"
 
 Pair = dict[str, Any]
 
@@ -53,9 +54,21 @@ def save_pairs(pairs: list[Pair], out_dir: Path, stats: dict[str, Any] | None = 
 
 # --------------------------------------------------------------------------- split and templates
 
+def question_key(text: str) -> str:
+    return " ".join(text.lower().split())
+
+
+def question_half(keys, seed):
+    """Mask for the first half of shuffled, distinct normalized questions."""
+    groups = np.array(sorted(set(keys)))
+    np.random.default_rng(seed).shuffle(groups)
+    first = set(groups[:len(groups) // 2])
+    return np.array([key in first for key in keys], dtype=bool)
+
+
 def assign_split_and_templates(pairs: list[Pair], seed: int = SPLIT_SEED,
                                train_ratio: float = 0.5) -> list[Pair]:
-    """Question-level 50:50 split and uniform template assignment (in place).
+    """Row-level 50:50 split and uniform template assignment (in place).
 
     The RNG call sequence matches the original construction: the split shuffle
     uses ``random.seed(seed)``; templates use ``random.seed(seed + 1)``.
@@ -193,7 +206,11 @@ def build_triviaqa_pairs(records: list[dict], distractors: dict[str, str | None]
             "qwen_fp16": {"answer": r.get("qwen_answer"), "correct": r.get("qwen_correct"),
                           "prob": r.get("qwen_prob")},
         })
-    return assign_split_and_templates(pairs, seed)
+    train = question_half([question_key(p["question"]) for p in pairs], seed)
+    for pair, is_train in zip(pairs, train):
+        pair["split"] = "train" if is_train else "test"
+    _templates(pairs, seed)
+    return pairs
 
 
 def triviaqa_stats(pairs: list[Pair]) -> dict[str, Any]:

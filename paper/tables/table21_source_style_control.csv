@@ -1,5 +1,0 @@
-analysis,model,layer,original,gold_donor
-answer_only_style,Gold vs. incorrect answer,-,.5621,.5001
-hidden_state_transfer,Llama-3.1-8B,14,.8296,.9808
-hidden_state_transfer,Qwen2.5-7B,18,.8277,.9836
-hidden_state_transfer,Mistral-7B,13,.8237,.9843

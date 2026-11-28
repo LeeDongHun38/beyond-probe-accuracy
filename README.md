@@ -1,106 +1,52 @@
-# Beyond Probe Accuracy: Estimation Stability, Intervention Specificity, and Representation Geometry of Probe Directions
+# Beyond Probe Accuracy
 
-Code, data, and results for the EACL 2027 paper.
+**Estimation Stability, Intervention Specificity, and Representation Geometry of Probe Directions**
 
-Linear probes with similar held-out AUROC can point in very different directions. With the model,
-dataset, layer, and training representations held fixed, we vary only the probe estimator and
-evaluate each direction on three properties:
+DongHun Lee and Misuk Kim · EACL 2027
 
-- **predictive separability:** held-out AUROC
-- **estimation stability:** split-half cosine
-- **directional intervention specificity:** steering against norm-matched random directions
+[Final paper (PDF)](paper/Beyond%20Probe%20Accuracy.pdf) · [Numerical tables](paper/tables) · [Figures](paper/figures) · [Experiment artifacts](artifacts/camera_ready) · [Data card](data/DATA_CARD.md)
 
-We then transfer the FP16 mean-difference direction to quantized models and measure where the
-differential quantization error concentrates.
+The paper compares probe estimators on the same model, layer and training representations. It measures how well each probe separates correct from incorrect answers, how consistently its direction can be estimated, and how its intervention effect compares with random directions. Five instruction-tuned models are evaluated on TriviaQA, ARC-Easy and CommonsenseQA.
 
-**Setting:** 5 instruction-tuned models (Llama-3.1-8B, Qwen2.5-7B, Mistral-7B, Qwen2.5-14B,
-Ministral-3-14B) × 3 QA datasets (TriviaQA, ARC-Easy, CommonsenseQA) × 5 quantization conditions
-(AWQ, GPTQ, RTN W4A16; W8A8; W4A8).
-
-## Installation
-
-```bash
-pip install -e .                 # core: numpy, scipy, scikit-learn, pyyaml, safetensors
-pip install -e ".[gpu]"          # + torch, transformers (extraction, steering)
-pip install -e ".[gpu,quant]"    # + AWQ / GPTQ loaders
-pip install -e ".[paper]"        # + pandas, matplotlib (tables, figures)
-```
-
-## Reproducing the paper's tables and figures (CPU, under a minute)
-
-All reported results are included under `artifacts/`, so the tables and figures can be rebuilt
-without a GPU:
-
-```bash
-python paper/make_tables.py      # paper/tables/table01 ... table28
-python paper/make_figures.py     # paper/figures/fig2, fig3, fig4
-python verify/verify_paper_numbers.py   # compare every table cell and in-text number with the paper
-python verify/check_checksums.py        # file hashes + exact rebuild of all multiple-testing families
-```
-
-## Running the experiments
-
-Every stage is a `probedir` command. Fixed settings (models, selected layers, seeds, intervention
-magnitudes) are in `configs/experiment.yaml`. Outputs go to `results/`.
-
-```bash
-# 0. Contrastive pairs (released in data/pairs/; this rebuilds them, Sec. 4, App. A.1)
-probedir pairs --dataset arc_easy --out data/pairs/arc_easy
-
-# 1. Hidden states at the last token of each proposed answer (Sec. 3.1)
-probedir extract --model llama-3.1-8b --dataset triviaqa                    # FP16, all layers
-probedir extract --model llama-3.1-8b --dataset triviaqa --precision awq    # selected layer
-
-# 2. Layer selection, MD direction, split-half stability (Sec. 3.2-3.3; Tables 10, 12)
-probedir probes --model llama-3.1-8b --dataset triviaqa
-
-# 3. Estimator sweep: MD vs. L2 logistic regression (Table 1; Fig. 2)
-probedir estimator-sweep --model llama-3.1-8b --dataset triviaqa
-
-# 4. Bidirectional steering and random-direction specificity (Sec. 3.3-3.4; Fig. 3)
-probedir steer --model llama-3.1-8b --dataset triviaqa --alpha 4 --random-null
-probedir steer --model llama-3.1-8b --dataset triviaqa --r 0.10
-probedir null-family
-
-# 5. Quantization transfer and error geometry (Sec. 3.5; Table 2; Fig. 4)
-probedir transfer --model llama-3.1-8b --dataset triviaqa \
-    --direction artifacts/directions/llama-3.1-8b__triviaqa__transfer.npy
-probedir geometry --model llama-3.1-8b --dataset triviaqa \
-    --direction artifacts/directions/llama-3.1-8b__triviaqa__geometry.npy
-probedir geometry-bh
-
-# 6. Validity controls (App. D)
-probedir template-control --model qwen2.5-14b --dataset triviaqa
-probedir controls gold-donor
-probedir controls readout --model llama-3.1-8b --dataset triviaqa \
-    --answers data/owngen/triviaqa_llama.json --output results/controls/readout_llama.json
-```
-
-`transfer` and `geometry` cover all five quantization conditions of a cell, so extract each
-`--precision` (awq, gptq, rtn, w8a8, w4a8) first. With
-`--direction`, they use the exact direction vectors from the paper's runs
-(`artifacts/directions/`); without it, they re-estimate the MD direction from the FP16 cache.
-`probedir <command> --help` lists the options for each command. Models are loaded from the
-Hugging Face Hub at the revisions in `environment/MODELS.md`. 7–8B models run on a single
-24 GB GPU; the 14B models were run on two.
-
-## Repository layout
-
-| Path | Contents |
+| Analysis | Camera-ready result |
 |---|---|
-| `src/probedir/` | The package. One module per method component: `data`, `prompts`, `models`, `extract`, `probes`, `steering`, `nulls`, `transfer`, `geometry`, `controls`, `stats` |
-| `configs/experiment.yaml` | Models, datasets, selected layers, seeds, intervention and geometry settings |
-| `data/` | Contrastive pairs, gold-donor control, self-generated answers (`data/DATA_CARD.md`) |
-| `artifacts/paper_sections/` | Results for each appendix section (C.1–E.3) that the tables and figures are built from |
-| `artifacts/stats_package/` | Raw null draws and per-direction effects; recomputes every BH family |
-| `artifacts/directions/` | MD direction vectors used for the quantization analyses |
-| `artifacts/sources/` | Run summaries that the table builders and claim checks read |
-| `paper/` | Table and figure builders and their outputs |
-| `verify/` | Paper values and the verification scripts |
-| `tests/` | Unit tests (`pytest`, CPU, no downloads) |
-| `environment/` | Recorded package versions and model checkpoints |
+| Direction stability (Tables 1 and 12) | On TriviaQA, MD split-half cosine ranges from .956 to .980. Scale-normalized LR has higher held-out AUROC and lower split-half cosine than MD in all 66 comparisons across 11 model–layer settings. The paired AUROC interval excludes zero in 64. |
+| Intervention specificity (Figure 3, Tables 18–20) | At α = 4, MD exceeds all 127 isotropic directions in 29 of 30 model–dataset–side comparisons. One random direction exceeds MD on the Mistral-7B TriviaQA false side. All 30 tests pass BH correction. At matched dose r = .05, the result depends on the null family. |
+| Quantization (Figure 4, Tables 2 and 25–28) | The largest TriviaQA AUROC drop is .036. At a fixed FP16 threshold, 2.34–14.30% of evaluation decisions change. In the 25-condition 14B geometry panel, the MD-axis statistic is significant in 25/25 settings and the incremental 49-component statistic in 0/25. |
+
+## Rebuild and verify the results
+
+From a source checkout with Python 3.10 or newer, run the following on CPU. The scripts read the released scores, model-level summaries and null draws.
+
+```bash
+python -m pip install -e '.[paper,dev]'
+python paper/make_tables.py
+python paper/make_figures.py
+python verify/verify_paper_numbers.py
+python verify/check_checksums.py
+python -m pytest -q
+```
+
+The table builder exports the 22 numerical result tables using the numbering of the final PDF. Tables 4–8 describe prompts, examples, models and estimators. Table 10 defines the statistical families. The CSVs retain extra precision and use one row per experimental condition or side. The verifier checks them against the printed values, including the documented rounding differences in Table 21. [Verification details](verify/VERIFY_REPORT.md)
+
+## Reuse the experiments
+
+The final TriviaQA split assigns all rows with the same normalized question to the same partition. There are 2,508 training pairs and 2,491 held-out pairs, with 2,203 distinct questions on each side. Training-only layer selection gives L16 for Llama-3.1-8B, L18 for Qwen2.5-7B, L13 for Mistral-7B, L29 for Qwen2.5-14B and L36 for Ministral-3-14B. [Split manifest](artifacts/camera_ready/v2/split_manifest.csv) · [Configuration](configs/experiment.yaml)
+
+The package provides model-level commands for pair construction, extraction, probe fitting, steering and quantization. For an inference run, install the GPU extras and obtain the relevant checkpoint. Quantized checkpoint loaders may require additional platform-specific dependencies. [Model revisions and environment](environment/MODELS.md)
+
+```bash
+python -m pip install -e '.[gpu]'
+probedir extract --model llama-3.1-8b --dataset triviaqa
+probedir probes --model llama-3.1-8b --dataset triviaqa
+probedir estimator-sweep --model llama-3.1-8b --dataset triviaqa
+probedir steer --model llama-3.1-8b --dataset triviaqa --alpha 4 --random-null
+```
+
+After extracting FP16 and the five quantized precisions for a cell, use `probedir transfer` for AUROC and margins. Use `probedir geometry-permutation` for the within-pair label-permutation experiment in Figure 4. The command refits MD and residual PCA for each permutation. The CPU table builder can reproduce the panel statistics directly from its stored draws.
+
+The release includes the v1 sensitivity audit, v2 refits, v3 transfer and matched-dose experiments, v4 appendix results and v5 fixed-dose TriviaQA controls. Their relationship to each final table and figure is documented in the [artifact guide](artifacts/camera_ready/README.md). The [previous revision](https://github.com/LeeDongHun38/beyond-probe-accuracy/tree/7ebd9edd99ef27178cd682be26678332c0478808) preserves the review-version results and verification report.
 
 ## License
 
-Code is released under the MIT License (`LICENSE`). Data and derived artifacts follow the licenses
-of their sources (`THIRD_PARTY_NOTICES.md`). Model weights are not redistributed.
+The code uses the MIT License. Data and derived artifacts retain their source terms. [License](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)
